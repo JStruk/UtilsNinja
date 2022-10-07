@@ -3,12 +3,12 @@
 
 <template>
   <header>
-    <!-- <h1> Hello, World! </h1> -->
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <!-- <RouterLink to="/about">About</RouterLink> -->
-    </nav>
+    <menu-bar />
   </header>
 
   <RouterView />
 </template>
+
+<script setup>
+  import MenuBar from './components/MenuBar.vue'
+</script>
