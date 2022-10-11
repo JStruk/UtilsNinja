@@ -1,6 +1,5 @@
 <template>
-    Tools Page
-    <ul class="flex border-b">
+    <ul class="flex border-b pt-6">
         <li :class="{'-mb-px mr-1': activeTab===0}" class="mr-1">
             <a :class="{'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab===0}"
                 class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
