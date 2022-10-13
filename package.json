@@ -1,5 +1,5 @@
 {
-  "name": "devutils",
+  "name": "utilsNinja",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
