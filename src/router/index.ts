@@ -1,20 +1,29 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import ToolsView from '../views/ToolsView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import ToolsView from "../views/ToolsView.vue";
+import LoremImpsumGenerator from "../views/LoremIpsumGenerator.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "home",
+      component: HomeView,
     },
     {
-      path: '/tools',
-      name: 'tools',
-      component: ToolsView
+      path: "/tools",
+      name: "tools",
+      component: ToolsView,
+      children: [
+        {
+          path: "lig",
+          name: "LoremIpsumGenerator",
+          component: LoremImpsumGenerator,
+        },
+      ],
     },
+
     // {
     //   path: '/about',
     //   name: 'about',
@@ -23,7 +32,7 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue')
     // }
-  ]
-})
+  ],
+});
 
-export default router
+export default router;
