@@ -4,9 +4,9 @@
             <div class="flex justify-between">
                 <div>
                     <!-- Website Logo -->
-                    <a href="#" class="flex items-center py-4">
+                    <router-link :to="{ name: 'home' }" class="flex items-center py-4">
                         <img :src=logo alt="Logo" class="h-16  mr-2">
-                    </a>
+                    </router-link>
                 </div>
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
@@ -35,12 +35,12 @@
             <ul class="">
                 <li class="active"><a href="index.html"
                         class="block text-sm px-2 py-4 text-white bg-purple-400 font-semibold">Home</a></li>
-                <li><a href="#services"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Services</a></li>
+                <li><a href="#home"
+                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Tools</a></li>
                 <li><a href="#about"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">About</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contribute</a></li>
                 <li><a href="#contact"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contact Us</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contact</a></li>
             </ul>
         </div>
     </nav>
