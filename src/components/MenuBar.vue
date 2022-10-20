@@ -47,13 +47,11 @@
 </template>
 
 <script lang="ts" setup>
-// @ts-ignore
 import logo from '../assets/logo.png'
 
-// let collapsed = false;
 import { ref } from 'vue'
 
 let collapsed = ref(true)
 
-const toggleMenu = () => { collapsed.value = !collapsed.value; console.log(collapsed); }
-</script> 
+const toggleMenu = () => { collapsed.value = !collapsed.value; }
+</script>
