@@ -11,8 +11,8 @@
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
                     <a href="" class="py-4 px-2 text-purple-400 border-b-4 border-purple-400 font-semibold ">Home</a>
-                    <a href=""
-                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Tools</a>
+                    <router-link :to="{ name: 'tools' }"
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Tools</router-link>
                     <a href=""
                         class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Contribute</a>
                     <a href=""
@@ -47,13 +47,11 @@
 </template>
 
 <script lang="ts" setup>
-// @ts-ignore
 import logo from '../assets/logo.png'
 
-// let collapsed = false;
 import { ref } from 'vue'
 
 let collapsed = ref(true)
 
-const toggleMenu = () => { collapsed.value = !collapsed.value; console.log(collapsed); }
-</script> 
+const toggleMenu = () => { collapsed.value = !collapsed.value; }
+</script>

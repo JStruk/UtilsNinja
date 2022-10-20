@@ -24,4 +24,7 @@ module.exports = {
   env: {
     node: true
   },
+  rules: {
+    "object-curly-spacing": ["error", "always"]
+  }
 }

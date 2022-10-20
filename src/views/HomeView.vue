@@ -1,13 +1,9 @@
 <template>
-  <div class='h-screen flex justify-center items-center m-auto md:p-12 text-center'>
+  <div class='flex justify-center items-center m-auto md:p-12 text-center'>
     <div class="flex flex-col justify-center items-center">
       <div class='flex flex-col md:w-3/4 w-full'>
         <span class='md:text-8xl text-4xl font-semibold text-purple-500 pb-4'> UtilsNinja </span>
-        <span class='px-2 md:text-2xl text-lg text-purple-400'> A simple, fast, and accessible grab bag of useful
-          utilities
-          for
-          developers
-          to use on the fly. </span>
+        <span class='px-2 md:text-2xl text-lg text-purple-400'>{{slogan}}</span>
       </div>
       <div class="p-12">
         <router-link
@@ -23,6 +19,7 @@
 
 <script lang='ts' setup>
 import HeroSvg from "@/components/HeroSvg.vue";
+import { slogan } from '@/constants/constants'
 
 </script>
 
