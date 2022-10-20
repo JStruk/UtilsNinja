@@ -29,9 +29,9 @@ describe('MenuBar', function () {
     it.each(['Home', 'Tools', 'Contact', 'Contribute'])('renders %s link', (tabName) => {
         const wrapper = renderComponent();
 
-        const tab = wrapper.findAll('a').filter(n => n.text().match(tabName)).at(0);
+        const tab = wrapper.findAll('a').filter(n => n.text().match(tabName))
 
-        expect(tab?.exists()).toBeTruthy()
+        expect(tab?.[0].exists()).toBeTruthy()
         expect.assertions(1)
     })
 });
