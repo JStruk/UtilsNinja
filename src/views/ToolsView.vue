@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 let activeTab = ref(0);
 
