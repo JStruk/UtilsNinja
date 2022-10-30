@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ToolsView from "../views/ToolsView.vue";
 import LoremIpsumGenerator from "../views/LoremIpsumGenerator.vue";
+import CsvToJson from "../views/CsvToJson.vue";
 
 export const routes = [
   {
@@ -18,6 +19,12 @@ export const routes = [
         path: "lig",
         name: "LoremIpsumGenerator",
         component: LoremIpsumGenerator,
+      },
+      {
+        path: "csvtojson",
+        name: "CsvToJson",
+        component: CsvToJson,
+
       },
     ],
   },
