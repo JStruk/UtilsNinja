@@ -36,6 +36,15 @@
         >JSON to CSV</router-link
       >
     </li>
+    <li :class="{ '-mb-px mr-1': activeTab === 4 }" class="mr-1">
+      <router-link
+        :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 4 }"
+        class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
+        @click="() => setActiveTab(4)"
+        :to="{ name: 'CsvToJson' }"
+        >CSV to JSON</router-link
+      >
+    </li>
   </ul>
   <router-view></router-view>
 </template>
