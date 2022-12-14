@@ -2,8 +2,8 @@
 
 import { describe, expect, it } from 'vitest';
 import App from '@/App.vue'
-import { mount } from "@vue/test-utils";
-import { router } from "./helpers/testRouter";
+import { mount } from '@vue/test-utils';
+import { router } from './helpers/testRouter';
 
 const renderComponent = () => {
     return mount(App, {

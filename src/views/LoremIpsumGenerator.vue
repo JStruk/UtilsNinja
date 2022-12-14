@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { LoremIpsum } from "lorem-ipsum";
+import { LoremIpsum } from 'lorem-ipsum';
 import { ref } from 'vue';
 
 const lorem = ref<string>('')
@@ -30,10 +30,10 @@ function generateLorem() {
 function copyToClipboard(str: string) {
   navigator.clipboard.writeText(str).then(
     function () {
-      console.log("Async: Copying to clipboard was successful!");
+      console.log('Async: Copying to clipboard was successful!');
     },
     function (err) {
-      console.error("Async: Could not copy text: ", err);
+      console.error('Async: Could not copy text: ', err);
     }
   );
 }

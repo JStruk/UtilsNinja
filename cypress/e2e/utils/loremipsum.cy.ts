@@ -24,7 +24,9 @@ describe('Lorem Ipsum Generator', () => {
         cy.contains('Generate').click()
         cy.contains('Copy to Clipboard').click()
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         let generatedText: string
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         let clipboardText: string
 
         cy.get('textarea').invoke('text')
