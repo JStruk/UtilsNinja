@@ -5,7 +5,7 @@
         :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 0 }"
         class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
         @click="() => setActiveTab(0)"
-        :to="{ name: 'tools' }"
+        :to="{ name: 'FormatJson' }"
         >JSON Format</router-link
       >
     </li>
@@ -46,7 +46,7 @@
       >
     </li>
   </ul>
-  <router-view></router-view>
+  <router-view class="p-4"></router-view>
 </template>
 
 <script lang="ts" setup>

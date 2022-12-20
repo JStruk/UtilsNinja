@@ -2,13 +2,15 @@
 </script>
 
 <template>
-  <header>
-    <menu-bar />
-  </header>
+  <div class="flex flex-col h-screen">
+    <header>
+      <menu-bar/>
+    </header>
 
-  <RouterView />
+    <RouterView/>
+  </div>
 </template>
 
 <script setup>
-  import MenuBar from './components/MenuBar.vue'
+import MenuBar from './components/MenuBar.vue'
 </script>
