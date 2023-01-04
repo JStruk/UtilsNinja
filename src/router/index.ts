@@ -4,6 +4,7 @@ import ToolsView from '@/views/ToolsView.vue';
 import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue';
 import CsvToJson from '@/views/CsvToJson.vue';
 import FormatJSON from '@/views/FormatJSON.vue';
+import JsonToCSV from '@/views/JsonToCSV.vue';
 
 export const routes = [
     {
@@ -28,6 +29,12 @@ export const routes = [
                 path: 'csvtojson',
                 name: 'CsvToJson',
                 component: CsvToJson,
+
+            },
+            {
+                path: 'jsontocsv',
+                name: 'JsonToCSV',
+                component: JsonToCSV,
 
             },
             {

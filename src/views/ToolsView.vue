@@ -32,7 +32,7 @@
         :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 3 }"
         class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
         @click="() => setActiveTab(3)"
-        :to="{ name: 'tools' }"
+        :to="{ name: 'JsonToCSV' }"
         >JSON to CSV</router-link
       >
     </li>
