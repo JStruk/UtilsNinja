@@ -24,4 +24,10 @@ describe('Navigation', () => {
         cy.get('input')
         cy.get('textarea')
     })
+
+    it('can visit the CSV to JSON generator page', () => {
+        cy.visit('/tools/csvtojson')
+
+        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools/csvtojson`)
+    })
 })
