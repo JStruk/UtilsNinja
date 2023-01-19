@@ -22,4 +22,17 @@ describe('CSVToJSON', () => {
 
         expect(convertJSONtoCSV(JSONinput)).toEqual(CSVresult)
     })
+
+    it('should wrap object in array', () => {
+        const JSONinput = JSON.stringify(
+            {
+                Name: 'Joe',
+                Age: '25',
+                Height: "5'10"
+            })
+
+        const CSVresult = "Name,Age,Height\nJoe,25,5'10"
+
+        expect(convertJSONtoCSV(JSONinput)).toEqual(CSVresult)
+    })
 })
