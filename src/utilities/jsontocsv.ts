@@ -1,14 +1,11 @@
 export function convertJSONtoCSV(json: any): string {
-    // moving forward:
-    //     - investigate npm package to do this for us
-    //     - how hard will this be to fully implement? i.e JSON array vs object needs to be handled separately
     const parsed = JSON.parse(json)
 
     const objectArray = Array.isArray(parsed) ? parsed : [parsed]
 
-    let str = '';
+    let csvData = '';
 
-    str += Object.keys(objectArray?.[0]).join(',') + '\n'
+    csvData += Object.keys(objectArray?.[0]).join(',') + '\n'
 
     for (let i = 0; i < objectArray.length; i++) {
         let line = '';
@@ -18,8 +15,8 @@ export function convertJSONtoCSV(json: any): string {
             line += objectArray[i][index];
         }
 
-        str += line + '\n';
+        csvData += line + '\n';
     }
 
-    return str.trimEnd();
+    return csvData.trimEnd();
 }
