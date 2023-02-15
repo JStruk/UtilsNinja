@@ -5,6 +5,7 @@ import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue';
 import CsvToJson from '@/views/CsvToJson.vue';
 import FormatJSON from '@/views/FormatJSON.vue';
 import JsonToCSV from '@/views/JsonToCSV.vue';
+import Dates from '@/views/Dates.vue';
 
 export const routes = [
     {
@@ -41,6 +42,12 @@ export const routes = [
                 path: 'formatjson',
                 name: 'FormatJson',
                 component: FormatJSON,
+
+            },
+            {
+                path: 'dates',
+                name: 'Dates',
+                component: Dates,
 
             },
         ],
