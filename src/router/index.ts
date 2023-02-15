@@ -6,6 +6,7 @@ import CsvToJson from '@/views/CsvToJson.vue';
 import FormatJSON from '@/views/FormatJSON.vue';
 import JsonToCSV from '@/views/JsonToCSV.vue';
 import StringInspector from '@/views/StringInspector.vue';
+import Dates from '@/views/Dates.vue';
 
 export const routes = [
     {
@@ -46,6 +47,12 @@ export const routes = [
                 path: 'inspector',
                 name: 'Inspector',
                 component: StringInspector,
+            },
+            {
+                path: 'dates',
+                name: 'Dates',
+                component: Dates,
+
             },
         ],
     },
