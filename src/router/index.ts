@@ -5,6 +5,7 @@ import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue';
 import CsvToJson from '@/views/CsvToJson.vue';
 import FormatJSON from '@/views/FormatJSON.vue';
 import JsonToCSV from '@/views/JsonToCSV.vue';
+import StringInspector from '@/views/StringInspector.vue';
 import Dates from '@/views/Dates.vue';
 
 export const routes = [
@@ -30,19 +31,22 @@ export const routes = [
                 path: 'csvtojson',
                 name: 'CsvToJson',
                 component: CsvToJson,
-
             },
             {
                 path: 'jsontocsv',
                 name: 'JsonToCSV',
                 component: JsonToCSV,
-
             },
             {
                 path: 'formatjson',
                 name: 'FormatJson',
                 component: FormatJSON,
+            },
 
+            {
+                path: 'inspector',
+                name: 'Inspector',
+                component: StringInspector,
             },
             {
                 path: 'dates',
