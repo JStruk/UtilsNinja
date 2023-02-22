@@ -62,12 +62,21 @@
     </li>
     <li :class="{ '-mb-px mr-1': activeTab === 5 }" class="mr-1">
       <router-link
-        :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 5 }"
-        class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
-        @click="() => setActiveTab(5)"
-        :to="{ name: 'Dates' }"
-        >Dates</router-link
-      >
+          :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 5 }"
+          class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
+          @click="() => setActiveTab(5)"
+          :to="{ name: 'Dates' }">
+        Dates
+      </router-link>
+    </li>
+    <li :class="{ '-mb-px mr-1': activeTab === 6 }" class="mr-1">
+      <router-link
+          :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 6 }"
+          class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
+          @click="() => setActiveTab(6)"
+          :to="{ name: 'PHPToJson' }">
+        PHP To JSON
+      </router-link>
     </li>
   </ul>
   <router-view class="p-4"></router-view>

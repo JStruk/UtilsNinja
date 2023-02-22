@@ -1,26 +1,26 @@
 import { describe, it, expect } from 'vitest'
-import { PHParrayTojson } from '@/utilities/phparraytojson';
+import { PHPArrayToJson } from '@/utilities/phparraytojson';
 
 
-describe('PHParrayTojson', () => {
+describe('PHPArrayToJson', () => {
     it('returns an empty json object from empty associative array', () => {
         const array = '[]';
         const result = {}
 
-        expect(PHParrayTojson(array)).toEqual(result)
+        expect(PHPArrayToJson(array)).toEqual(result)
     })
 
-    it('should tacos', function () {
+    it('should convert php array to json object', function () {
         const phpObject = '["foo" => "bar"]';
         const expectedJSONObject = { 'foo': 'bar' }
 
-        expect(PHParrayTojson(phpObject)).toEqual(expectedJSONObject)
+        expect(PHPArrayToJson(phpObject)).toEqual(expectedJSONObject)
     });
 
-    it('should nested tacos', function () {
+    it('should convert nested php array to json object', function () {
         const phpObject = '["foo" => ["bar" => "baz"]]';
         const expectedJSONObject = { 'foo': { 'bar': 'baz' } }
 
-        expect(PHParrayTojson(phpObject)).toEqual(expectedJSONObject)
+        expect(PHPArrayToJson(phpObject)).toEqual(expectedJSONObject)
     });
 })

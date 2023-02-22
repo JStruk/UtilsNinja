@@ -1,4 +1,4 @@
-export function PHParrayTojson(php: string): {} {
+export function PHPArrayToJson(php: string): {} {
     return JSON.parse(php
         .replace(/\[/g, '{')
         .replace(/]/g, '}')
