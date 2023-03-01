@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { PHPArrayToJson } from '@/utilities/phparraytojson';
+import { PHPArrayToJson } from '@/utilities/PHPArrayToJson';
 
 
 describe('PHPArrayToJson', () => {
