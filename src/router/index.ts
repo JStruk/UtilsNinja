@@ -8,6 +8,7 @@ import JsonToCSV from '@/views/JsonToCSV.vue';
 import StringInspector from '@/views/StringInspector.vue';
 import Dates from '@/views/Dates.vue';
 import PHPArrayToJson from '@/views/PHPArrayToJson.vue';
+import JSONToPHPArray from '@/views/JSONToPHPArray.vue';
 
 export const routes = [
     {
@@ -59,6 +60,11 @@ export const routes = [
                 path: 'php-to-json',
                 name: 'PHPToJson',
                 component: PHPArrayToJson,
+            },
+            {
+                path: 'json-to-php',
+                name: 'JSONToPHP',
+                component: JSONToPHPArray,
             },
         ],
     },
