@@ -35,8 +35,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { copyToClipboard } from '../helpers/copyToClipboard'
-import { generateLoremIpsum } from '../utilities/loremIpsumGenerator'
+import { copyToClipboard } from '../helpers/CopyToClipboard'
+import { generateLoremIpsum } from '../utilities/LoremIpsumGenerator'
 import type { LoremUnit } from 'lorem-ipsum/types/src/constants/units';
 
 const lorem = ref<string>('')

@@ -21,7 +21,7 @@
 import { ref } from 'vue';
 import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
-import { unixEpochToDate } from '@/utilities/unixEpochToDate'
+import { unixEpochToDate } from '@/utilities/UnixEpochToDate'
 
 const inputText = ref<string>('');
 const isTimestampValid = ref<boolean>(false);

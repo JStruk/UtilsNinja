@@ -1,4 +1,4 @@
-import { convertCSVToJSON } from '../../../src/utilities/csvtojson';
+import { convertCSVToJSON } from '../../../src/utilities/CSVToJSON';
 
 describe('CSV to JSON', () => {
     beforeEach(() => {

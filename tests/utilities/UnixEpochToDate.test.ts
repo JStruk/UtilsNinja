@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { unixEpochToDate } from '@/utilities/unixEpochToDate';
+import { unixEpochToDate } from '@/utilities/UnixEpochToDate';
 
 describe('Unix Epoch to Date', () => {
     const testCases = [

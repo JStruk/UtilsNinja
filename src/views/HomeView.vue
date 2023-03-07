@@ -19,7 +19,7 @@
 
 <script lang='ts' setup>
 import HeroSvg from '@/components/HeroSvg.vue';
-import { slogan } from '@/constants/constants'
+import { slogan } from '@/constants/Constants'
 
 </script>
 

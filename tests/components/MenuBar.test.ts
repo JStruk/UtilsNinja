@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect } from 'vitest'
-import { router } from '../helpers/testRouter';
+import { router } from '../helpers/TestRouter';
 import { mount } from '@vue/test-utils';
 import MenuBar from '../../src/components/MenuBar.vue'
 

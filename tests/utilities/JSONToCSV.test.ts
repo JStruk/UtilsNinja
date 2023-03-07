@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { convertJSONtoCSV } from '@/utilities/jsontocsv';
+import { convertJSONtoCSV } from '@/utilities/JSONToCSV';
 
 describe('CSVToJSON', () => {
     it('should convert valid JSON to valid CSV', () => {

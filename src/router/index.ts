@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import ToolsView from '@/views/ToolsView.vue';
 import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue';
-import CsvToJson from '@/views/CsvToJson.vue';
+import CsvToJson from '@/views/CSVToJSON.vue';
 import FormatJSON from '@/views/FormatJSON.vue';
-import JsonToCSV from '@/views/JsonToCSV.vue';
+import JsonToCSV from '@/views/JSONToCSV.vue';
 import StringInspector from '@/views/StringInspector.vue';
 import Dates from '@/views/Dates.vue';
-import PHPArrayToJson from '@/views/PHPArrayToJson.vue';
+import PHPArrayToJson from '@/views/PHPArrayToJSON.vue';
 import JSONToPHPArray from '@/views/JSONToPHPArray.vue';
 
 export const routes = [

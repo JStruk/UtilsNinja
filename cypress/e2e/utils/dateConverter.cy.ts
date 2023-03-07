@@ -1,4 +1,4 @@
-import { unixEpochToDate } from '../../../src/utilities/unixEpochToDate';
+import { unixEpochToDate } from '../../../src/utilities/UnixEpochToDate';
 
 describe('Unix Epoch to Date', () => {
     beforeEach(() => {
