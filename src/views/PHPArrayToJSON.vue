@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue';
-import { PHPArrayToJson } from '@/utilities/PHPArrayToJson';
+import { PHPArrayToJSON } from '@/utilities/PHPArrayToJSON';
 import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
 
@@ -23,6 +23,6 @@ const PHPArray = ref<string>('')
 const json = ref()
 
 function convert() {
-  json.value = PHPArrayToJson(PHPArray.value)
+  json.value = PHPArrayToJSON(PHPArray.value)
 }
 </script>

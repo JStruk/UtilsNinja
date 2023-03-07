@@ -23,14 +23,13 @@ const setActiveTab = (tabNumber: number) => {
 };
 
 const links = [
-  { route: 'FormatJson', label: 'JSON Format' },
-  { route: 'tools', label: 'Base 64 Encode/Decode' },
+  { route: 'FormatJSON', label: 'JSON Format' },
   { route: 'LoremIpsumGenerator', label: 'Lorem Ipsum' },
-  { route: 'JsonToCSV', label: 'JSON to CSV' },
-  { route: 'CsvToJson', label: 'CSV to JSON' },
+  { route: 'JSONToCSV', label: 'JSON to CSV' },
+  { route: 'CSVToJSON', label: 'CSV to JSON' },
   { route: 'Inspector', label: 'Inspector' },
   { route: 'Dates', label: 'Dates' },
-  { route: 'PHPToJson', label: 'PHP To JSON' },
+  { route: 'PHPToJSON', label: 'PHP To JSON' },
   { route: 'JSONToPHP', label: 'JSON To PHP' },
 ];
 </script>

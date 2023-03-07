@@ -30,18 +30,18 @@ export const routes = [
                 }
             },
             {
-                path: 'csvtojson',
-                name: 'CsvToJson',
+                path: 'csv-to-json',
+                name: 'CSVToJSON',
                 component: CsvToJson,
             },
             {
-                path: 'jsontocsv',
-                name: 'JsonToCSV',
+                path: 'json-to-csv',
+                name: 'JSONToCSV',
                 component: JsonToCSV,
             },
             {
-                path: 'formatjson',
-                name: 'FormatJson',
+                path: 'json-formatter',
+                name: 'FormatJSON',
                 component: FormatJSON,
             },
 
@@ -58,7 +58,7 @@ export const routes = [
             },
             {
                 path: 'php-to-json',
-                name: 'PHPToJson',
+                name: 'PHPToJSON',
                 component: PHPArrayToJson,
             },
             {

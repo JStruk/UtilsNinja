@@ -1,4 +1,4 @@
-import { PHPArrayToJson } from '../../../src/utilities/PHPArrayToJson';
+import { PHPArrayToJSON } from '../../../src/utilities/PHPArrayToJSON';
 
 describe('PHP Array To Json', () => {
     beforeEach(() => {
