@@ -50,32 +50,23 @@
       </router-link
       >
     </li>
-    <li :class="{ '-mb-px mr-1': activeTab === 6 }" class="mr-1">
-      <router-link
-          :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 6 }"
-          class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
-          @click="() => setActiveTab(6)"
-          :to="{ name: 'Inspector' }"
-      >Inspector
-      </router-link
-      >
-    </li>
     <li :class="{ '-mb-px mr-1': activeTab === 5 }" class="mr-1">
       <router-link
           :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 5 }"
           class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
           @click="() => setActiveTab(5)"
-          :to="{ name: 'Dates' }">
-        Dates
-      </router-link>
+          :to="{ name: 'Inspector' }"
+      >Inspector
+      </router-link
+      >
     </li>
     <li :class="{ '-mb-px mr-1': activeTab === 6 }" class="mr-1">
       <router-link
           :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 6 }"
           class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
           @click="() => setActiveTab(6)"
-          :to="{ name: 'PHPToJson' }">
-        PHP To JSON
+          :to="{ name: 'Dates' }">
+        Dates
       </router-link>
     </li>
     <li :class="{ '-mb-px mr-1': activeTab === 7 }" class="mr-1">
@@ -83,6 +74,15 @@
           :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 7 }"
           class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
           @click="() => setActiveTab(7)"
+          :to="{ name: 'PHPToJson' }">
+        PHP To JSON
+      </router-link>
+    </li>
+    <li :class="{ '-mb-px mr-1': activeTab === 8 }" class="mr-1">
+      <router-link
+          :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === 8 }"
+          class="bg-white inline-block py-2 px-4 text-purple-500 hover:text-purple-800"
+          @click="() => setActiveTab(8)"
           :to="{ name: 'JSONToPHP' }">
          JSON To PHP
       </router-link>
