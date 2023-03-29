@@ -15,7 +15,7 @@ describe('Lorem Ipsum Generator', () => {
     it('should populate textarea with generated lorem ipsum text', () => {
         cy.get('input[type="number"]').type('3')
         cy.contains('Generate').click()
-        cy.get('textarea').invoke('val').should('not.be.empty');
+        cy.get('textarea').invoke('val').should('not.be.empty')
     })
 
     it.skip('should copy generated text to user\'s clipboard', () => {
@@ -31,13 +31,13 @@ describe('Lorem Ipsum Generator', () => {
 
         cy.get('textarea').invoke('text')
             .then(text => {
-                generatedText = text;
-            });
+                generatedText = text
+            })
 
         cy.window().then(win => {
             win.navigator.clipboard.readText().then(text => {
                 cy.log(text)
-                clipboardText = text;
+                clipboardText = text
             })
         })
 

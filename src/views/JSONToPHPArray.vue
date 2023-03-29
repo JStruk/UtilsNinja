@@ -14,10 +14,9 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue';
-import { JSONToPHPArray } from '@/utilities/JSONToPHPArray';
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
+import { ref } from 'vue'
+import { JSONToPHPArray } from '@/utilities/JSONToPHPArray'
+import 'vue-json-pretty/lib/styles.css'
 
 const JSONData = ref<string>('')
 const phpArray = ref()

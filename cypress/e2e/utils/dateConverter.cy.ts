@@ -1,4 +1,4 @@
-import { unixEpochToDate } from '../../../src/utilities/UnixEpochToDate';
+import { unixEpochToDate } from '../../../src/utilities/UnixEpochToDate'
 
 describe('Unix Epoch to Date', () => {
     beforeEach(() => {
@@ -10,13 +10,13 @@ describe('Unix Epoch to Date', () => {
     })
 
     it('displays the date strings', () => {
-        const timestamp = '1674595801793';
+        const timestamp = '1674595801793'
 
-        cy.get('input').type(timestamp);
+        cy.get('input').type(timestamp)
 
-        const formattedDates = unixEpochToDate(parseInt(timestamp));
-        cy.contains(`"iso":"${formattedDates.iso}"`);
-        cy.contains(`"locale":"${formattedDates.locale}"`);
-        cy.contains(`"human":"${formattedDates.human}"`);
-    });
+        const formattedDates = unixEpochToDate(parseInt(timestamp))
+        cy.contains(`"iso":"${formattedDates.iso}"`)
+        cy.contains(`"locale":"${formattedDates.locale}"`)
+        cy.contains(`"human":"${formattedDates.human}"`)
+    })
 })

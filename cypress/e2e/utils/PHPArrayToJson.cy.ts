@@ -1,5 +1,3 @@
-import { PHPArrayToJSON } from '../../../src/utilities/PHPArrayToJSON';
-
 describe('PHP Array To Json', () => {
     beforeEach(() => {
         cy.visit('/tools/php-to-json')

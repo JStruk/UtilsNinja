@@ -1,12 +1,12 @@
-import { inspect, InspectionResult } from '../../../src/utilities/StringInspector';
+import { inspect, InspectionResult } from '../../../src/utilities/StringInspector'
 
 describe('String Inspector', () => {
     beforeEach(() => {
         cy.visit('/tools/inspector')
     })
 
-    const text = 'idk this is definitely some text';
-    const sentence = 'this has \n four of the same word \r and that word is word word';
+    const text = 'idk this is definitely some text'
+    const sentence = 'this has \n four of the same word \r and that word is word word'
 
 
     it('should allow the user to enter text', () => {
@@ -35,5 +35,5 @@ describe('String Inspector', () => {
         Object.keys(distribution).map((word) => {
             cy.contains(`"${word}":${distribution[word]}`)
         })
-    });
+    })
 })

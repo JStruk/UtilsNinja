@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-let activeTab = ref(0);
+let activeTab = ref(0)
 
 const setActiveTab = (tabNumber: number) => {
-  activeTab.value = tabNumber;
-};
+  activeTab.value = tabNumber
+}
 
 const links = [
   { route: 'FormatJSON', label: 'JSON Format' },
@@ -31,5 +31,5 @@ const links = [
   { route: 'Dates', label: 'Dates' },
   { route: 'PHPToJSON', label: 'PHP To JSON' },
   { route: 'JSONToPHP', label: 'JSON To PHP' },
-];
+]
 </script>

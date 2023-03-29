@@ -3,20 +3,20 @@ export function JSONtoCSV(json: any): string {
 
     const objectArray = Array.isArray(parsed) ? parsed : [parsed]
 
-    let csvData = '';
+    let csvData = ''
 
     csvData += Object.keys(objectArray?.[0]).join(',') + '\n'
 
     for (let i = 0; i < objectArray.length; i++) {
-        let line = '';
+        let line = ''
         for (const index in objectArray[i]) {
             if (line != '') line += ','
 
-            line += objectArray[i][index];
+            line += objectArray[i][index]
         }
 
-        csvData += line + '\n';
+        csvData += line + '\n'
     }
 
-    return csvData.trimEnd();
+    return csvData.trimEnd()
 }

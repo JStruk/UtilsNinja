@@ -13,26 +13,24 @@
       </div>
     </div>
   </div>
-
-
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
+import { ref } from 'vue'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
 import { unixEpochToDate } from '@/utilities/UnixEpochToDate'
 
-const inputText = ref<string>('');
-const isTimestampValid = ref<boolean>(false);
-const formattedDate = ref();
+const inputText = ref<string>('')
+const isTimestampValid = ref<boolean>(false)
+const formattedDate = ref()
 
 function formatDate() {
   try {
-    formattedDate.value = unixEpochToDate(parseInt(inputText.value));
-    isTimestampValid.value = true;
+    formattedDate.value = unixEpochToDate(parseInt(inputText.value))
+    isTimestampValid.value = true
   } catch (e) {
-    isTimestampValid.value = false;
+    isTimestampValid.value = false
   }
 }
 

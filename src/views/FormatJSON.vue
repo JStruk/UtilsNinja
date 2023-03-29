@@ -18,21 +18,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
+import { ref } from 'vue'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
 
 const inputText = ref<string>('{}')
-const isJSONValid = ref<boolean>(false);
-const formattedJSON = ref<string>('');
+const isJSONValid = ref<boolean>(false)
+const formattedJSON = ref<string>('')
 
 function formatJSON() {
   inputText.value.replace(/'/g, '"')
   try {
-    formattedJSON.value = JSON.parse(inputText.value);
-    isJSONValid.value = true;
+    formattedJSON.value = JSON.parse(inputText.value)
+    isJSONValid.value = true
   } catch (e) {
-    isJSONValid.value = false;
+    isJSONValid.value = false
   }
 }
 

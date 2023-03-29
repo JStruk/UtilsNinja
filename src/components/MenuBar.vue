@@ -53,5 +53,5 @@ import { ref } from 'vue'
 
 let collapsed = ref(true)
 
-const toggleMenu = () => { collapsed.value = !collapsed.value; }
+const toggleMenu = () => { collapsed.value = !collapsed.value }
 </script>
