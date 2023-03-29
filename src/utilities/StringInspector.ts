@@ -1,4 +1,4 @@
-type WordDistribution = Record<string, number>;
+type WordDistribution = Record<string, number>
 export type InspectionResult = {
     characterCount: number
     wordCount: number
@@ -11,7 +11,7 @@ export function inspect(string: String): InspectionResult {
     const words = string.split(/\s+/)
     const wordDistribution = words.reduce((carry: WordDistribution, word: string) => {
         carry[word] = (carry[word] || 0) + 1
-        return carry;
+        return carry
     }, {})
 
     return {

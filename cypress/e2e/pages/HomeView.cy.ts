@@ -1,4 +1,4 @@
-import { slogan } from '../../../src/constants/Constants';
+import { slogan } from '../../../src/constants/Constants'
 
 describe('HomeView', () => {
     it('shows the title', () => {

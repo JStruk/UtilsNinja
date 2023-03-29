@@ -14,10 +14,10 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue';
-import { PHPArrayToJSON } from '@/utilities/PHPArrayToJSON';
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
+import { ref } from 'vue'
+import { PHPArrayToJSON } from '@/utilities/PHPArrayToJSON'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
 
 const PHPArray = ref<string>('')
 const json = ref()

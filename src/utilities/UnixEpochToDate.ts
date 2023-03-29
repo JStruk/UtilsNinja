@@ -26,7 +26,7 @@ const humanOptions: Intl.DateTimeFormatOptions = {
 // Handle user input seconds vs milliseconds?
 export function unixEpochToDate(timestamp: number)
 {
-    const date = new Date(timestamp);
+    const date = new Date(timestamp)
 
     const getOrdinal = (num: string): string => {
         if(['11', '12', '13'].includes(num)) return 'th'

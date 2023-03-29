@@ -16,8 +16,8 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue';
-import { CSVToJSON } from '@/utilities/CSVToJSON';
+import { ref } from 'vue'
+import { CSVToJSON } from '@/utilities/CSVToJSON'
 
 const CSVData = ref<string>('')
 const jsonString = ref<string>('')

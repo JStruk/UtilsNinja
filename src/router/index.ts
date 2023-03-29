@@ -1,14 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-import ToolsView from '@/views/ToolsView.vue';
-import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue';
-import CsvToJson from '@/views/CSVToJSON.vue';
-import FormatJSON from '@/views/FormatJSON.vue';
-import JsonToCSV from '@/views/JSONToCSV.vue';
-import StringInspector from '@/views/StringInspector.vue';
-import Dates from '@/views/Dates.vue';
-import PHPArrayToJson from '@/views/PHPArrayToJSON.vue';
-import JSONToPHPArray from '@/views/JSONToPHPArray.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+import ToolsView from '@/views/ToolsView.vue'
+import LoremIpsumGenerator from '@/views/LoremIpsumGenerator.vue'
+import CsvToJson from '@/views/CSVToJSON.vue'
+import FormatJSON from '@/views/FormatJSON.vue'
+import JsonToCSV from '@/views/JSONToCSV.vue'
+import StringInspector from '@/views/StringInspector.vue'
+import Dates from '@/views/UnixEpochToDate.vue'
+import PHPArrayToJson from '@/views/PHPArrayToJSON.vue'
+import JSONToPHPArray from '@/views/JSONToPHPArray.vue'
 
 export const routes = [
     {
@@ -68,11 +68,11 @@ export const routes = [
             },
         ],
     },
-];
+]
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
-});
+})
 
-export default router;
+export default router

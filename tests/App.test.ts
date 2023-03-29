@@ -1,9 +1,9 @@
 // @vitest-environment jsdom
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest'
 import App from '@/App.vue'
-import { mount } from '@vue/test-utils';
-import { router } from './helpers/TestRouter';
+import { mount } from '@vue/test-utils'
+import { router } from './helpers/TestRouter'
 
 const renderComponent = () => {
     return mount(App, {
@@ -15,14 +15,14 @@ const renderComponent = () => {
 
 describe('App', () => {
     it('renders the component', () => {
-        const wrapper = renderComponent();
+        const wrapper = renderComponent()
 
-        expect(wrapper.exists()).toBeTruthy();
+        expect(wrapper.exists()).toBeTruthy()
     })
 
     it('renders a navbar', () => {
-        const wrapper = renderComponent();
+        const wrapper = renderComponent()
 
-        expect(wrapper.find('nav').exists()).toBeTruthy();
+        expect(wrapper.find('nav').exists()).toBeTruthy()
     })
 })

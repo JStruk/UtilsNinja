@@ -18,17 +18,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
-import { inspect } from '@/utilities/StringInspector';
-import type { InspectionResult } from '@/utilities/StringInspector';
+import { ref } from 'vue'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
+import { inspect } from '@/utilities/StringInspector'
+import type { InspectionResult } from '@/utilities/StringInspector'
 
 const inputText = ref<string>('')
 const output = ref<InspectionResult>()
 
 function inspectText() {
-  output.value = inspect(inputText.value);
+  output.value = inspect(inputText.value)
 }
 
 </script>

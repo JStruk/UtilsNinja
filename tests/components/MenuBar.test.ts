@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect } from 'vitest'
-import { router } from '../helpers/TestRouter';
-import { mount } from '@vue/test-utils';
+import { router } from '../helpers/TestRouter'
+import { mount } from '@vue/test-utils'
 import MenuBar from '../../src/components/MenuBar.vue'
 
 const renderComponent = () => {
@@ -15,23 +15,23 @@ const renderComponent = () => {
 
 describe('MenuBar', function () {
     it('renders', () => {
-        const wrapper = renderComponent();
+        const wrapper = renderComponent()
 
-        expect(wrapper.exists()).toBeTruthy();
+        expect(wrapper.exists()).toBeTruthy()
     })
 
     it('renders a nav section', () => {
-        const wrapper = renderComponent();
+        const wrapper = renderComponent()
 
-        expect(wrapper.find('nav').exists()).toBeTruthy();
+        expect(wrapper.find('nav').exists()).toBeTruthy()
     })
 
     it.each(['Home', 'Tools', 'Contact', 'Contribute'])('renders %s link', (tabName) => {
-        const wrapper = renderComponent();
+        const wrapper = renderComponent()
 
         const tab = wrapper.findAll('a').filter(n => n.text().match(tabName))
 
         expect(tab?.[0].exists()).toBeTruthy()
         expect.assertions(1)
     })
-});
+})

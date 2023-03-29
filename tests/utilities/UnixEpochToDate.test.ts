@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { unixEpochToDate } from '@/utilities/UnixEpochToDate';
+import { unixEpochToDate } from '@/utilities/UnixEpochToDate'
 
 describe('Unix Epoch to Date', () => {
     const testCases = [
@@ -9,10 +9,10 @@ describe('Unix Epoch to Date', () => {
     ]
 
     it.each(testCases)('can covert a unix timestamp to a %s date', (dateFormat, dateString) => {
-        const timestamp = 1674595801793;
-        const result = unixEpochToDate(timestamp);
+        const timestamp = 1674595801793
+        const result = unixEpochToDate(timestamp)
 
-        expect(result).toBeInstanceOf(Object);
+        expect(result).toBeInstanceOf(Object)
         expect(result).toEqual(expect.objectContaining({
             [dateFormat]: dateString
         }))

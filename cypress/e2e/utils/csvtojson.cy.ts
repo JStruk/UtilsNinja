@@ -1,4 +1,4 @@
-import { CSVToJSON } from '../../../src/utilities/CSVToJSON';
+import { CSVToJSON } from '../../../src/utilities/CSVToJSON'
 
 describe('CSV to JSON', () => {
     beforeEach(() => {
@@ -12,16 +12,16 @@ describe('CSV to JSON', () => {
     it('should accept user CSV and output converted JSON', () => {
         const CSVData = "Name,Age,Height\nJoe,25,5'10\nMike,30,6'0"
 
-        cy.get('textarea[placeholder="CSV Data"]').type(CSVData);
-        cy.contains('Convert').click();
+        cy.get('textarea[placeholder="CSV Data"]').type(CSVData)
+        cy.contains('Convert').click()
 
-        const expectedJSON = CSVToJSON(CSVData);
-        cy.get('textarea[placeholder="JSON format"]').invoke('val').should('equal', expectedJSON);
-    });
+        const expectedJSON = CSVToJSON(CSVData)
+        cy.get('textarea[placeholder="JSON format"]').invoke('val').should('equal', expectedJSON)
+    })
 
     it('should return an empty array if the CSV data cannot be parsed', () => {
-        cy.get('textarea[placeholder="CSV Data"]').type('I am the walrus');
-        cy.contains('Convert').click();
-        cy.get('textarea[placeholder="JSON format"]').invoke('val').should('equal', '[]');
+        cy.get('textarea[placeholder="CSV Data"]').type('I am the walrus')
+        cy.contains('Convert').click()
+        cy.get('textarea[placeholder="JSON format"]').invoke('val').should('equal', '[]')
     })
 })
