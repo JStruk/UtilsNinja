@@ -1,4 +1,4 @@
-export function convertJSONtoCSV(json: any): string {
+export function JSONtoCSV(json: any): string {
     const parsed = JSON.parse(json)
 
     const objectArray = Array.isArray(parsed) ? parsed : [parsed]

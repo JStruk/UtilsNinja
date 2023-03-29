@@ -1,4 +1,4 @@
-export function convertCSVToJSON(csv: string): string {
+export function CSVToJSON(csv: string): string {
     const all_data = csv.split('\n')
     const headers = all_data[0].split(',')
 

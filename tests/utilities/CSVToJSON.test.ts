@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { convertCSVToJSON } from '@/utilities/CSVToJSON';
+import { CSVToJSON } from '@/utilities/CSVToJSON';
 
 describe('CSVToJSON', () => {
     it('should convert valid CSV to valid JSON string', () => {
@@ -18,6 +18,6 @@ describe('CSVToJSON', () => {
             }
         ]
 
-        expect(convertCSVToJSON(CSVData)).toEqual(JSON.stringify(expectedJSON, null, '\t'))
+        expect(CSVToJSON(CSVData)).toEqual(JSON.stringify(expectedJSON, null, '\t'))
     })
 })

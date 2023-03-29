@@ -1,4 +1,4 @@
-import { convertJSONtoCSV } from '../../../src/utilities/JSONToCSV';
+import { JSONtoCSV } from '../../../src/utilities/JSONToCSV';
 
 
 describe('CSV to JSON', () => {
@@ -16,7 +16,7 @@ describe('CSV to JSON', () => {
         cy.get('textarea[placeholder="JSON Data"]').type(JSONData, { parseSpecialCharSequences: false });
         cy.contains('Convert').click();
 
-        const expectedCSV = convertJSONtoCSV(JSONData);
+        const expectedCSV = JSONtoCSV(JSONData);
         cy.get('textarea[placeholder="CSV format"]').invoke('val').should('equal', expectedCSV);
     });
 

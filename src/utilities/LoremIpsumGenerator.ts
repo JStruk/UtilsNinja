@@ -7,17 +7,17 @@ const UNIT_SENTENCES = 'sentences';
 const UNIT_PARAGRAPHS = 'paragraphs';
 type LoremUnit = 'words' | 'word' | 'sentences' | 'sentence' | 'paragraphs' | 'paragraph';
 
-export function generateLoremIpsum(unit: LoremUnit, numUnits: number): string {
-    const loremIpsumGenerator = new LoremIpsum();
+export function generate(unit: LoremUnit, numUnits: number): string {
+    const loremIpsum = new LoremIpsum();
 
     console.log(unit);
     switch (unit) {
         case UNIT_WORDS:
-            return loremIpsumGenerator.generateWords(numUnits);
+            return loremIpsum.generateWords(numUnits);
         case UNIT_SENTENCES:
-            return loremIpsumGenerator.generateSentences(numUnits);
+            return loremIpsum.generateSentences(numUnits);
         case UNIT_PARAGRAPHS:
-            return loremIpsumGenerator.generateParagraphs(numUnits);
+            return loremIpsum.generateParagraphs(numUnits);
     }
 
     return 'Invalid options received. Please try again.';
