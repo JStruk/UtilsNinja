@@ -17,12 +17,12 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue';
-import { convertJSONtoCSV } from '@/utilities/JSONToCSV';
+import { JSONtoCSV } from '@/utilities/JSONToCSV';
 
 const JSONInput = ref<string>('')
 const CSVString = ref<string>('')
 
 function convert() {
-  CSVString.value = convertJSONtoCSV(JSONInput.value)
+  CSVString.value = JSONtoCSV(JSONInput.value)
 }
 </script>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { convertJSONtoCSV } from '@/utilities/JSONToCSV';
+import { JSONtoCSV } from '@/utilities/JSONToCSV';
 
 describe('CSVToJSON', () => {
     it('should convert valid JSON to valid CSV', () => {
@@ -19,7 +19,7 @@ describe('CSVToJSON', () => {
 
         const CSVresult = "Name,Age,Height\nJoe,25,5'10\nMike,30,6'0"
 
-        expect(convertJSONtoCSV(JSONinput)).toEqual(CSVresult)
+        expect(JSONtoCSV(JSONinput)).toEqual(CSVresult)
     })
 
     it('should wrap object in array', () => {
@@ -32,6 +32,6 @@ describe('CSVToJSON', () => {
 
         const CSVresult = "Name,Age,Height\nJoe,25,5'10"
 
-        expect(convertJSONtoCSV(JSONinput)).toEqual(CSVresult)
+        expect(JSONtoCSV(JSONinput)).toEqual(CSVresult)
     })
 })

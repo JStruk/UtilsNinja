@@ -1,4 +1,4 @@
-import { convertCSVToJSON } from '../../../src/utilities/CSVToJSON';
+import { CSVToJSON } from '../../../src/utilities/CSVToJSON';
 
 describe('CSV to JSON', () => {
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe('CSV to JSON', () => {
         cy.get('textarea[placeholder="CSV Data"]').type(CSVData);
         cy.contains('Convert').click();
 
-        const expectedJSON = convertCSVToJSON(CSVData);
+        const expectedJSON = CSVToJSON(CSVData);
         cy.get('textarea[placeholder="JSON format"]').invoke('val').should('equal', expectedJSON);
     });
 

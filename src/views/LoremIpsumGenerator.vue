@@ -36,7 +36,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { copyToClipboard } from '../helpers/CopyToClipboard'
-import { generateLoremIpsum } from '../utilities/LoremIpsumGenerator'
+import { generate } from '../utilities/LoremIpsumGenerator'
 import type { LoremUnit } from 'lorem-ipsum/types/src/constants/units';
 
 const lorem = ref<string>('')
@@ -44,7 +44,7 @@ const numUnits = ref<number>(5)
 const selectedLoremUnits = ref<string>('words');
 
 function getLoremIpsum() {
-  lorem.value = generateLoremIpsum(selectedLoremUnits.value as LoremUnit, numUnits.value);
+  lorem.value = generate(selectedLoremUnits.value as LoremUnit, numUnits.value);
 }
 
 </script>
