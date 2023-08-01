@@ -10,10 +10,10 @@ describe('Base64Encode', () => {
         expect(Base64Encode(input)).toEqual(expectedBase64)
     })
 
-    it('can handle string with invalid characters', () => {
+    it('will throw error for invalid characters', () => {
         const input: string ='🔥🔥'
 
-        expect(() => Base64Encode(input)).not.toThrowError()
+        expect(() => Base64Encode(input)).toThrowError()
     })
 
     it('can handle empty string', function () {

@@ -9,6 +9,7 @@ import StringInspector from '@/views/StringInspector.vue'
 import Dates from '@/views/UnixEpochToDate.vue'
 import PHPArrayToJson from '@/views/PHPArrayToJSON.vue'
 import JSONToPHPArray from '@/views/JSONToPHPArray.vue'
+import Base64Encode from '@/views/Base64Encode.vue'
 
 export const routes = [
     {
@@ -71,6 +72,11 @@ export const routes = [
                 name: 'JSONToPHP',
                 component: JSONToPHPArray,
             },
+            {
+                path: 'base-64-encode',
+                name: 'Base64Encode',
+                component: Base64Encode,
+            }
         ],
     },
 ]
