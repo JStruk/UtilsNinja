@@ -25,7 +25,7 @@ const encodedString = ref<string>('')
 function encode() {
   try {
     encodedString.value = Base64Encode(stringToEncode.value)
-  } catch (e) {
+  } catch (e: any) {
     alert(e.message)
   }
 }
