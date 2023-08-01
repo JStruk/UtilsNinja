@@ -20,6 +20,11 @@ export const routes = [
         path: '/tools',
         name: 'tools',
         component: ToolsView,
+        redirect: () => {
+            return {
+                name: 'FormatJSON'
+            }
+        },
         children: [
             {
                 path: 'lig',
