@@ -9,8 +9,14 @@ import StringInspector from '@/views/StringInspector.vue'
 import Dates from '@/views/UnixEpochToDate.vue'
 import PHPArrayToJson from '@/views/PHPArrayToJSON.vue'
 import JSONToPHPArray from '@/views/JSONToPHPArray.vue'
+import Layout from '@/layouts/Layout.vue'
 
 export const routes = [
+    {
+        path: '/layout',
+        name: 'layout',
+        component: Layout,
+    },
     {
         path: '/',
         name: 'home',
