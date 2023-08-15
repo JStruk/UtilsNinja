@@ -1,6 +1,4 @@
-
-
-const localeOptions: Intl.DateTimeFormatOptions = {
+let localeOptions: Intl.DateTimeFormatOptions = {
     weekday: 'short',
     year: 'numeric',
     month: 'short',
@@ -9,10 +7,10 @@ const localeOptions: Intl.DateTimeFormatOptions = {
     minute: '2-digit',
     second: '2-digit',
     hour12: false,
-    timeZoneName: 'longOffset'
+    timeZoneName: 'longOffset',
 }
 
-const humanOptions: Intl.DateTimeFormatOptions = {
+let humanOptions: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -23,13 +21,16 @@ const humanOptions: Intl.DateTimeFormatOptions = {
     hour12: true,
 }
 
-// Handle user input seconds vs milliseconds?
-export function unixEpochToDate(timestamp: number)
-{
+export function unixEpochToDate(timestamp: number, options?: Intl.DateTimeFormatOptions) {
+    if (options) {
+        humanOptions = { ...humanOptions, ...options }
+        localeOptions = { ...localeOptions, ...options }
+    }
+
     const date = new Date(timestamp)
 
     const getOrdinal = (num: string): string => {
-        if(['11', '12', '13'].includes(num)) return 'th'
+        if (['11', '12', '13'].includes(num)) return 'th'
 
         switch (num[num.length - 1]) {
             case '1':
