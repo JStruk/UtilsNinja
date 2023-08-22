@@ -10,6 +10,7 @@ import Dates from '@/views/UnixEpochToDate.vue'
 import PHPArrayToJson from '@/views/PHPArrayToJSON.vue'
 import JSONToPHPArray from '@/views/JSONToPHPArray.vue'
 import Base64Encode from '@/views/Base64Encode.vue'
+import Base64Decode from '@/views/Base64Decode.vue'
 
 export const routes = [
     {
@@ -76,7 +77,12 @@ export const routes = [
                 path: 'base-64-encode',
                 name: 'Base64Encode',
                 component: Base64Encode,
-            }
+            },
+            {
+                path: 'base-64-decode',
+                name: 'Base64Decode',
+                component: Base64Decode,
+            },
         ],
     },
 ]

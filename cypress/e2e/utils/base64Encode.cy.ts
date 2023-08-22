@@ -1,6 +1,6 @@
-import { inspect, InspectionResult } from '../../../src/utilities/StringInspector'
+import { Base64Encode } from '../../../src/utilities/Base64Encode'
 
-describe('String Inspector', () => {
+describe('Base64 Encoder', () => {
     beforeEach(() => {
         cy.visit('/tools/base-64-encode')
     })
@@ -14,7 +14,7 @@ describe('String Inspector', () => {
     it('should display the encoded text', () => {
         cy.get('textarea[aria-label="input-to-encode"]').type(text)
         cy.get('button[aria-label="encode-text"]').click()
-        const encodedText: string = btoa(text)
+        const encodedText: string = Base64Encode(text)
         cy.get('textarea[aria-label="encoded-text"]').should('have.value', encodedText)
     })
 
