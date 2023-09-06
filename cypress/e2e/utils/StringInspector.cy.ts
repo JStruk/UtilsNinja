@@ -10,11 +10,11 @@ describe('String Inspector', () => {
 
 
     it('should allow the user to enter text', () => {
-        cy.get('textarea').type(text)
+        cy.get('textarea[aria-label="string-inspector"]').type(text, { scrollBehavior: 'center' })
     })
 
     it('should display the results of the inspected string', () => {
-        cy.get('textarea').type(sentence)
+        cy.get('textarea[aria-label="string-inspector"]').type(sentence, { scrollBehavior: 'center' })
 
         const inspectorResult: InspectionResult = inspect(sentence)
 
@@ -25,7 +25,7 @@ describe('String Inspector', () => {
     })
 
     it('should display the word distribution for the inspected string', function () {
-        cy.get('textarea').type(sentence)
+        cy.get('textarea[aria-label="string-inspector"]').type(sentence, { scrollBehavior: 'center' })
 
         const inspectorResult: InspectionResult = inspect(sentence)
 

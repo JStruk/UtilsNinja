@@ -9,7 +9,7 @@ describe('Navigation', () => {
     it('can visit the tools page', () => {
         cy.visit('/tools')
 
-        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools`)
+        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools/json-formatter`)
 
         // TODO: dynamically check for util tabs based on registry of utils
         cy.contains('JSON Format')

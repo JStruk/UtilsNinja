@@ -3,7 +3,7 @@ import { JSONtoCSV } from '../../../src/utilities/JSONToCSV'
 
 describe('CSV to JSON', () => {
     beforeEach(() => {
-        cy.visit('/tools/jsontocsv')
+        cy.visit('/tools/json-to-csv')
     })
 
     it('should allow the user to type text into textarea', () => {
