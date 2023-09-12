@@ -31,6 +31,7 @@ const links = [
   { route: 'Dates', label: 'Dates' },
   { route: 'PHPToJSON', label: 'PHP To JSON' },
   { route: 'JSONToPHP', label: 'JSON To PHP' },
-  { route: 'Base64Encode', label: 'Base64Encode' }
+  { route: 'Base64Encode', label: 'Base64Encode' },
+  { route: 'Base64Decode', label: 'Base64Decode' }
 ]
 </script>
