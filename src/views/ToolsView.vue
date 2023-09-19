@@ -1,6 +1,6 @@
 <template>
-  <ul class="flex border-b pt-6">
-    <li v-for="(link, index) in links" :key="index" :class="{ '-mb-px mr-1': activeTab === index }" class="mr-1">
+  <ul class="container mx-auto justify-center flex border-b pt-6">
+    <li v-for="(link, index) in links" :key="index" :class="{ ' -mb-px mr-1': activeTab === index }" class="mr-1">
       <router-link
           :to="{ name: link.route }"
           :class="{ 'bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-purple-700': activeTab === index }"
@@ -10,7 +10,7 @@
       </router-link>
     </li>
   </ul>
-  <router-view class="p-4"></router-view>
+  <router-view class="container mx-auto"></router-view>
 </template>
 
 <script lang="ts" setup>
