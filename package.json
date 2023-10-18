@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "colortranslator": "^3.0.2",
     "lorem-ipsum": "^2.0.8",
     "vue": "^3.2.38",
     "vue-gtag": "^2.0.1",
