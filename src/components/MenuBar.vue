@@ -10,12 +10,17 @@
                 </div>
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="" class="py-4 px-2 text-purple-400 border-b-4 border-purple-400 font-semibold ">Home</a>
+                    <router-link :to="{ name: 'home' }"
+                        activeClass="border-b-4 border-purple-400"
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Home</router-link>
                     <router-link :to="{ name: 'tools' }"
+                        activeClass="border-b-4 border-purple-400"
                         class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Tools</router-link>
-                    <a href=""
+                    <a href="https://github.com/JStruk/UtilsNinja"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Contribute</a>
-                    <a href=""
+                    <a href="#contact"
                         class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Contact</a>
                 </div>
                 <!-- Mobile menu button -->
@@ -31,13 +36,19 @@
             </div>
         </div>
         <!-- mobile menu -->
-        <div class="mobile-menu" v-if="!collapsed">
+        <div class="mobile-menu" v-show="!collapsed">
             <ul class="">
-                <li class="active"><a href="index.html"
-                        class="block text-sm px-2 py-4 text-white bg-purple-400 font-semibold">Home</a></li>
-                <li><a href="#home"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Tools</a></li>
-                <li><a href="#about"
+                <li><router-link :to="{ name: 'home' }"
+                        @click="toggleMenu"
+                        activeClass="bg-purple-400 text-white font-semibold"
+                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Home</router-link></li>
+                <li><router-link :to="{ name: 'tools' }"
+                        @click="toggleMenu"
+                        activeClass="bg-purple-400 text-white font-semibold"
+                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Tools</router-link></li>
+                <li><a href="https://github.com/JStruk/UtilsNinja"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contribute</a></li>
                 <li><a href="#contact"
                         class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contact</a></li>
