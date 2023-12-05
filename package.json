@@ -16,6 +16,7 @@
     "colortranslator": "^3.0.2",
     "lorem-ipsum": "^2.0.8",
     "vue": "^3.2.38",
+    "vue-debounce": "^4.0.1",
     "vue-gtag": "^2.0.1",
     "vue-json-pretty": "^2.2.3",
     "vue-router": "^4.1.5"
