@@ -1,9 +1,10 @@
 <template>
   <div class="border-2 space-y-4 flex flex-col text-right items-center text-purple-500">
     <div class="flex mb-12">
-      <div class="p-2 w-48">
+      <div class="p-2">
         <p class="text-xl font-bold">Enter color code:</p>
-        <p class="text-xs">Accept RGB, HEX, CMYK, HSL</p>
+        <p class="text-xs">Accepts RGB, HEX, CMYK, HSL</p>
+        <p class="text-xs">or color name (e.g. "red")</p>
       </div>
       <div class="flex flex-col overflow-ellipsis">
         <input type="text" v-model="colorInput" v-debounce:300ms="convert"
