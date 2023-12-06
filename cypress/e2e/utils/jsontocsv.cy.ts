@@ -14,7 +14,7 @@ describe('CSV to JSON', () => {
         const JSONData = '[{"name": "John Doe", "age": "15"}]'
 
         cy.get('textarea[placeholder="JSON Data"]').type(JSONData, { parseSpecialCharSequences: false })
-        cy.contains('Convert').click()
+        cy.get('button').contains('Convert').click()
 
         const expectedCSV = JSONtoCSV(JSONData)
         cy.get('textarea[placeholder="CSV format"]').invoke('val').should('equal', expectedCSV)
@@ -23,7 +23,7 @@ describe('CSV to JSON', () => {
 
     it('should return an empty array if the CSV data cannot be parsed', () => {
         cy.get('textarea[placeholder="JSON Data"]').type('I am the walrus')
-        cy.contains('Convert').click()
+        cy.get('button').contains('Convert').click()
         cy.get('textarea[placeholder="CSV format"]').invoke('val').should('equal', '')
     })
 })

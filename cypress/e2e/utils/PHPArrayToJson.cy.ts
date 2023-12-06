@@ -15,7 +15,7 @@ describe('PHP Array To Json', () => {
     it('should display the results of the inspected string', () => {
         cy.get('textarea').type(phpArray)
 
-        cy.contains('Convert').click()
+        cy.get('button').contains('Convert').click()
 
         cy.contains(`"${key}":"${value}"`)
     })
