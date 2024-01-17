@@ -1,6 +1,5 @@
 <template>
-  <div class="">
-    <div class="bg-white shadow rounded p-5">
+    <div class="h-full bg-white shadow rounded p-5">
       <div class="flex justify-evenly w-4/5">
         <textarea aria-label="input-to-encode" v-model="stringToEncode" type="text" placeholder="String to encode" rows="5"
                   class="w-full p-2"></textarea>
@@ -12,7 +11,6 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Encoded String"></textarea>
     </div>
-  </div>
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 space-y-4 flex flex-col text-right items-center text-purple-500">
+  <div class="h-full space-y-4 flex flex-col text-right items-center text-purple-500">
     <div class="flex mb-12">
       <div class="p-2">
         <p class="text-xl font-bold">Enter color code:</p>
@@ -8,38 +8,38 @@
       </div>
       <div class="flex flex-col overflow-ellipsis">
         <input type="text" v-model="colorInput" v-debounce:300ms="convert"
-               class="border rounded border-black p-1 w-96 text-black text-xl">
+               class="border rounded border-black p-1 text-black text-xl">
         <p v-if="errorMessage" class="text-red-500 text-sm text-left">{{ errorMessage }}</p>
       </div>
     </div>
     <div class="flex">
-      <p class="text-lg w-48 p-2">Color:</p>
-      <input type="text" class="border rounded border-gray-300 p-1 w-96" :style="{ backgroundColor: hex }" readonly>
+      <p class="text-lg  p-2">Color:</p>
+      <input type="text" class="border rounded border-gray-300 p-1" :style="{ backgroundColor: hex }" readonly>
     </div>
-    <div class="flex">
-      <p class="text-lg w-48 p-2">RGB:</p>
-      <input type="text" id="rgb" v-model="rgb" class="border rounded border-gray-300 p-1 w-96 text-black" readonly>
+    <div class="flex space-x-2 items-center">
+      <p class="text-lg lg:w-48">RGB:</p>
+      <input type="text" id="rgb" v-model="rgb" class="border rounded border-gray-300 p-1 text-black" readonly>
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
               type="button" @click="copyToClipboard(rgb)">Copy to Clipboard
       </button>
     </div>
-    <div class="flex">
-      <p class="text-lg w-48 p-2">HEX:</p>
-      <input type="text" id="hex" v-model="hex" class="border rounded border-gray-300 p-1 w-96 text-black" readonly>
+    <div class="flex space-x-2 items-center">
+      <p class="text-lg lg:w-48">HEX:</p>
+      <input type="text" id="rgb" v-model="hex" class="border rounded border-gray-300 p-1 text-black" readonly>
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
               type="button" @click="copyToClipboard(hex)">Copy to Clipboard
       </button>
     </div>
-    <div class="flex">
-      <p class="text-lg w-48 p-2">CMYK:</p>
-      <input type="text" id="cmyk" v-model="cmyk" class="border rounded border-gray-300 p-1 w-96 text-black" readonly>
+    <div class="flex items-center">
+      <p class="text-lg m-2 lg:w-48">CMYK:</p>
+      <input type="text" id="rgb" v-model="cmyk" class="border rounded border-gray-300 p-1 text-black" readonly>
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
               type="button" @click="copyToClipboard(cmyk)">Copy to Clipboard
       </button>
     </div>
-    <div class="flex">
-      <p class="text-lg w-48 p-2">HSL:</p>
-      <input type="text" id="hsl" v-model="hsl" class="border rounded border-gray-300 p-1 w-96 text-black" readonly>
+    <div class="flex space-x-2 items-center">
+      <p class="text-lg lg:w-48">HSL:</p>
+      <input type="text" id="rgb" v-model="hsl" class="border rounded border-gray-300 p-1 text-black" readonly>
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
               type="button" @click="copyToClipboard(hsl)">Copy to Clipboard
       </button>

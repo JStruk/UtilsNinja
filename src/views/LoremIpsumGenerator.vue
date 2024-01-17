@@ -1,5 +1,5 @@
 <template>
-  <div class="text-purple-500">
+  <div class="text-purple-500 h-full">
     <div class="flex p-6 items-center">
       <div>
         <input v-model="numUnits" type="number" placeholder="Paragraphs" class="border border-purple-300 p-2" />
