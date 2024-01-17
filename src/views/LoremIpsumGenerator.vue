@@ -1,5 +1,5 @@
 <template>
-  <div class="text-purple-500 h-full">
+  <div class="text-purple-500 h-full p-2">
     <div class="flex p-6 items-center">
       <div>
         <input v-model="numUnits" type="number" placeholder="Paragraphs" class="border border-purple-300 p-2" />
@@ -35,8 +35,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { copyToClipboard } from '../helpers/CopyToClipboard'
-import { generate } from '../utilities/LoremIpsumGenerator'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
+import { generate } from '@/utilities/LoremIpsumGenerator'
 import type { LoremUnit } from 'lorem-ipsum/types/src/constants/units'
 
 const lorem = ref<string>('')

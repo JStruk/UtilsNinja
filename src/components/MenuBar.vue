@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import logo from '../assets/logo.png'
+import logo from '../assets/utilsninjalogo.png'
 
 import { ref } from 'vue'
 
