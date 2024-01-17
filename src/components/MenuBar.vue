@@ -36,7 +36,7 @@
             </div>
         </div>
         <!-- mobile menu -->
-        <div class="mobile-menu" v-show="!collapsed">
+        <div class="mobile-menu text-center" v-show="!collapsed">
             <ul class="">
                 <li><router-link :to="{ name: 'home' }"
                         @click="toggleMenu"
