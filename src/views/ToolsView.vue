@@ -34,9 +34,10 @@
       <div
           v-for="(link, index) in links"
           :key="index"
+          @click="() => setActiveTab(index)"
           class="h-28 w-3/4 bg-purple-700 flex items-center justify-center text-center"
       >
-        <router-link :to="{ name: link.route }" @click="() => setActiveTab(index)">
+        <router-link :to="{ name: link.route }">
           <p v-html="link.label"/>
         </router-link>
       </div>
