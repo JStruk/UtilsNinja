@@ -2,13 +2,12 @@
   <TwoPaneLayout>
     <template v-slot:left-pane>
       <div class="flex-1 rounded-lg p-2 min-h-1/2 h-full overflow-auto">
-        <span>Enter JSON Data:</span>
+        <span>Enter String:</span>
         <textarea
             rows=40
             v-model="inputText"
             @input="inspectText"
             type="text"
-            placeholder="JSON Data"
             aria-label="string-inspector"
             class="w-full border border-gray-400 rounded-lg p-2"
         />

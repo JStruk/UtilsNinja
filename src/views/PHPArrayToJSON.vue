@@ -36,6 +36,8 @@ const PHPArray = ref<string>('')
 const json = ref()
 
 function convert() {
-  json.value = PHPArrayToJSON(PHPArray.value)
+  try {
+    json.value = PHPArrayToJSON(PHPArray.value)
+  } catch (e) {}
 }
 </script>

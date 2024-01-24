@@ -48,10 +48,11 @@ import 'vue-json-pretty/lib/styles.css'
 import copyIcon from '../assets/copy-icon.png'
 import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '../Layouts/TwoPaneLayout.vue'
+import type { JSONDataType } from 'vue-json-pretty/types/utils'
 
 let JSONInput = ref<string>('{}')
 const isJSONValid = ref<boolean>(true)
-const formattedJSON = ref<Object>({})
+const formattedJSON = ref<JSONDataType>({})
 
 function formatJSON() {
   JSONInput.value.replace(/'/g, '"')
