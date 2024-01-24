@@ -57,6 +57,7 @@ const route = useRoute()
 
 const updateIsMainToolsPage = () => {
   isMainToolsPage.value = route.path === '/tools'
+  setActiveTab(links.findIndex((link) => route.path.includes(link.path)))
 }
 onMounted(updateIsMainToolsPage)
 onUpdated(updateIsMainToolsPage)
@@ -66,17 +67,17 @@ const setActiveTab = (tabNumber: number) => {
 }
 
 const links = [
-  { route: 'FormatJSON', label: 'JSON Formatter' },
-  { route: 'LoremIpsumGenerator', label: 'Lorem Ipsum Generator' },
-  { route: 'JSONToCSV', label: 'JSON &#10140; CSV' },
-  { route: 'CSVToJSON', label: 'CSV &#10140; JSON' },
-  { route: 'PHPToJSON', label: 'PHP &#10140; JSON' },
-  { route: 'JSONToPHP', label: 'JSON &#10140; PHP' },
-  { route: 'Inspector', label: 'String Inspector' },
-  { route: 'Dates', label: 'Dates' },
-  { route: 'Base64Encode', label: 'Base64 Encode' },
-  { route: 'Base64Decode', label: 'Base64 Decode' },
-  { route: 'LineSort', label: 'Line Sort' },
-  { route: 'ColorConverter', label: 'Color Converter' }
+  { route: 'FormatJSON', label: 'JSON Formatter', path: '/json-formatter' },
+  { route: 'LoremIpsumGenerator', label: 'Lorem Ipsum Generator', path: '/lig' },
+  { route: 'JSONToCSV', label: 'JSON &#10140; CSV', path: '/json-to-csv' },
+  { route: 'CSVToJSON', label: 'CSV &#10140; JSON', path:'/csv-to-json' },
+  { route: 'PHPToJSON', label: 'PHP &#10140; JSON', path: '/php-to-json' },
+  { route: 'JSONToPHP', label: 'JSON &#10140; PHP', path: '/json-to-php' },
+  { route: 'Inspector', label: 'String Inspector', path: '/inspector' },
+  { route: 'Dates', label: 'Dates', path: '/dates' },
+  { route: 'Base64Encode', label: 'Base64 Encode', path: '/base-64-encode' },
+  { route: 'Base64Decode', label: 'Base64 Decode', path: '/base-64-decode' },
+  { route: 'LineSort', label: 'Line Sort', path: '/line-sort' },
+  { route: 'ColorConverter', label: 'Color Converter', path: '/color-converter' }
 ]
 </script>
