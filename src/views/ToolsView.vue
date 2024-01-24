@@ -29,9 +29,9 @@
     </div>
   </div>
 
-  <div v-show="isMainToolsPage">
-    <div class="flex flex-col items-center md:hidden text-slate-100 space-y-4 py-12">
+    <div class="md:hidden flex flex-col items-center text-slate-100 space-y-4" :class="{ 'py-12': isMainToolsPage }">
       <div
+          v-show="isMainToolsPage"
           v-for="(link, index) in links"
           :key="index"
           @click="() => setActiveTab(index)"
@@ -41,16 +41,16 @@
           <p v-html="link.label"/>
         </router-link>
       </div>
+      <router-view/>
     </div>
-  </div>
-  <router-view/>
+
 </template>
 
 <script lang="ts" setup>
 import { onMounted, onUpdated, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-let activeTab = ref(0)
+let activeTab = ref()
 let expanded = ref<boolean>(true)
 let isMainToolsPage = ref<boolean>(true)
 const route = useRoute()
