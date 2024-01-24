@@ -1,22 +1,25 @@
 <template>
-  <div class="relative w-full text-gray-800 flex flex-col sm:flex-row min-h-screen justify-center sm:space-x-2 sm:space-y-0 space-y-2 bg-gray-50 px-2">
-    <div class="flex flex-1 flex-col border">
-      <div class="md:py-2 bg-[#ebebeb]">Enter JSON:</div>
-      <div class="flex-grow relative">
-        <v-ace-editor
-            v-model:value="JSONInput"
-            lang="json"
-            theme="chrome"
-            :options="{ useWorker: true, fontSize: 14 }"
-            class="h-full text-purple-500"
-            v-debounce:300ms="formatJSON"
-        />
+  <TwoPaneLayout>
+    <template v-slot:left-pane>
+      <div class="flex flex-1 flex-col border">
+        <div class="md:py-2 bg-[#ebebeb]">Enter JSON:</div>
+        <div class="flex-grow relative">
+          <v-ace-editor
+              v-model:value="JSONInput"
+              lang="json"
+              theme="chrome"
+              :options="{ useWorker: true, fontSize: 14 }"
+              class="h-full text-purple-500"
+              v-debounce:300ms="formatJSON"
+          />
+        </div>
       </div>
-    </div>
-    <div class="flex flex-1 flex-col text-center">
-      <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400' : 'bg-red-500'">
-        <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
-          <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
+    </template>
+    <template v-slot:right-pane>
+      <div class="flex flex-1 flex-col text-center">
+        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400' : 'bg-red-500'">
+          <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
+            <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
             <img
                 :src="copyIcon"
                 alt="Copy to Clipboard"
@@ -24,14 +27,15 @@
                 title="copy to clipboard"
                 @click="copyButtonClicked"
             />
+          </div>
+          <h3 v-else class="text-white font-bold">JSON Invalid!</h3>
         </div>
-        <h3 v-else class="text-white font-bold">JSON Invalid!</h3>
+        <div class="flex-grow bg-gray-100 p-2">
+          <vue-json-pretty showLineNumber showLine showIcon :data="formattedJSON"/>
+        </div>
       </div>
-      <div class="flex-grow bg-gray-100 p-2">
-        <vue-json-pretty showLineNumber showLine showIcon :data="formattedJSON" />
-      </div>
-    </div>
-  </div>
+    </template>
+  </TwoPaneLayout>
 </template>
 
 <script lang="ts" setup>
@@ -43,6 +47,7 @@ import '../../ace-config.js'
 import 'vue-json-pretty/lib/styles.css'
 import copyIcon from '../assets/copy-icon.png'
 import { toast } from 'vue3-toastify'
+import TwoPaneLayout from '../Layouts/TwoPaneLayout.vue'
 
 let JSONInput = ref<string>('{}')
 const isJSONValid = ref<boolean>(true)
