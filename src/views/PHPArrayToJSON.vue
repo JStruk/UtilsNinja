@@ -1,13 +1,27 @@
 <template>
-    <div class="h-full bg-white shadow rounded p-5">
-      <div class="flex justify-evenly w-4/5">
-        <textarea v-model="PHPArray" type="text" placeholder="PHP Array" rows="5" class="w-full p-2"></textarea>
-        <button class="bg-indigo-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg w-28" type="button"
-                @click="convert">Convert
-        </button>
+  <TwoPaneLayout>
+    <template v-slot:left-pane>
+      <div class="flex flex-1">
+        <textarea
+            v-model="PHPArray"
+            type="text"
+            placeholder="PHP Array"
+            rows="5"
+            class="w-full p-2"
+            v-debounce:300ms="convert"
+        />
       </div>
-      <vue-json-pretty showLineNumber showLine showIcon :data="json" />
-    </div>
+    </template>
+    <template v-slot:right-pane>
+      <vue-json-pretty
+          showLineNumber
+          showLine
+          showIcon
+          :data="json"
+          class="flex-1"
+      />
+    </template>
+  </TwoPaneLayout>
 </template>
 
 <script lang="ts" setup>
@@ -16,6 +30,7 @@ import { ref } from 'vue'
 import { PHPArrayToJSON } from '@/utilities/PHPArrayToJSON'
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
+import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 
 const PHPArray = ref<string>('')
 const json = ref()
