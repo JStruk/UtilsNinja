@@ -2,6 +2,13 @@
 
 A simple, fast, and accessible grab bag of useful utilities for developers to use on the fly.
 
+![Uptime Robot status](https://img.shields.io/uptimerobot/status/m796270451-f52443331f308fd73d37f833)
+![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m796270451-f52443331f308fd73d37f833)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c96d4b19-1a5c-4383-b374-0fc05ecf7de5/deploy-status)](https://app.netlify.com/sites/celadon-beignet-3132dc/deploys)
+![Node.js CI](https://github.com/JStruk/UtilsNinja/actions/workflows/node.js.yml/badge.svg)
+![Contributors](https://img.shields.io/github/contributors/JStruk/UtilsNinja)
+![Issues](https://img.shields.io/github/issues/JStruk/UtilsNinja)
+
 # Development
 
 ## Customize configuration
