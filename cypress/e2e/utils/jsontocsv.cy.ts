@@ -7,14 +7,19 @@ describe('CSV to JSON', () => {
     })
 
     it('should allow the user to type text into textarea', () => {
-        cy.get('textarea[placeholder="JSON Data"]').type('I am the walrus')
+        cy.get('textarea[placeholder="JSON Data"]')
+            .filter(':visible')
+            .type('I am the walrus')
     })
 
     it('should accept user CSV and output converted JSON', () => {
         const JSONData = '[{"name": "John Doe", "age": "15"}]'
 
-        cy.get('textarea[placeholder="JSON Data"]').type(JSONData, { parseSpecialCharSequences: false })
-        cy.get('button').contains('Convert').click()
+        cy.get('textarea[placeholder="JSON Data"]')
+            .filter(':visible')
+            .type(JSONData, { parseSpecialCharSequences: false })
+
+        cy.wait(310)
 
         const expectedCSV = JSONtoCSV(JSONData)
         cy.get('textarea[placeholder="CSV format"]').invoke('val').should('equal', expectedCSV)
@@ -22,8 +27,14 @@ describe('CSV to JSON', () => {
 
 
     it('should return an empty array if the CSV data cannot be parsed', () => {
-        cy.get('textarea[placeholder="JSON Data"]').type('I am the walrus')
-        cy.get('button').contains('Convert').click()
-        cy.get('textarea[placeholder="CSV format"]').invoke('val').should('equal', '')
+        cy.get('textarea[placeholder="JSON Data"]')
+            .filter(':visible')
+            .type('I am the walrus')
+
+        cy.wait(310)
+        cy.get('textarea[placeholder="CSV format"]')
+            .filter(':visible')
+            .invoke('val')
+            .should('equal', '')
     })
 })

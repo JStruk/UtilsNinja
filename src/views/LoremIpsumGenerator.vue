@@ -1,5 +1,5 @@
 <template>
-  <div class="text-purple-500">
+  <div class="text-purple-500 h-full p-2">
     <div class="flex p-6 items-center">
       <div>
         <input v-model="numUnits" type="number" placeholder="Paragraphs" class="border border-purple-300 p-2" />
@@ -27,16 +27,20 @@
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
         type="button" @click="copyToClipboard(lorem)">Copy to Clipboard</button>
     </div>
-    <textarea :value="lorem" disabled rows="30"
-      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-      placeholder="Lorem Ipsum.."></textarea>
+    <textarea
+        :value="lorem"
+        rows="30"
+        class="mt-1 block w-full p-2 bg-gray-200 rounded-md border border-purple-500 shadow-sm sm:text-sm"
+        placeholder="Lorem Ipsum.."
+        aria-label="generated-lorem-ipsum"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { copyToClipboard } from '../helpers/CopyToClipboard'
-import { generate } from '../utilities/LoremIpsumGenerator'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
+import { generate } from '@/utilities/LoremIpsumGenerator'
 import type { LoremUnit } from 'lorem-ipsum/types/src/constants/units'
 
 const lorem = ref<string>('')

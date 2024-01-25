@@ -24,12 +24,12 @@ export const routes = [
         path: '/tools',
         name: 'tools',
         component: ToolsView,
-        redirect: () => {
-            return {
-                name: 'FormatJSON'
-            }
-        },
         children: [
+            {
+                path: 'json-formatter',
+                name: 'FormatJSON',
+                component: FormatJSON,
+            },
             {
                 path: 'lig',
                 name: 'LoremIpsumGenerator',
@@ -39,31 +39,14 @@ export const routes = [
                 }
             },
             {
-                path: 'csv-to-json',
-                name: 'CSVToJSON',
-                component: CsvToJson,
-            },
-            {
                 path: 'json-to-csv',
                 name: 'JSONToCSV',
                 component: JsonToCSV,
             },
             {
-                path: 'json-formatter',
-                name: 'FormatJSON',
-                component: FormatJSON,
-            },
-
-            {
-                path: 'inspector',
-                name: 'Inspector',
-                component: StringInspector,
-            },
-            {
-                path: 'dates',
-                name: 'Dates',
-                component: Dates,
-
+                path: 'csv-to-json',
+                name: 'CSVToJSON',
+                component: CsvToJson,
             },
             {
                 path: 'php-to-json',
@@ -74,6 +57,17 @@ export const routes = [
                 path: 'json-to-php',
                 name: 'JSONToPHP',
                 component: JSONToPHPArray,
+            },
+            {
+                path: 'inspector',
+                name: 'Inspector',
+                component: StringInspector,
+            },
+            {
+                path: 'dates',
+                name: 'Dates',
+                component: Dates,
+
             },
             {
                 path: 'base-64-encode',
@@ -102,6 +96,7 @@ export const routes = [
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
+    scrollBehavior: () => ({ top: 0 })
 })
 
 export default router

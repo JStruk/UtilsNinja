@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white shadow-lg">
+    <nav class="bg-white border-b shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
                 <div>
@@ -36,29 +36,29 @@
             </div>
         </div>
         <!-- mobile menu -->
-        <div class="mobile-menu" v-show="!collapsed">
+        <div class="mobile-menu text-center" v-show="!collapsed">
             <ul class="">
                 <li><router-link :to="{ name: 'home' }"
                         @click="toggleMenu"
-                        activeClass="bg-purple-400 text-white font-semibold"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Home</router-link></li>
+                        activeClass="bg-purple-500 text-white font-semibold"
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Home</router-link></li>
                 <li><router-link :to="{ name: 'tools' }"
                         @click="toggleMenu"
-                        activeClass="bg-purple-400 text-white font-semibold"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Tools</router-link></li>
+                        activeClass="bg-purple-500 text-white font-semibold"
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Tools</router-link></li>
                 <li><a href="https://github.com/JStruk/UtilsNinja"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contribute</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Contribute</a></li>
                 <li><a href="#contact"
-                        class="block text-sm px-2 py-4 hover:bg-purple-400 transition duration-300">Contact</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Contact</a></li>
             </ul>
         </div>
     </nav>
 </template>
 
 <script lang="ts" setup>
-import logo from '../assets/logo.png'
+import logo from '../assets/utilsninjalogo.png'
 
 import { ref } from 'vue'
 

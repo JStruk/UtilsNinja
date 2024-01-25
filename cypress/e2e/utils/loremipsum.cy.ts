@@ -4,16 +4,26 @@ describe('Lorem Ipsum Generator', () => {
     })
 
     it('should allow user to enter number of paragraphs', () => {
-        cy.get('input[type="number"]').type('3')
+        cy.get('input[type="number"]')
+            .filter(':visible')
+            .type('3')
     })
 
     it('should generate lorem ipsum text', () => {
-        cy.get('input[type="number"]').type('3')
+        cy.get('input[type="number"]')
+            .filter(':visible')
+            .type('3')
         cy.contains('Generate').click()
+
+        cy.get('[aria-label="generated-lorem-ipsum"]')
+            .filter(':visible')
+            .should('not.have.value', ':empty')
     })
 
     it('should populate textarea with generated lorem ipsum text', () => {
-        cy.get('input[type="number"]').type('3')
+        cy.get('input[type="number"]')
+            .filter(':visible')
+            .type('3')
         cy.contains('Generate').click()
         cy.get('textarea').invoke('val').should('not.be.empty')
     })
