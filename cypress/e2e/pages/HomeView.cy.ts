@@ -20,13 +20,13 @@ describe('HomeView', () => {
         cy.visit('/')
         cy.contains('View Tools').click()
 
-        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools/json-formatter`)
+        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools`)
     })
 
     it('allows the user to go to the Tools page via navbar', () => {
         cy.visit('/')
         cy.contains('Tools').click()
 
-        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools/json-formatter`)
+        cy.url().should('be.equal', `${Cypress.config('baseUrl')}/tools`)
     })
 })

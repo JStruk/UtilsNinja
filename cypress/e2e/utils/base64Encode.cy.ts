@@ -8,14 +8,20 @@ describe('Base64 Encoder', () => {
     const text: string = 'idk this is definitely some text'
 
     it('should allow the user to enter text to encode', () => {
-        cy.get('textarea[aria-label="input-to-encode"]').type(text)
+        cy.get('textarea[aria-label="input-to-encode"]')
+            .filter(':visible')
+            .type(text)
     })
 
     it('should display the encoded text', () => {
-        cy.get('textarea[aria-label="input-to-encode"]').type(text)
-        cy.get('button[aria-label="encode-text"]').click()
-        const encodedText: string = Base64Encode(text)
-        cy.get('textarea[aria-label="encoded-text"]').should('have.value', encodedText)
-    })
+        cy.get('textarea[aria-label="input-to-encode"]')
+            .filter(':visible')
+            .type(text)
 
+        const encodedText: string = Base64Encode(text)
+        cy.wait(310)
+        cy.get('textarea[aria-label="encoded-text"]')
+            .filter(':visible')
+            .should('have.value', encodedText)
+    })
 })

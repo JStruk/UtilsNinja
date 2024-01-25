@@ -1,11 +1,13 @@
 export function JSONtoCSV(json: any): string {
-    const parsed = JSON.parse(json)
+    let parsed = ''
+    try {
+        parsed = JSON.parse(json)
+    } catch (e) {
+        return ''
+    }
 
-    const objectArray = Array.isArray(parsed) ? parsed : [parsed]
-
-    let csvData = ''
-
-    csvData += Object.keys(objectArray?.[0]).join(',') + '\n'
+    const objectArray: any[] = Array.isArray(parsed) ? parsed : [parsed]
+    let csvData: string = Object.keys(objectArray?.[0]).join(',') + '\n'
 
     for (let i = 0; i < objectArray.length; i++) {
         let line = ''

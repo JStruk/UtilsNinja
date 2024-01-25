@@ -27,9 +27,13 @@
       <button class="bg-purple-500 hover:bg-purple-600 text-white text-sm leading-6 font-medium mx-4 rounded-lg p-2"
         type="button" @click="copyToClipboard(lorem)">Copy to Clipboard</button>
     </div>
-    <textarea :value="lorem"  rows="30"
-      class="mt-1 block w-full p-2 bg-gray-200 rounded-md border border-purple-500 shadow-sm sm:text-sm"
-      placeholder="Lorem Ipsum.."></textarea>
+    <textarea
+        :value="lorem"
+        rows="30"
+        class="mt-1 block w-full p-2 bg-gray-200 rounded-md border border-purple-500 shadow-sm sm:text-sm"
+        placeholder="Lorem Ipsum.."
+        aria-label="generated-lorem-ipsum"
+    />
   </div>
 </template>
 

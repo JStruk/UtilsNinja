@@ -9,13 +9,13 @@ describe('PHP Array To Json', () => {
     const phpArray = `["${key}" => "${value}"]`
 
     it('should allow the user to enter text', () => {
-        cy.get('textarea').type(phpArray)
+        cy.get('[aria-label="php-array-input"]').filter(':visible').type(phpArray)
     })
 
     it('should display the results of the inspected string', () => {
-        cy.get('textarea').type(phpArray)
+        cy.get('[aria-label="php-array-input"]').filter(':visible').type(phpArray)
 
-        cy.get('button').contains('Convert').click()
+        cy.wait(310)
 
         cy.contains(`"${key}":"${value}"`)
     })

@@ -8,6 +8,7 @@
             placeholder="PHP Array"
             rows="5"
             class="w-full p-2"
+            aria-label="php-array-input"
             v-debounce:300ms="convert"
         />
       </div>
@@ -38,6 +39,8 @@ const json = ref()
 function convert() {
   try {
     json.value = PHPArrayToJSON(PHPArray.value)
-  } catch (e) {}
+  } catch (e) {
+    // this is just so we don't flood the console
+  }
 }
 </script>

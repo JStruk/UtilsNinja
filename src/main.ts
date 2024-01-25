@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/style.css'
-import 'vue3-toastify/dist/index.css';
+import 'vue3-toastify/dist/index.css'
 import VueGtag from 'vue-gtag'
 import { vue3Debounce } from 'vue-debounce'
-import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify'
 
 const app = createApp(App)
 
