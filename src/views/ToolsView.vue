@@ -74,10 +74,10 @@ const links = [
   { route: 'PHPToJSON', label: 'PHP &#10140; JSON', path: '/php-to-json' },
   { route: 'JSONToPHP', label: 'JSON &#10140; PHP', path: '/json-to-php' },
   { route: 'Inspector', label: 'String Inspector', path: '/inspector' },
-  { route: 'Dates', label: 'Dates', path: '/dates' },
+  { route: 'Dates', label: 'Timestamp Converter', path: '/dates' },
   { route: 'Base64Encode', label: 'Base64 Encode', path: '/base-64-encode' },
   { route: 'Base64Decode', label: 'Base64 Decode', path: '/base-64-decode' },
-  { route: 'LineSort', label: 'Line Sort', path: '/line-sort' },
+  { route: 'LineSort', label: 'Line Sorter', path: '/line-sort' },
   { route: 'ColorConverter', label: 'Color Converter', path: '/color-converter' }
 ]
 </script>
