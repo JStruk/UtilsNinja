@@ -8,7 +8,7 @@
               v-model:value="JSONInput"
               lang="json"
               theme="chrome"
-              :options="{ useWorker: true, fontSize: 14 }"
+              :options="{ useWorker: true, fontSize: 14, showPrintMargin: false }"
               class="h-full text-purple-500"
               v-debounce:300ms="formatJSON"
           />

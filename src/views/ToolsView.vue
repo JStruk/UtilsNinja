@@ -24,7 +24,7 @@
     >
       <p class="text-4xl" :class="expanded ? 'rotate-180' : ''">&#10095;</p>
     </div>
-    <div class="flex-1 bg-slate-100">
+    <div class="flex-1 bg-slate-100 overflow-scroll">
       <router-view/>
     </div>
   </div>
