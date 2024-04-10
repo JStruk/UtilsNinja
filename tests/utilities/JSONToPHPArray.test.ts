@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { JSONToPHPArray } from '@/utilities/JSONToPHPArray'
 
 describe('JSONToPHPArray', () => {
@@ -11,14 +11,14 @@ describe('JSONToPHPArray', () => {
 
     it('returns an php array from json object', function () {
         const json = '{"foo":"bar"}'
-        const result = '["foo"=>"bar"]'
+        const result = '["foo" => "bar"]'
 
         expect(JSONToPHPArray(json)).toEqual(result)
     })
 
     it('should convert nested php array to json object', function () {
         const json = '{"baz":{"foo":"bar"}}'
-        const result = '["baz"=>["foo"=>"bar"]]'
+        const result = '["baz" => ["foo" => "bar"]]'
 
         expect(JSONToPHPArray(json)).toEqual(result)
     })
