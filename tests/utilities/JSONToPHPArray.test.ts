@@ -22,4 +22,31 @@ describe('JSONToPHPArray', () => {
 
         expect(JSONToPHPArray(json)).toEqual(result)
     })
+
+    const providesJsonDates = [
+        [
+            '{"registered" : "2019-03-26T09:34:48 +04:00", "skrunky" : "2020-09-30T07:09:05 +04:00"}',
+            '["registered" => "2019-03-26T09:34:48 +04:00", "skrunky" => "2020-09-30T07:09:05 +04:00"]'
+        ],
+        [
+            '{"registered":"2019-03-26T09:34:48 +04:00","skrunky":"2020-09-30T07:09:05+04:00"}',
+            '["registered" => "2019-03-26T09:34:48 +04:00","skrunky" => "2020-09-30T07:09:05+04:00"]'
+        ],
+        [
+            '{"registered": "2019-03-26T09:34:48 +04:00", "skrunky": "2020-09-30T07:09:05 +04:00"}',
+            '["registered" => "2019-03-26T09:34:48 +04:00", "skrunky" => "2020-09-30T07:09:05 +04:00"]'
+        ],
+        [
+            '{"registered" :"2019-03-26T09:34:48 +04:00", "skrunky" :"2020-09-30T07:09:05 +04:00"}',
+            '["registered" => "2019-03-26T09:34:48 +04:00", "skrunky" => "2020-09-30T07:09:05 +04:00"]'
+        ],
+        [
+            '{"registered" : "2019-03-26T09:34:48 +04:00", "skrunky" : "2020-09-30T07" : "09:05 +04:00"}',
+            '["registered" => "2019-03-26T09:34:48 +04:00", "skrunky" => "2020-09-30T07" => "09:05 +04:00"]'
+        ],
+    ]
+
+    it.each(providesJsonDates)('should convert JSON object to PHP array that has dates in it', function (json: string, expected: string) {
+        expect(JSONToPHPArray(json)).toEqual(expected)
+    })
 })
