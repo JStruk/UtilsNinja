@@ -2,14 +2,16 @@
   <TwoPaneLayout>
     <template v-slot:left-pane>
       <div class="flex justify-evenly w-4/5">
-        <textarea
-            v-model="JSONInput"
-            type="text"
-            placeholder="JSON Data"
-            rows="5"
-            class="w-full p-2"
-            v-debounce:300ms="convert"
-        />
+        <div class="flex-grow relative">
+          <v-ace-editor
+              v-model:value="JSONInput"
+              lang="json"
+              theme="chrome"
+              :options="{ useWorker: true, fontSize: 14, showPrintMargin: false }"
+              class="h-full text-purple-500"
+              v-debounce:300ms="convert"
+          />
+        </div>
       </div>
     </template>
     <template v-slot:right-pane>
@@ -25,10 +27,10 @@
 </template>
 
 <script lang="ts" setup>
-
 import { ref } from 'vue'
 import { JSONtoCSV } from '@/utilities/JSONToCSV'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
+import { VAceEditor } from 'vue3-ace-editor'
 
 const JSONInput = ref<string>('')
 const CSVString = ref<string>('')
