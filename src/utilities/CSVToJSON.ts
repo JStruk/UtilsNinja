@@ -7,5 +7,5 @@ export function CSVToJSON(csv: string): string {
         return Object.fromEntries(headers.map((h, i) => [h, fields[i]]))
     })
 
-    return JSON.stringify(json, null, '\t')
+    return JSON.parse(JSON.stringify(json, null, '\t'))
 }
