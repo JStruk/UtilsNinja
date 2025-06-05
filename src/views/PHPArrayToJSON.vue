@@ -7,7 +7,7 @@
               v-model:value="PHPInput"
               lang="php"
               theme="chrome"
-              :options="{ useWorker: false, fontSize: 14, showPrintMargin: false, inlineEnabled: true }"
+              :options="{ useWorker: false, fontSize: 14, showPrintMargin: false}"
               class="h-full text-purple-500"
               v-debounce:300ms="convert"
           />
