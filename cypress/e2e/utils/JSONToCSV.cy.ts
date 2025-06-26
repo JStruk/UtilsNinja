@@ -7,17 +7,13 @@ describe('CSV to JSON', () => {
     })
 
     it('should allow the user to type text into textarea', () => {
-        cy.get('textarea[placeholder="JSON Data"]')
-            .filter(':visible')
-            .type('I am the walrus')
+        cy.get('.ace_text-input').first().type('I am the walrus', { force: true })
     })
 
     it('should accept user CSV and output converted JSON', () => {
         const JSONData = '[{"name": "John Doe", "age": "15"}]'
 
-        cy.get('textarea[placeholder="JSON Data"]')
-            .filter(':visible')
-            .type(JSONData, { parseSpecialCharSequences: false })
+        cy.get('.ace_text-input').first().type(JSONData, { force: true, parseSpecialCharSequences: false })
 
         cy.wait(310)
 
@@ -27,9 +23,7 @@ describe('CSV to JSON', () => {
 
 
     it('should return an empty array if the CSV data cannot be parsed', () => {
-        cy.get('textarea[placeholder="JSON Data"]')
-            .filter(':visible')
-            .type('I am the walrus')
+        cy.get('.ace_text-input').first().type('I am the walrus', { force: true })
 
         cy.wait(310)
         cy.get('textarea[placeholder="CSV format"]')
