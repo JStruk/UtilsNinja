@@ -24,5 +24,8 @@ export function PHPArrayToJSON(php: string): {} {
         result = result.replace(placeholder, original);
     });
 
+    // Remove trailing commas before closing brackets/braces
+    result = result.replace(/,\s*([\]}])/g, '$1');
+
     return JSON.parse(result);
 }
