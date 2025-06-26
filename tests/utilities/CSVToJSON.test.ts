@@ -18,6 +18,6 @@ describe('CSVToJSON', () => {
             }
         ]
 
-        expect(CSVToJSON(CSVData)).toEqual(JSON.stringify(expectedJSON, null, '\t'))
+        expect(CSVToJSON(CSVData)).toEqual(structuredClone(expectedJSON))
     })
 })
