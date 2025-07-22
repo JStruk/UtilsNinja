@@ -1,7 +1,8 @@
 <template>
     <TwoPaneLayout>
     <template v-slot:left-pane>
-      <textarea
+      <div class="dark:bg-gray-700 h-full w-full">
+        <textarea
           aria-label="input-to-encode"
           v-model="stringToEncode"
           type="text"
@@ -10,9 +11,11 @@
           class="w-full p-2 dark:bg-gray-800 dark:text-white dark:border-gray-700"
           v-debounce:300ms="encode"
       />
+      </div>
     </template>
     <template v-slot:right-pane>
-      <textarea
+      <div class="dark:bg-gray-700 h-full w-full">
+        <textarea
           aria-label="encoded-text"
           :value="encodedString"
           readonly
@@ -20,6 +23,7 @@
           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-800 dark:text-white dark:border-gray-700"
           placeholder="Encoded String"
       />
+      </div>
     </template>
   </TwoPaneLayout>
 </template>

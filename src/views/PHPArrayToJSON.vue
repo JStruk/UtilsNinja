@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1">
+      <div class="flex flex-1 dark:bg-gray-700">
         <div class="flex-grow relative">
           <v-ace-editor
               v-model:value="PHPInput"

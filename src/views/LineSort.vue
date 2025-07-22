@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-col w-full space-y-1">
+      <div class="flex flex-col w-full space-y-1 dark:bg-gray-700">
         <div class="flex">
           <label>Remove Duplicates</label>
           <input

@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex-1 rounded-lg p-2 min-h-1/2 h-full overflow-auto dark:bg-gray-900 dark:text-purple-200">
+      <div class="flex-1 rounded-lg p-2 min-h-1/2 h-full overflow-auto dark:bg-gray-700 dark:text-purple-200">
         <span>Enter String:</span>
         <textarea
             rows=40
@@ -14,7 +14,7 @@
       </div>
     </template>
     <template v-slot:right-pane>
-      <div class="flex-1 p-2 h-full overflow-scroll dark:bg-gray-900 dark:text-purple-200">
+      <div class="flex-1 p-2 h-full overflow-scroll dark:bg-gray-700 dark:text-purple-200">
         <span>inspector gadget says:</span>
         <div class="border border-gray-400 rounded-lg p-4 dark:bg-gray-800 dark:text-white dark:border-gray-700">
           <vue-json-pretty

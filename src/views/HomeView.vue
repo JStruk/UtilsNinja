@@ -1,9 +1,9 @@
 <template>
-  <div class='flex justify-center items-center m-auto md:p-12 text-center dark:bg-gray-900'>
+  <div class='flex justify-center items-center m-auto md:p-12 text-center bg-transparent'>
     <div class="flex flex-col justify-center items-center">
       <div class='flex flex-col md:w-3/4 w-full'>
-        <span class='md:text-8xl text-4xl font-semibold text-purple-500 pb-4 dark:text-purple-300'> UtilsNinja </span>
-        <span class='px-2 md:text-2xl text-lg text-purple-400 dark:text-purple-200'>{{slogan}}</span>
+        <span class='md:text-8xl text-4xl font-semibold text-purple-500 pb-4'> UtilsNinja </span>
+        <span class='px-2 md:text-2xl text-lg text-purple-400'>{{slogan}}</span>
       </div>
       <div class="p-12">
         <router-link

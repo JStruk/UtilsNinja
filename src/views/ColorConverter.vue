@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full space-y-4 pt-12 flex flex-col text-right text-purple-500 dark:text-purple-300">
+  <div class="h-full space-y-4 pt-12 flex flex-col text-right text-purple-500 dark:text-purple-300 dark:bg-gray-700">
     <div class="flex mb-12">
       <div class="p-2">
         <p class="text-xl font-bold">Enter color code:</p>

@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1 justify-evenly w-4/5">
+      <div class="flex flex-1 justify-evenly w-4/5 dark:bg-gray-700">
         <textarea
             v-model="CSVData"
             type="text"
@@ -13,7 +13,7 @@
       </div>
     </template>
     <template v-slot:right-pane>
-      <div class="flex flex-1 flex-col text-center">
+      <div class="flex flex-1 flex-col text-center dark:bg-gray-700">
         <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'">
           <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
             <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
