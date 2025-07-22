@@ -1,15 +1,15 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1 flex-col border">
-        <div class="md:py-2 bg-[#ebebeb]">Enter JSON:</div>
+      <div class="flex flex-1 flex-col border dark:border-gray-700">
+        <div class="md:py-2 bg-[#ebebeb] dark:bg-gray-800 dark:text-purple-200">Enter JSON:</div>
         <div class="flex-grow relative">
           <v-ace-editor
               v-model:value="JSONInput"
               lang="json"
               theme="chrome"
               :options="{ useWorker: true, fontSize: 14, showPrintMargin: false }"
-              class="h-full text-purple-500"
+              class="h-full text-purple-500 dark:text-purple-300 dark:bg-gray-900"
               v-debounce:300ms="formatJSON"
           />
         </div>
@@ -17,7 +17,7 @@
     </template>
     <template v-slot:right-pane>
       <div class="flex flex-1 flex-col text-center">
-        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400' : 'bg-red-500'">
+        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'">
           <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
             <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
             <img
@@ -30,7 +30,7 @@
           </div>
           <h3 v-else class="text-white font-bold">JSON Invalid!</h3>
         </div>
-        <div class="flex-grow bg-gray-100 p-2">
+        <div class="flex-grow bg-gray-100 p-2 dark:bg-gray-900 dark:text-purple-200">
           <vue-json-pretty showLineNumber showLine showIcon :data="formattedJSON"/>
         </div>
       </div>

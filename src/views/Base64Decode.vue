@@ -7,7 +7,7 @@
           type="text"
           placeholder="String to decode"
           rows="5"
-          class="w-full p-2"
+          class="w-full p-2 dark:bg-gray-800 dark:text-white dark:border-gray-700"
           v-debounce:300ms="decode"
       />
     </template>
@@ -17,7 +17,7 @@
           :value="decodedString"
           readonly
           rows="30"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-800 dark:text-white dark:border-gray-700"
           placeholder="Decoded String"
       />
     </template>

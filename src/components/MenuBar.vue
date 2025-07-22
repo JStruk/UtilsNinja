@@ -12,16 +12,21 @@
                 <div class="hidden md:flex items-center space-x-1">
                     <router-link :to="{ name: 'home' }"
                         activeClass="border-b-4 border-purple-400"
-                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Home</router-link>
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300 dark:text-gray-200 dark:hover:text-purple-300">Home</router-link>
                     <router-link :to="{ name: 'tools' }"
                         activeClass="border-b-4 border-purple-400"
-                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Tools</router-link>
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300 dark:text-gray-200 dark:hover:text-purple-300">Tools</router-link>
                     <a href="https://github.com/JStruk/UtilsNinja"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Contribute</a>
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300 dark:text-gray-200 dark:hover:text-purple-300">Contribute</a>
                     <a href="#contact"
-                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300">Contact</a>
+                        class="py-4 px-2 text-gray-400 font-semibold hover:text-purple-400 transition duration-300 dark:text-gray-200 dark:hover:text-purple-300">Contact</a>
+                    <!-- Dark mode toggle -->
+                    <button @click="toggleDarkMode" class="ml-4 px-2 py-1 rounded transition-colors duration-200 border border-purple-400 text-purple-500 dark:text-yellow-300 dark:border-yellow-300 dark:bg-gray-800 bg-white hover:bg-purple-50 dark:hover:bg-gray-700">
+                      <span v-if="isDark">🌙</span>
+                      <span v-else>☀️</span>
+                    </button>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
@@ -41,17 +46,17 @@
                 <li><router-link :to="{ name: 'home' }"
                         @click="toggleMenu"
                         activeClass="bg-purple-500 text-white font-semibold"
-                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Home</router-link></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300 dark:bg-gray-900 dark:text-yellow-300">Home</router-link></li>
                 <li><router-link :to="{ name: 'tools' }"
                         @click="toggleMenu"
                         activeClass="bg-purple-500 text-white font-semibold"
-                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Tools</router-link></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300 dark:bg-gray-900 dark:text-yellow-300">Tools</router-link></li>
                 <li><a href="https://github.com/JStruk/UtilsNinja"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Contribute</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300 dark:bg-gray-900 dark:text-yellow-300">Contribute</a></li>
                 <li><a href="#contact"
-                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300">Contact</a></li>
+                        class="block text-sm px-2 py-4 hover:bg-purple-600 transition duration-300 dark:bg-gray-900 dark:text-yellow-300">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -59,10 +64,34 @@
 
 <script lang="ts" setup>
 import logo from '../assets/utilsninjalogo.png'
-
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 let collapsed = ref(true)
 
 const toggleMenu = () => { collapsed.value = !collapsed.value }
+
+// Dark mode logic
+const isDark = ref(false)
+
+const toggleDarkMode = () => {
+  isDark.value = !isDark.value
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme', 'dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+    localStorage.setItem('theme', 'light')
+  }
+}
+
+onMounted(() => {
+  const theme = localStorage.getItem('theme')
+  if (theme === 'dark') {
+    isDark.value = true
+    document.documentElement.classList.add('dark')
+  } else {
+    isDark.value = false
+    document.documentElement.classList.remove('dark')
+  }
+})
 </script>

@@ -1,15 +1,15 @@
 <template>
-  <div class="hidden md:flex relative min-h-screen justify-center overflow-hidden bg-[#EDEDED]">
+  <div class="hidden md:flex relative min-h-screen justify-center overflow-hidden bg-[#EDEDED] dark:bg-gray-900">
     <div
-        class="flex flex-col pt-12 bg-slate-300 bg-opacity-50 text-center overflow-hidden transition-all duration-500 ease-in-out"
+        class="flex flex-col pt-12 bg-slate-300 bg-opacity-50 text-center overflow-hidden transition-all duration-500 ease-in-out dark:bg-gray-800 dark:bg-opacity-80 dark:text-purple-200"
         :class="expanded ? 'w-80 px-6' : 'w-0'"
     >
-      <h2 class="font-semibold underline p-4 text-4xl text-purple-700">Tools</h2>
+      <h2 class="font-semibold underline p-4 text-4xl text-purple-700 dark:text-purple-300">Tools</h2>
       <ul class="text-xl md:w-64">
         <li v-for="(link, index) in links"
             :key="index"
             class="p-1 px-4 font-bold"
-            :class="activeTab === index ? 'bg-purple-600 text-white' : index % 2 === 0 ? 'bg-slate-100 text-purple-600' : 'bg-slate-200 text-purple-600'"
+            :class="activeTab === index ? 'bg-purple-600 text-white dark:bg-purple-800 dark:text-yellow-200' : index % 2 === 0 ? 'bg-slate-100 text-purple-600 dark:bg-gray-900 dark:text-purple-200' : 'bg-slate-200 text-purple-600 dark:bg-gray-800 dark:text-purple-200'"
         >
           <router-link :to="{ name: link.route }" @click="() => setActiveTab(index)">
             <p v-html="link.label"/>
@@ -18,24 +18,24 @@
       </ul>
     </div>
     <div
-        class="bg-slate-300 bg-opacity-50 p-2 text-purple-700"
+        class="bg-slate-300 bg-opacity-50 p-2 text-purple-700 dark:bg-gray-800 dark:bg-opacity-80 dark:text-purple-200"
         :title="expanded ? 'collapse' : 'expand'"
         @click="() => expanded = !expanded"
     >
       <p class="text-4xl" :class="expanded ? 'rotate-180' : ''">&#10095;</p>
     </div>
-    <div class="flex-1 bg-slate-100 overflow-scroll">
+    <div class="flex-1 bg-slate-100 overflow-scroll dark:bg-gray-950">
       <router-view/>
     </div>
   </div>
 
-    <div class="md:hidden flex flex-col items-center text-slate-100 space-y-4" :class="{ 'py-12': isMainToolsPage }">
+    <div class="md:hidden flex flex-col items-center text-slate-100 space-y-4 dark:bg-gray-900" :class="{ 'py-12': isMainToolsPage }">
       <div
           v-show="isMainToolsPage"
           v-for="(link, index) in links"
           :key="index"
           @click="() => setActiveTab(index)"
-          class="h-28 w-3/4 bg-purple-700 flex items-center justify-center text-center"
+          class="h-28 w-3/4 bg-purple-700 flex items-center justify-center text-center dark:bg-purple-900 dark:text-yellow-200"
       >
         <router-link :to="{ name: link.route }">
           <p v-html="link.label"/>

@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen bg-white dark:bg-gray-950 dark:text-gray-100">
     <header>
       <menu-bar/>
     </header>

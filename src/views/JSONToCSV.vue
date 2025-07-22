@@ -8,7 +8,7 @@
               lang="json"
               theme="chrome"
               :options="{ useWorker: true, fontSize: 14, showPrintMargin: false }"
-              class="h-full text-purple-500"
+              class="h-full text-purple-500 dark:text-purple-300 dark:bg-gray-900"
               v-debounce:300ms="convert"
           />
         </div>
@@ -19,7 +19,7 @@
           :value="CSVString"
           readonly
           rows="30"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-800 dark:text-white dark:border-gray-700"
           placeholder="CSV format"
       />
     </template>
