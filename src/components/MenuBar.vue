@@ -66,7 +66,7 @@
 import logo from '../assets/utilsninjalogo.png'
 import { ref, onMounted } from 'vue'
 
-let collapsed = ref(true)
+const collapsed = ref(true)
 
 const toggleMenu = () => { collapsed.value = !collapsed.value }
 

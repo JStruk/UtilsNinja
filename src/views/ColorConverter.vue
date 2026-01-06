@@ -57,7 +57,7 @@ const rgb = ref<string>('')
 const hex = ref<string>('')
 const hsl = ref<string>('')
 const cmyk = ref<string>('')
-let errorMessage = ref<string | null>('')
+const errorMessage = ref<string | null>('')
 
 function convert() {
   try {

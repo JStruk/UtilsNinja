@@ -50,9 +50,9 @@
 import { onMounted, onUpdated, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-let activeTab = ref()
-let expanded = ref<boolean>(true)
-let isMainToolsPage = ref<boolean>(true)
+const activeTab = ref()
+const expanded = ref<boolean>(true)
+const isMainToolsPage = ref<boolean>(true)
 const route = useRoute()
 
 const updateIsMainToolsPage = () => {
