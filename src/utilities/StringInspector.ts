@@ -7,7 +7,7 @@ export type InspectionResult = {
     wordDistribution: WordDistribution
 }
 
-export function inspect(string: String): InspectionResult {
+export function inspect(string: string): InspectionResult {
     const words = string.split(/\s+/)
     const wordDistribution = words.reduce((carry: WordDistribution, word: string) => {
         carry[word] = (carry[word] || 0) + 1

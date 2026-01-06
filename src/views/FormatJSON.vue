@@ -50,7 +50,7 @@ import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '../Layouts/TwoPaneLayout.vue'
 import type { JSONDataType } from 'vue-json-pretty/types/utils'
 
-let JSONInput = ref<string>('{}')
+const JSONInput = ref<string>('{}')
 const isJSONValid = ref<boolean>(true)
 const formattedJSON = ref<JSONDataType>({})
 
