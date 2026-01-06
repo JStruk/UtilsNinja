@@ -8,7 +8,7 @@
               lang="json"
               theme="chrome"
               :options="{ useWorker: true, fontSize: 14, showPrintMargin: false }"
-              class="h-full text-purple-500"
+              class="h-full text-purple-500 dark:text-purple-300 dark:bg-gray-900"
               v-debounce:300ms="convert"
           />
         </div>
@@ -20,7 +20,7 @@
           type="text"
           placeholder="PHP Array"
           rows="5"
-          class="w-full p-2"
+          class="w-full p-2 dark:bg-gray-800 dark:text-white dark:border-gray-700"
       />
     </template>
   </TwoPaneLayout>

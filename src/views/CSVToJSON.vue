@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1 justify-evenly w-4/5">
+      <div class="flex flex-1 justify-evenly w-4/5 dark:bg-gray-700">
         <textarea
             v-model="CSVData"
             type="text"
@@ -13,8 +13,8 @@
       </div>
     </template>
     <template v-slot:right-pane>
-      <div class="flex flex-1 flex-col text-center">
-        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400' : 'bg-red-500'">
+      <div class="flex flex-1 flex-col text-center dark:bg-gray-700">
+        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'">
           <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
             <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
             <img
@@ -27,7 +27,7 @@
           </div>
           <h3 v-else class="text-white font-bold">JSON Invalid!</h3>
         </div>
-        <div class="flex-grow bg-gray-100 p-2">
+        <div class="flex-grow bg-gray-100 p-2 dark:bg-gray-900 dark:text-purple-200">
           <vue-json-pretty showLineNumber showLine showIcon :data="jsonString"/>
         </div>
       </div>

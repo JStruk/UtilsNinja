@@ -1,11 +1,11 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-col w-full space-y-1">
+      <div class="flex flex-col w-full space-y-1 dark:bg-gray-700">
         <div class="flex">
           <label>Remove Duplicates</label>
           <input
-              class="bg-indigo-600 text-white text-sm leading-6 font-medium mx-4 w-12 rounded-lg"
+              class="bg-indigo-600 text-white text-sm leading-6 font-medium mx-4 w-12 rounded-lg dark:bg-indigo-800"
               type="checkbox"
               aria-label="remove-duplicates-checkbox"
               @click="removeDuplicates"
@@ -18,7 +18,7 @@
             type="text"
             placeholder="Lines"
             aria-label="input-to-sort"
-            class="w-full p-2 flex-grow"
+            class="w-full p-2 flex-grow dark:bg-gray-800 dark:text-white dark:border-gray-700"
             v-debounce:300ms="convert"
         />
 
@@ -29,7 +29,7 @@
            :value="sortedInput"
            readonly
            rows="30"
-           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-800 dark:text-white dark:border-gray-700"
            aria-label="sorted-text"
            placeholder="Sorted lines"/>
     </template>
