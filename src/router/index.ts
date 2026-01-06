@@ -13,6 +13,9 @@ import Base64Decode from '@/views/Base64Decode.vue'
 import LineSort from '@/views/LineSort.vue'
 import ColorConverter from '@/views/ColorConverter.vue'
 import QRCodeGenerator from '@/views/QRCodeGenerator.vue'
+import CurlToFetch from '@/views/CurlToFetch.vue'
+import HttpStatusCodes from '@/views/HttpStatusCodes.vue'
+import RandomDataGenerator from '@/views/RandomDataGenerator.vue'
 
 export const routes = [
     {
@@ -93,6 +96,11 @@ export const routes = [
                 path: 'qr-generator',
                 name: 'QRCodeGenerator',
                 component: QRCodeGenerator,
+            },
+            {
+                path: 'curl-to-fetch',
+                name: 'CurlToFetch',
+                component: CurlToFetch,
             },
         ],
     },

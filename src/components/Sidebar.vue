@@ -132,6 +132,11 @@ const categories = [
       { route: 'CSVToJSON', label: 'CSV to JSON', icon: 'svg-data' },
       { route: 'PHPToJSON', label: 'PHP to JSON', icon: 'svg-code' },
       { route: 'JSONToPHP', label: 'JSON to PHP', icon: 'svg-code' },
+  {
+    name: 'Dev Tools',
+    tools: [
+      { route: 'CurlToFetch', label: 'cURL to Fetch', icon: 'svg-terminal' },
+      { route: 'HttpStatusCodes', label: 'HTTP Status Codes', icon: 'svg-list' },
     ]
   },
   {
@@ -165,6 +170,9 @@ const svgSortFix = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="2
 const svgText = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>' }
 const svgClock = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' }
 const svgPalette = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.32 2.26-.88.5-.5.74-1.18.74-1.83 0-1.5 1.2-2.7 2.7-2.7.65 0 1.33.24 1.83.74.56.56 1.34.88 2.26.88 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>' }
+const svgTerminal = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>' }
+const svgList = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>' }
+const svgUsers = { template: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' }
 
 const filteredCategories = computed(() => {
   if (!searchQuery.value) return categories

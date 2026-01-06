@@ -46,6 +46,7 @@ import jsonIcon from '@/assets/icons/json-formatter.png'
 import base64Icon from '@/assets/icons/base64-encode.png'
 import timeIcon from '@/assets/icons/timestamp-converter.png'
 import qrIcon from '@/assets/icons/qr-generator.png'
+import curlIcon from '@/assets/icons/curl-to-fetch.png'
 
 const featuredTools = [
   { 
@@ -71,6 +72,13 @@ const featuredTools = [
     label: 'QR Code Generator', 
     description: 'Create customizable QR codes for URLs, text, and more.',
     icon: qrIcon
+  },
+  { 
+    route: 'CurlToFetch', 
+    label: 'cURL to Fetch', 
+    description: 'Instantly convert cURL commands into clean JavaScript Fetch code.',
+    icon: curlIcon
+  },
   }
 ]
 </script>
