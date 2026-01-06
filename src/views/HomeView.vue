@@ -12,8 +12,8 @@
         :to="{ name: tool.route }"
         class="group p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 shadow-soft hover:shadow-xl hover:shadow-primary-500/10 hover:border-primary-500/30 transition-all duration-300"
       >
-        <div class="w-12 h-12 bg-primary-50 dark:bg-primary-900/30 rounded-xl flex items-center justify-center text-primary-600 dark:text-primary-400 mb-4 group-hover:scale-110 transition-transform">
-           <component :is="tool.icon" class="w-6 h-6" />
+        <div class="w-16 h-16 bg-primary-50 dark:bg-primary-900/30 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 overflow-hidden p-2">
+           <img :src="tool.icon" :alt="tool.label" class="w-full h-full object-contain" />
         </div>
         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
           {{ tool.label }}
@@ -42,30 +42,35 @@
 import HeroSvg from '@/components/HeroSvg.vue'
 import { slogan } from '@/constants/Constants'
 
+import jsonIcon from '@/assets/icons/json-formatter.png'
+import base64Icon from '@/assets/icons/base64-encode.png'
+import timeIcon from '@/assets/icons/timestamp-converter.png'
+import qrIcon from '@/assets/icons/qr-generator.png'
+
 const featuredTools = [
   { 
     route: 'FormatJSON', 
     label: 'JSON Formatter', 
     description: 'Clean, format, and validate your JSON data with ease.',
-    icon: { template: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M4 16v2a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M16 20h2a2 2 0 0 0 2-2v-2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>' }
+    icon: jsonIcon
   },
   { 
     route: 'Base64Encode', 
     label: 'Base64 Encode', 
     description: 'Securely encode text into Base64 format.',
-    icon: { template: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' }
+    icon: base64Icon
   },
   { 
     route: 'Dates', 
     label: 'Timestamp Converter', 
     description: 'Convert Unix timestamps to human-readable dates.',
-    icon: { template: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' }
+    icon: timeIcon
   },
   { 
     route: 'QRCodeGenerator', 
     label: 'QR Code Generator', 
     description: 'Create customizable QR codes for URLs, text, and more.',
-    icon: { template: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/><path d="M12 12h.01"/></svg>' }
+    icon: qrIcon
   }
 ]
 </script>
