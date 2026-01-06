@@ -1,34 +1,46 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1 justify-evenly w-4/5 dark:bg-gray-700">
-        <textarea
-            v-model="CSVData"
-            type="text"
-            placeholder="CSV Data"
-            rows="5"
-            class="w-full p-2"
-            v-debounce:300ms="convert"
-        />
+      <div class="flex flex-col h-full min-h-0">
+        <div class="px-6 py-4 border-b flex items-center justify-between bg-white dark:bg-slate-900 z-10">
+          <h3 class="font-semibold text-slate-700 dark:text-slate-200">Input CSV</h3>
+        </div>
+        <div class="flex-1 relative overflow-hidden">
+          <textarea
+              v-model="CSVData"
+              placeholder="Paste your CSV data here..."
+              class="w-full h-full p-6 bg-transparent font-mono text-sm text-slate-600 dark:text-slate-300 outline-none resize-none custom-scrollbar"
+              v-debounce:300ms="convert"
+          />
+        </div>
       </div>
     </template>
     <template v-slot:right-pane>
-      <div class="flex flex-1 flex-col text-center dark:bg-gray-700">
-        <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'">
-          <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
-            <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
-            <img
-                :src="copyIcon"
-                alt="Copy to Clipboard"
-                class="h-5 hover:h-6 hover:border"
-                title="copy to clipboard"
-                @click="copyButtonClicked"
-            />
+      <div class="flex flex-col h-full min-h-0">
+        <div class="px-6 py-4 border-b flex items-center justify-between transition-colors z-10" :class="isJSONValid ? 'bg-emerald-50/50 dark:bg-emerald-950/20' : 'bg-rose-50/50 dark:bg-rose-950/20'">
+          <div class="flex items-center gap-2">
+            <div :class="isJSONValid ? 'bg-emerald-500' : 'bg-rose-500'" class="w-2 h-2 rounded-full shadow-sm shadow-black/10"></div>
+            <h3 class="font-semibold" :class="isJSONValid ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'">
+              {{ isJSONValid ? 'Valid JSON Output' : 'Invalid CSV Data' }}
+            </h3>
           </div>
-          <h3 v-else class="text-white font-bold">JSON Invalid!</h3>
+          <button 
+            v-if="isJSONValid && jsonOutput"
+            @click="copyButtonClicked"
+            class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm active:scale-95"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copy JSON
+          </button>
         </div>
-        <div class="flex-grow bg-gray-100 p-2 dark:bg-gray-900 dark:text-purple-200">
-          <vue-json-pretty showLineNumber showLine showIcon :data="jsonString"/>
+        <div class="flex-1 overflow-auto p-4 custom-scrollbar bg-slate-50/30 dark:bg-slate-900/10">
+          <vue-json-pretty 
+            showLineNumber 
+            showLine 
+            showIcon 
+            :data="jsonOutput" 
+            class="text-sm rounded-xl overflow-hidden shadow-sm"
+          />
         </div>
       </div>
     </template>
@@ -40,26 +52,37 @@ import { ref } from 'vue'
 import { CSVToJSON } from '@/utilities/CSVToJSON'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 import VueJsonPretty from 'vue-json-pretty'
-import copyIcon from '@/assets/copy-icon.png'
-import { copyToClipboard } from '@/helpers/CopyToClipboard';
-import { toast } from 'vue3-toastify';
+import 'vue-json-pretty/lib/styles.css'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
+import { toast } from 'vue3-toastify'
 
-const CSVData = ref<string>('')
-const jsonString = ref<string>('')
+const CSVData = ref<string>('id,name,email\n1,Ninja,ninja@example.com\n2,Shinobi,shinobi@example.com')
+const jsonOutput = ref<any>(null)
 const isJSONValid = ref<boolean>(true)
 
 function convert() {
+  if (!CSVData.value.trim()) {
+    jsonOutput.value = null
+    isJSONValid.value = true
+    return
+  }
+  
   try {
-    jsonString.value = CSVToJSON(CSVData.value)
+    const result = CSVToJSON(CSVData.value)
+    // The utility returns a stringified JSON, let's parse it for vue-json-pretty
+    jsonOutput.value = typeof result === 'string' ? JSON.parse(result) : result
     isJSONValid.value = true
   } catch (e) {
     isJSONValid.value = false
+    jsonOutput.value = null
   }
 }
 
 function copyButtonClicked() {
-  copyToClipboard(JSON.stringify(jsonString.value, null, '\t'))
-  console.log('toasting')
-  toast.success('Formatted JSON copied to clipboard', { autoClose: 2500 })
+  copyToClipboard(JSON.stringify(jsonOutput.value, null, '\t'))
+  toast.success('JSON copied to clipboard', { autoClose: 2500 })
 }
+
+// Initial conversion
+convert()
 </script>

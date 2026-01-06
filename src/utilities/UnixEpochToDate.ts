@@ -46,7 +46,9 @@ export function unixEpochToDate(timestamp: number, options?: Intl.DateTimeFormat
 
     const ordinal = (humanString: string): string => {
         const blocks = humanString.split(' ')
-        blocks[2] = blocks[2] + getOrdinal(blocks[2])
+        if (blocks[2] !== undefined) {
+            blocks[2] = blocks[2] + getOrdinal(blocks[2])
+        }
         return blocks.join(' ')
     }
 
