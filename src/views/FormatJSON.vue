@@ -1,7 +1,7 @@
 <template>
   <TwoPaneLayout>
     <template v-slot:left-pane>
-      <div class="flex flex-1 flex-col border dark:border-gray-700 dark:bg-gray-700">
+      <div class="flex flex-1 flex-col border dark:border-gray-700">
         <div class="md:py-2 bg-[#ebebeb] dark:bg-gray-800 dark:text-purple-200">Enter JSON:</div>
         <div class="flex-grow relative">
           <v-ace-editor
@@ -16,7 +16,7 @@
       </div>
     </template>
     <template v-slot:right-pane>
-      <div class="flex flex-1 flex-col text-center dark:bg-gray-700">
+      <div class="flex flex-1 flex-col text-center">
         <div class="rounded md:py-2" :class="isJSONValid ? 'bg-green-400 dark:bg-green-700' : 'bg-red-500 dark:bg-red-700'">
           <div v-if="isJSONValid" class="flex items-center justify-center space-x-2">
             <h3 class="text-white font-bold">JSON Valid & Formatted </h3>
