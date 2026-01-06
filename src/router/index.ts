@@ -107,6 +107,11 @@ export const routes = [
                 name: 'HttpStatusCodes',
                 component: HttpStatusCodes,
             },
+            {
+                path: 'random-data',
+                name: 'RandomDataGenerator',
+                component: RandomDataGenerator,
+            },
         ],
     },
 ]

@@ -25,6 +25,7 @@
     "vue3-toastify": "^0.2.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.2.0",
     "@rushstack/eslint-patch": "^1.15.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/jsdom": "^27.0.0",

@@ -132,6 +132,9 @@ const categories = [
       { route: 'CSVToJSON', label: 'CSV to JSON', icon: 'svg-data' },
       { route: 'PHPToJSON', label: 'PHP to JSON', icon: 'svg-code' },
       { route: 'JSONToPHP', label: 'JSON to PHP', icon: 'svg-code' },
+      { route: 'RandomDataGenerator', label: 'Random Data', icon: 'svg-users' },
+    ]
+  },
   {
     name: 'Dev Tools',
     tools: [

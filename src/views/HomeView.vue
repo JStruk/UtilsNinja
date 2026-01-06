@@ -47,6 +47,8 @@ import base64Icon from '@/assets/icons/base64-encode.png'
 import timeIcon from '@/assets/icons/timestamp-converter.png'
 import qrIcon from '@/assets/icons/qr-generator.png'
 import curlIcon from '@/assets/icons/curl-to-fetch.png'
+import httpIcon from '@/assets/icons/http-status-codes.png'
+import randomIcon from '@/assets/icons/random-data.png'
 
 const featuredTools = [
   { 
@@ -85,6 +87,11 @@ const featuredTools = [
     description: 'A beautiful, filterable reference for all HTTP response status codes.',
     icon: httpIcon
   },
+  { 
+    route: 'RandomDataGenerator', 
+    label: 'Random Data', 
+    description: 'Generate mock user data, addresses, numbers, and more for testing.',
+    icon: randomIcon
   }
 ]
 </script>
