@@ -12,6 +12,7 @@ import Base64Encode from '@/views/Base64Encode.vue'
 import Base64Decode from '@/views/Base64Decode.vue'
 import LineSort from '@/views/LineSort.vue'
 import ColorConverter from '@/views/ColorConverter.vue'
+import QRCodeGenerator from '@/views/QRCodeGenerator.vue'
 
 export const routes = [
     {
@@ -87,6 +88,11 @@ export const routes = [
                 path: 'color-converter',
                 name: 'ColorConverter',
                 component: ColorConverter,
+            },
+            {
+                path: 'qr-generator',
+                name: 'QRCodeGenerator',
+                component: QRCodeGenerator,
             },
         ],
     },
