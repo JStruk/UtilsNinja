@@ -79,6 +79,12 @@ const featuredTools = [
     description: 'Instantly convert cURL commands into clean JavaScript Fetch code.',
     icon: curlIcon
   },
+  { 
+    route: 'HttpStatusCodes', 
+    label: 'HTTP Status Codes', 
+    description: 'A beautiful, filterable reference for all HTTP response status codes.',
+    icon: httpIcon
+  },
   }
 ]
 </script>

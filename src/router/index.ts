@@ -102,6 +102,11 @@ export const routes = [
                 name: 'CurlToFetch',
                 component: CurlToFetch,
             },
+            {
+                path: 'http-status-codes',
+                name: 'HttpStatusCodes',
+                component: HttpStatusCodes,
+            },
         ],
     },
 ]
