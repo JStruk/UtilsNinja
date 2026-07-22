@@ -135,6 +135,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Converter Tools',
     },
     {
+        id: 'json-to-code',
+        routeName: 'JSONToCode',
+        path: 'json-to-code',
+        label: 'JSON to Code',
+        description: 'Infer TypeScript, C#, or Go models from representative JSON.',
+        category: 'Data & Formats',
+        tags: ['json', 'typescript', 'csharp', 'go', 'interface', 'model', 'generate'],
+        icon: 'code',
+        component: () => import('@/views/JSONToCode.vue'),
+        analyticsCategory: 'Generator Tools',
+    },
+    {
         id: 'base64-encode',
         routeName: 'Base64Encode',
         path: 'base-64-encode',
