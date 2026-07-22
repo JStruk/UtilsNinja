@@ -147,6 +147,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Generator Tools',
     },
     {
+        id: 'json-schema-validator',
+        routeName: 'JSONSchemaValidator',
+        path: 'json-schema-validator',
+        label: 'JSON Schema Validator',
+        description: 'Validate JSON data against Draft 2020-12 schemas with path-level diagnostics.',
+        category: 'Data & Formats',
+        tags: ['json', 'schema', 'validate', 'draft 2020-12', 'ajv', 'contract'],
+        icon: 'validation',
+        component: () => import('@/views/JSONSchemaValidator.vue'),
+        analyticsCategory: 'Developer Tools',
+    },
+    {
         id: 'base64-encode',
         routeName: 'Base64Encode',
         path: 'base-64-encode',
