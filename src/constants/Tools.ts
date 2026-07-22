@@ -319,6 +319,18 @@ export const tools: ToolDefinition[] = [
         featuredImage: timeIcon,
     },
     {
+        id: 'cron-explorer',
+        routeName: 'CronExplorer',
+        path: 'cron-explorer',
+        label: 'Cron Explorer',
+        description: 'Explain cron expressions and preview upcoming runs by timezone.',
+        category: 'Date & Time',
+        tags: ['cron', 'schedule', 'timezone', 'devops', 'jobs'],
+        icon: 'calendar',
+        component: () => import('@/views/CronExplorer.vue'),
+        analyticsCategory: 'Developer Tools',
+    },
+    {
         id: 'lorem-ipsum',
         routeName: 'LoremIpsumGenerator',
         path: 'lig',
