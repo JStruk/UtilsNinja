@@ -165,11 +165,15 @@ export function inspectJWT(token: string, now: Date | number = new Date()): JWTI
         warnings.push('The token declares the unsecured "none" algorithm.')
     }
 
+    if (notBefore && expiresAt && expiresAt.seconds <= notBefore.seconds) {
+        warnings.push('Claim "exp" is earlier than or equal to "nbf", so the token has no valid time window.')
+    }
+
     let status: JWTTemporalStatus
-    if (notBefore && nowSeconds < notBefore.seconds) {
-        status = 'not-yet-valid'
-    } else if (expiresAt && nowSeconds >= expiresAt.seconds) {
+    if (expiresAt && nowSeconds >= expiresAt.seconds) {
         status = 'expired'
+    } else if (notBefore && nowSeconds < notBefore.seconds) {
+        status = 'not-yet-valid'
     } else if (!expiresAt) {
         status = 'no-expiration'
     } else {

@@ -87,6 +87,32 @@ describe('JWTInspector', () => {
         expect(inspectJWT(token, now).time.status).toBe('not-yet-valid')
     })
 
+    it('prioritizes expiration and warns when exp does not follow nbf', () => {
+        const now = Date.UTC(2026, 0, 1, 0, 0, 0)
+        const token = createToken({
+            nbf: now / 1000 + 60,
+            exp: now / 1000 - 60,
+        })
+
+        const result = inspectJWT(token, now)
+
+        expect(result.time.status).toBe('expired')
+        expect(result.warnings).toContain(
+            'Claim "exp" is earlier than or equal to "nbf", so the token has no valid time window.',
+        )
+    })
+
+    it('warns about an empty validity window when exp equals nbf', () => {
+        const now = Date.UTC(2026, 0, 1, 0, 0, 0)
+        const boundary = now / 1000 + 60
+        const result = inspectJWT(createToken({ nbf: boundary, exp: boundary }), now)
+
+        expect(result.time.status).toBe('not-yet-valid')
+        expect(result.warnings).toContain(
+            'Claim "exp" is earlier than or equal to "nbf", so the token has no valid time window.',
+        )
+    })
+
     it('handles missing signatures and expiration claims without implying validity', () => {
         const token = createToken({ sub: 'user-123' }, { alg: 'none', typ: 'JWT' }, '')
 
