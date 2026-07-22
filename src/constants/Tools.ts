@@ -197,6 +197,18 @@ export const tools: ToolDefinition[] = [
         featuredImage: curlIcon,
     },
     {
+        id: 'url-workbench',
+        routeName: 'URLWorkbench',
+        path: 'url-workbench',
+        label: 'URL Workbench',
+        description: 'Parse, edit, rebuild, encode, and decode URLs and query strings.',
+        category: 'Web & Network',
+        tags: ['url', 'uri', 'query string', 'percent encode', 'decode', 'parse'],
+        icon: 'link',
+        component: () => import('@/views/URLWorkbench.vue'),
+        analyticsCategory: 'Developer Tools',
+    },
+    {
         id: 'http-status-codes',
         routeName: 'HttpStatusCodes',
         path: 'http-status-codes',
