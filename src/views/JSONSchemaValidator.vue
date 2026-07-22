@@ -31,7 +31,7 @@
               <div class="mb-2 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <h3 id="schema-editor-heading" class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Schema JSON</h3>
-                  <p class="mt-0.5 text-[11px] text-slate-400">{{ schemaText.length.toLocaleString() }} / {{ DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxSchemaCharacters.toLocaleString() }} characters</p>
+                  <p class="mt-0.5 text-[11px] text-slate-400">{{ schemaText.length.toLocaleString() }} / {{ SCHEMA_CHARACTER_LIMIT.toLocaleString() }} characters</p>
                 </div>
                 <button type="button" class="text-xs font-semibold text-slate-400 transition hover:text-primary-600 focus:outline-none focus:underline" @click="formatEditor('schema')">Format schema</button>
               </div>
@@ -39,7 +39,7 @@
                 id="schema-json-input"
                 v-model="schemaText"
                 spellcheck="false"
-                :maxlength="DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxSchemaCharacters"
+                :maxlength="SCHEMA_CHARACTER_LIMIT"
                 class="h-64 w-full resize-y rounded-xl border border-slate-200 bg-slate-950 px-4 py-3 font-mono text-sm leading-6 text-cyan-100 outline-none transition focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-700"
                 aria-labelledby="schema-editor-heading"
                 placeholder="Paste a draft 2020-12 JSON Schema"
@@ -50,7 +50,7 @@
               <div class="mb-2 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <h3 id="data-editor-heading" class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Data JSON</h3>
-                  <p class="mt-0.5 text-[11px] text-slate-400">{{ dataText.length.toLocaleString() }} / {{ DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxDataCharacters.toLocaleString() }} characters</p>
+                  <p class="mt-0.5 text-[11px] text-slate-400">{{ dataText.length.toLocaleString() }} / {{ DATA_CHARACTER_LIMIT.toLocaleString() }} characters</p>
                 </div>
                 <div class="flex items-center gap-3">
                   <button type="button" class="text-xs font-semibold text-slate-400 transition hover:text-emerald-600 focus:outline-none focus:underline" @click="loadExample(true)">Valid sample</button>
@@ -62,7 +62,7 @@
                 id="data-json-input"
                 v-model="dataText"
                 spellcheck="false"
-                :maxlength="DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxDataCharacters"
+                :maxlength="DATA_CHARACTER_LIMIT"
                 class="h-56 w-full resize-y rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 font-mono text-sm leading-6 text-slate-800 outline-none transition focus:border-primary-500 focus:bg-white focus:ring-4 focus:ring-primary-500/10 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-100 dark:focus:bg-slate-800"
                 aria-labelledby="data-editor-heading"
                 placeholder="Paste JSON data to validate"
@@ -99,8 +99,8 @@
                 <p class="mt-1 text-xs font-semibold text-sky-900 dark:text-sky-200">Email, URI, UUID, date…</p>
               </div>
               <div class="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900/60 dark:bg-amber-950/30">
-                <p class="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">Bounds</p>
-                <p class="mt-1 text-xs font-semibold text-amber-900 dark:text-amber-200">{{ DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxErrors }} displayed errors</p>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">Isolation</p>
+                <p class="mt-1 text-xs font-semibold text-amber-900 dark:text-amber-200">{{ VALIDATION_TIMEOUT_MS / 1000 }} s worker limit</p>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
           </div>
 
           <footer class="flex items-center justify-between gap-4 border-t border-slate-100 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-            <p class="min-w-0 text-xs text-slate-400">Runs locally with Ajv 2020; input values are never mutated.</p>
+            <p class="min-w-0 text-xs text-slate-400">Runs locally in a disposable worker; input values are never mutated.</p>
             <button
               type="button"
               class="inline-flex min-w-36 items-center justify-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-sm font-bold text-white shadow-md shadow-primary-500/20 transition hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-500/20 disabled:cursor-wait disabled:opacity-70"
@@ -208,7 +208,7 @@
 
             <template v-else>
               <div v-if="result.errorsTruncated" class="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-300">
-                The report reached its {{ DEFAULT_SCHEMA_VALIDATOR_LIMITS.maxErrors }}-error display limit. Fix these issues and validate again to reveal any remaining errors.
+                The report reached its {{ MAX_DISPLAYED_ERRORS }}-error display limit. Fix these issues and validate again to reveal any remaining errors.
               </div>
 
               <div v-if="filteredDiagnostics.length" class="space-y-3">
@@ -259,20 +259,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
-import {
-  DEFAULT_SCHEMA_VALIDATOR_LIMITS,
-  validateJSONSchema,
-  type SchemaDiagnostic,
-  type SchemaValidationResult,
+import type {
+  SchemaDiagnostic,
+  SchemaValidationResult,
+  SchemaValidationWorkerRequest,
+  SchemaValidationWorkerResponse,
 } from '@/utilities/JSONSchemaValidator'
 
 type DiagnosticFilter = 'all' | 'errors' | 'warnings'
 type EditorSource = 'schema' | 'data'
 
 const AUTO_VALIDATE_DELAY_MS = 450
+const VALIDATION_TIMEOUT_MS = 1_500
+const SCHEMA_CHARACTER_LIMIT = 250_000
+const DATA_CHARACTER_LIMIT = 1_000_000
+const MAX_DISPLAYED_ERRORS = 200
 const EXAMPLE_SCHEMA = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   title: 'Developer profile',
@@ -329,6 +333,8 @@ const diagnosticFilters: Array<{ value: DiagnosticFilter; label: string }> = [
 ]
 
 let debounceTimeout: number | undefined
+let workerTimeout: number | undefined
+let activeWorker: Worker | null = null
 let validationGeneration = 0
 
 const filteredDiagnostics = computed<SchemaDiagnostic[]>(() => {
@@ -343,6 +349,7 @@ const filteredDiagnostics = computed<SchemaDiagnostic[]>(() => {
 })
 
 const resultHeading = computed(() => {
+  if (unexpectedError.value) return 'Validation stopped safely'
   if (!result.value) return 'Waiting for input'
   if (result.value.valid) return result.value.warningCount ? 'Valid with warnings' : 'Schema contract satisfied'
   if (!result.value.schemaValid) return 'Schema needs attention'
@@ -351,6 +358,7 @@ const resultHeading = computed(() => {
 })
 
 const resultDescription = computed(() => {
+  if (unexpectedError.value) return unexpectedError.value
   if (!result.value) return 'Validation runs automatically after a short pause.'
   if (result.value.valid) return 'The JSON instance passes every active constraint.'
   if (!result.value.schemaValid) return 'Fix schema parsing, references, or schema-definition errors first.'
@@ -360,6 +368,7 @@ const resultDescription = computed(() => {
 
 const resultStatus = computed(() => {
   if (isValidating.value) return 'Validating'
+  if (unexpectedError.value) return 'Stopped'
   if (!result.value) return 'Waiting'
   if (result.value.valid) return 'Valid'
   if (!result.value.schemaValid) return 'Schema error'
@@ -368,49 +377,107 @@ const resultStatus = computed(() => {
 
 const resultStatusClasses = computed(() => {
   if (isValidating.value) return 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300'
+  if (unexpectedError.value) return 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300'
   if (!result.value) return 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
   if (result.value.valid) return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300'
   return 'bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300'
 })
 
-async function runValidation(): Promise<void> {
+function terminateValidationWorker(): void {
+  activeWorker?.terminate()
+  activeWorker = null
+
+  if (workerTimeout !== undefined) {
+    window.clearTimeout(workerTimeout)
+    workerTimeout = undefined
+  }
+}
+
+function runValidation(): void {
   if (debounceTimeout !== undefined) {
     window.clearTimeout(debounceTimeout)
     debounceTimeout = undefined
   }
 
+  terminateValidationWorker()
   const generation = ++validationGeneration
   isValidating.value = true
   unexpectedError.value = ''
   editorMessage.value = ''
-  await nextTick()
-  await new Promise<void>(resolve => window.requestAnimationFrame(() => resolve()))
-  if (generation !== validationGeneration) return
-
   const startedAt = performance.now()
+  let worker: Worker
 
   try {
-    result.value = validateJSONSchema({
+    worker = new Worker(new URL('../workers/JSONSchemaValidator.worker.ts', import.meta.url), { type: 'module' })
+  } catch {
+    result.value = null
+    unexpectedError.value = 'The isolated validation worker could not be started.'
+    liveMessage.value = `Validation failed: ${unexpectedError.value}`
+    isValidating.value = false
+    return
+  }
+
+  activeWorker = worker
+
+  worker.onmessage = (event: MessageEvent<SchemaValidationWorkerResponse>) => {
+    if (event.data.requestId !== generation || activeWorker !== worker) return
+
+    lastDuration.value = Math.max(0, Math.round(performance.now() - startedAt))
+
+    if (event.data.ok) {
+      result.value = event.data.result
+      unexpectedError.value = ''
+      liveMessage.value = result.value.valid
+        ? 'JSON data is valid against the schema.'
+        : `Validation found ${result.value.errorCount} errors and ${result.value.warningCount} warnings.`
+    } else {
+      result.value = null
+      unexpectedError.value = event.data.error
+      liveMessage.value = `Validation failed: ${event.data.error}`
+    }
+
+    isValidating.value = false
+    terminateValidationWorker()
+  }
+
+  worker.onerror = () => {
+    if (activeWorker !== worker) return
+
+    result.value = null
+    unexpectedError.value = 'The isolated validation worker stopped unexpectedly.'
+    liveMessage.value = `Validation failed: ${unexpectedError.value}`
+    isValidating.value = false
+    terminateValidationWorker()
+  }
+
+  workerTimeout = window.setTimeout(() => {
+    if (activeWorker !== worker) return
+
+    result.value = null
+    unexpectedError.value = `Validation exceeded ${VALIDATION_TIMEOUT_MS / 1000} seconds and was stopped. Check schema patterns or reduce the input size.`
+    liveMessage.value = 'Validation timed out and the isolated worker was stopped.'
+    lastDuration.value = VALIDATION_TIMEOUT_MS
+    isValidating.value = false
+    terminateValidationWorker()
+  }, VALIDATION_TIMEOUT_MS)
+
+  const request: SchemaValidationWorkerRequest = {
+    requestId: generation,
+    options: {
       schemaText: schemaText.value,
       dataText: dataText.value,
       allErrors: allErrors.value,
       strictDiagnostics: strictDiagnostics.value,
-    })
-    lastDuration.value = Math.max(0, Math.round(performance.now() - startedAt))
-    liveMessage.value = result.value.valid
-      ? 'JSON data is valid against the schema.'
-      : `Validation found ${result.value.errorCount} errors and ${result.value.warningCount} warnings.`
-  } catch (error) {
-    result.value = null
-    unexpectedError.value = error instanceof Error ? error.message : 'Validation could not be completed.'
-    liveMessage.value = `Validation failed: ${unexpectedError.value}`
-  } finally {
-    if (generation === validationGeneration) isValidating.value = false
+    },
   }
+
+  worker.postMessage(request)
 }
 
 function scheduleValidation(): void {
   validationGeneration++
+  terminateValidationWorker()
+  isValidating.value = false
   if (debounceTimeout !== undefined) window.clearTimeout(debounceTimeout)
   debounceTimeout = window.setTimeout(runValidation, AUTO_VALIDATE_DELAY_MS)
 }
@@ -449,5 +516,6 @@ onMounted(runValidation)
 onBeforeUnmount(() => {
   validationGeneration++
   if (debounceTimeout !== undefined) window.clearTimeout(debounceTimeout)
+  terminateValidationWorker()
 })
 </script>

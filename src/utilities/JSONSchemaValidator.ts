@@ -58,6 +58,15 @@ export interface SchemaValidationResult {
     errorsTruncated: boolean
 }
 
+export interface SchemaValidationWorkerRequest {
+    requestId: number
+    options: SchemaValidationOptions
+}
+
+export type SchemaValidationWorkerResponse =
+    | { requestId: number; ok: true; result: SchemaValidationResult }
+    | { requestId: number; ok: false; error: string }
+
 interface ParseSuccess {
     ok: true
     value: unknown
