@@ -123,6 +123,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Converter Tools',
     },
     {
+        id: 'json-yaml-converter',
+        routeName: 'JSONYAMLConverter',
+        path: 'json-yaml',
+        label: 'JSON ↔ YAML',
+        description: 'Convert JSON and safe YAML documents in either direction.',
+        category: 'Data & Formats',
+        tags: ['json', 'yaml', 'yml', 'convert', 'config', 'multi-document'],
+        icon: 'file-code',
+        component: () => import('@/views/JSONYAMLConverter.vue'),
+        analyticsCategory: 'Converter Tools',
+    },
+    {
         id: 'base64-encode',
         routeName: 'Base64Encode',
         path: 'base-64-encode',
