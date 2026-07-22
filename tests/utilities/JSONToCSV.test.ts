@@ -34,4 +34,21 @@ describe('CSVToJSON', () => {
 
         expect(JSONtoCSV(JSONinput)).toEqual(CSVresult)
     })
+
+    it('escapes commas, quotes, and line breaks according to CSV rules', () => {
+        const JSONinput = JSON.stringify([
+            { Name: 'Jane, Smith', Note: 'Said "hello"\non two lines' },
+        ])
+
+        expect(JSONtoCSV(JSONinput)).toBe(
+            'Name,Note\n"Jane, Smith","Said ""hello""\non two lines"',
+        )
+    })
+
+    it('uses the first object as the column contract and rejects primitive rows', () => {
+        expect(JSONtoCSV('[{"name":"Jane"},{"name":"John","extra":true}]')).toBe(
+            'name\nJane\nJohn',
+        )
+        expect(JSONtoCSV('[1,2,3]')).toBe('')
+    })
 })
