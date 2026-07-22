@@ -148,6 +148,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Encoding Tools',
     },
     {
+        id: 'jwt-inspector',
+        routeName: 'JWTInspector',
+        path: 'jwt-inspector',
+        label: 'JWT Inspector',
+        description: 'Decode JWT headers, payloads, and time-based claims locally.',
+        category: 'Encoding & Security',
+        tags: ['jwt', 'token', 'base64url', 'claims', 'authentication', 'decode'],
+        icon: 'shield',
+        component: () => import('@/views/JWTInspector.vue'),
+        analyticsCategory: 'Security Tools',
+    },
+    {
         id: 'string-inspector',
         routeName: 'Inspector',
         path: 'inspector',
