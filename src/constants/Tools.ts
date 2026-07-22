@@ -160,6 +160,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Security Tools',
     },
     {
+        id: 'hash-generator',
+        routeName: 'HashGenerator',
+        path: 'hash-generator',
+        label: 'Hash & Checksum',
+        description: 'Generate SHA hashes, keyed HMACs, and local file checksums.',
+        category: 'Encoding & Security',
+        tags: ['hash', 'checksum', 'hmac', 'sha256', 'sha384', 'sha512', 'file'],
+        icon: 'hash',
+        component: () => import('@/views/HashGenerator.vue'),
+        analyticsCategory: 'Security Tools',
+    },
+    {
         id: 'string-inspector',
         routeName: 'Inspector',
         path: 'inspector',
