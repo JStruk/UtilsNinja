@@ -13,7 +13,7 @@
         class="group p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 shadow-soft hover:shadow-xl hover:shadow-primary-500/10 hover:border-primary-500/30 transition-all duration-300"
       >
         <div class="w-16 h-16 bg-primary-50 dark:bg-primary-900/30 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 overflow-hidden p-2">
-           <img :src="tool.icon" :alt="tool.label" class="w-full h-full object-contain" />
+        <img :src="tool.featuredImage" alt="" class="w-full h-full object-contain" />
         </div>
         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
           {{ tool.label }}
@@ -41,58 +41,14 @@
 <script lang='ts' setup>
 import HeroSvg from '@/components/HeroSvg.vue'
 import { slogan } from '@/constants/Constants'
+import { tools } from '@/constants/Tools'
 
-import jsonIcon from '@/assets/icons/json-formatter.png'
-import base64Icon from '@/assets/icons/base64-encode.png'
-import timeIcon from '@/assets/icons/timestamp-converter.png'
-import qrIcon from '@/assets/icons/qr-generator.png'
-import curlIcon from '@/assets/icons/curl-to-fetch.png'
-import httpIcon from '@/assets/icons/http-status-codes.png'
-import randomIcon from '@/assets/icons/random-data.png'
-
-const featuredTools = [
-  { 
-    route: 'FormatJSON', 
-    label: 'JSON Formatter', 
-    description: 'Clean, format, and validate your JSON data with ease.',
-    icon: jsonIcon
-  },
-  { 
-    route: 'Base64Encode', 
-    label: 'Base64 Encode', 
-    description: 'Securely encode text into Base64 format.',
-    icon: base64Icon
-  },
-  { 
-    route: 'Dates', 
-    label: 'Timestamp Converter', 
-    description: 'Convert Unix timestamps to human-readable dates.',
-    icon: timeIcon
-  },
-  { 
-    route: 'QRCodeGenerator', 
-    label: 'QR Code Generator', 
-    description: 'Create customizable QR codes for URLs, text, and more.',
-    icon: qrIcon
-  },
-  { 
-    route: 'CurlToFetch', 
-    label: 'cURL to Fetch', 
-    description: 'Instantly convert cURL commands into clean JavaScript Fetch code.',
-    icon: curlIcon
-  },
-  { 
-    route: 'HttpStatusCodes', 
-    label: 'HTTP Status Codes', 
-    description: 'A beautiful, filterable reference for all HTTP response status codes.',
-    icon: httpIcon
-  },
-  { 
-    route: 'RandomDataGenerator', 
-    label: 'Random Data', 
-    description: 'Generate mock user data, addresses, numbers, and more for testing.',
-    icon: randomIcon
-  }
-]
+const featuredTools = tools
+  .filter((tool) => tool.featuredImage)
+  .map((tool) => ({
+    route: tool.routeName,
+    label: tool.label,
+    description: tool.description,
+    featuredImage: tool.featuredImage,
+  }))
 </script>
-

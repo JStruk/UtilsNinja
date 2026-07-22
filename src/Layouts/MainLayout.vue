@@ -36,29 +36,14 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Sidebar from '../components/Sidebar.vue'
+import { findToolByRouteName } from '@/constants/Tools'
 
 const route = useRoute()
 
 const currentPageTitle = computed(() => {
   if (route.name === 'home') return 'Dashboard'
-  
-  // Try to find label in some registry or just use name
-  const names: Record<string, string> = {
-    'FormatJSON': 'JSON Formatter',
-    'LoremIpsumGenerator': 'Lorem Ipsum Generator',
-    'JSONToCSV': 'JSON to CSV',
-    'CSVToJSON': 'CSV to JSON',
-    'PHPToJSON': 'PHP to JSON',
-    'JSONToPHP': 'JSON to PHP',
-    'Inspector': 'String Inspector',
-    'Dates': 'Timestamp Converter',
-    'Base64Encode': 'Base64 Encode',
-    'Base64Decode': 'Base64 Decode',
-    'LineSort': 'Line Sorter',
-    'ColorConverter': 'Color Converter'
-  }
-  
-  return names[route.name as string] || (route.name as string)
+
+  return findToolByRouteName(route.name)?.label ?? 'UtilsNinja'
 })
 </script>
 
