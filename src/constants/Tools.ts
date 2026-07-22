@@ -1,12 +1,12 @@
 import type { Component } from 'vue'
 
-import base64Icon from '@/assets/icons/base64-encode.png'
-import curlIcon from '@/assets/icons/curl-to-fetch.png'
-import httpIcon from '@/assets/icons/http-status-codes.png'
-import jsonIcon from '@/assets/icons/json-formatter.png'
-import qrIcon from '@/assets/icons/qr-generator.png'
-import randomIcon from '@/assets/icons/random-data.png'
-import timeIcon from '@/assets/icons/timestamp-converter.png'
+import base64Icon from '@/assets/icons/base64-encode.webp'
+import curlIcon from '@/assets/icons/curl-to-fetch.webp'
+import httpIcon from '@/assets/icons/http-status-codes.webp'
+import jsonIcon from '@/assets/icons/json-formatter.webp'
+import qrIcon from '@/assets/icons/qr-generator.webp'
+import randomIcon from '@/assets/icons/random-data.webp'
+import timeIcon from '@/assets/icons/timestamp-converter.webp'
 
 export const toolCategories = [
     'Data & Formats',
