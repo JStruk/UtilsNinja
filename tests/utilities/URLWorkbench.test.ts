@@ -62,7 +62,13 @@ describe('URLWorkbench', () => {
             pathname: '/',
             hash: '',
             queryParameters: [],
-        })).toThrow('between 1 and 65535')
+        })).toThrow('between 0 and 65535')
+    })
+
+    it('round-trips URLs that explicitly use port zero', () => {
+        const source = 'http://example.com:0/health'
+
+        expect(buildURL(parseURL(source))).toBe(source)
     })
 
     it('encodes and decodes complete URLs without escaping URL separators', () => {

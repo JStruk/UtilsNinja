@@ -109,8 +109,8 @@ export function buildURL(parts: URLParts): string {
     if (port) {
         const numericPort = Number(port)
 
-        if (!PORT_PATTERN.test(port) || !Number.isInteger(numericPort) || numericPort < 1 || numericPort > 65535) {
-            throw new Error('Port must be a whole number between 1 and 65535.')
+        if (!PORT_PATTERN.test(port) || !Number.isInteger(numericPort) || numericPort < 0 || numericPort > 65535) {
+            throw new Error('Port must be a whole number between 0 and 65535.')
         }
     }
 
