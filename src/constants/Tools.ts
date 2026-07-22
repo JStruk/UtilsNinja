@@ -269,6 +269,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Developer Tools',
     },
     {
+        id: 'cidr-calculator',
+        routeName: 'CIDRCalculator',
+        path: 'cidr-calculator',
+        label: 'CIDR Calculator',
+        description: 'Calculate IPv4 subnet ranges, masks, capacity, and splits.',
+        category: 'Web & Network',
+        tags: ['cidr', 'subnet', 'ipv4', 'network', 'mask', 'broadcast', 'ip'],
+        icon: 'network',
+        component: () => import('@/views/CIDRCalculator.vue'),
+        analyticsCategory: 'Network Tools',
+    },
+    {
         id: 'http-status-codes',
         routeName: 'HttpStatusCodes',
         path: 'http-status-codes',
