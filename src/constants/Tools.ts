@@ -208,6 +208,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Text Tools',
     },
     {
+        id: 'regex-tester',
+        routeName: 'RegexTester',
+        path: 'regex-tester',
+        label: 'Regex Tester',
+        description: 'Test JavaScript regular expressions, captures, and replacements safely.',
+        category: 'Text & Diff',
+        tags: ['regex', 'regexp', 'pattern', 'match', 'capture', 'replace', 'javascript'],
+        icon: 'regex',
+        component: () => import('@/views/RegexTester.vue'),
+        analyticsCategory: 'Developer Tools',
+    },
+    {
         id: 'curl-to-fetch',
         routeName: 'CurlToFetch',
         path: 'curl-to-fetch',
