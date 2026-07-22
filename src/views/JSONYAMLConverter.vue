@@ -87,6 +87,7 @@
           <textarea
             :id="`${sourceFormat.toLowerCase()}-input`"
             v-model="input"
+            :maxlength="DEFAULT_MAX_INPUT_CHARACTERS"
             :aria-describedby="errorMessage ? 'conversion-error' : 'conversion-safety-note'"
             :aria-invalid="Boolean(errorMessage)"
             autocomplete="off"
@@ -97,31 +98,48 @@
           />
         </div>
 
-        <div id="conversion-safety-note" class="flex items-start gap-2 border-t bg-white px-5 py-3 text-xs leading-5 text-slate-500 dark:bg-slate-900 dark:text-slate-400">
+        <div id="conversion-safety-note" class="flex flex-wrap items-start gap-x-2 gap-y-1 border-t bg-white px-5 py-3 text-xs leading-5 text-slate-500 dark:bg-slate-900 dark:text-slate-400">
           <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z" />
             <path d="m9 12 2 2 4-4" />
           </svg>
-          Conversion stays in your browser. YAML uses the safe core schema, rejects custom tags, and limits alias expansion.
+          <span class="min-w-0 flex-1">
+            Conversion stays in your browser. YAML uses the safe core schema; input size, nesting, values, and alias expansion are bounded.
+          </span>
+          <span class="ml-6 whitespace-nowrap font-mono text-[10px] tabular-nums sm:ml-auto">
+            {{ input.length.toLocaleString() }} / {{ DEFAULT_MAX_INPUT_CHARACTERS.toLocaleString() }} characters
+          </span>
         </div>
       </section>
     </template>
 
     <template #right-pane>
-      <section class="flex h-full min-h-0 flex-col" :aria-labelledby="`${targetFormat.toLowerCase()}-output-heading`">
+      <section
+        class="flex h-full min-h-0 flex-col"
+        :aria-labelledby="`${targetFormat.toLowerCase()}-output-heading`"
+        :aria-busy="isConverting"
+      >
         <div
           class="border-b px-5 py-4 transition-colors"
-          :class="errorMessage
-            ? 'bg-rose-50/70 dark:bg-rose-950/20'
-            : conversion
-              ? 'bg-emerald-50/60 dark:bg-emerald-950/20'
-              : 'bg-white dark:bg-slate-900'"
+          :class="isConverting
+            ? 'bg-amber-50/70 dark:bg-amber-950/20'
+            : errorMessage
+              ? 'bg-rose-50/70 dark:bg-rose-950/20'
+              : conversion
+                ? 'bg-emerald-50/60 dark:bg-emerald-950/20'
+                : 'bg-white dark:bg-slate-900'"
         >
           <div class="flex flex-wrap items-center justify-between gap-3" aria-live="polite">
             <div class="flex items-center gap-3">
               <span
                 class="h-2.5 w-2.5 rounded-full"
-                :class="errorMessage ? 'bg-rose-500' : conversion ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600'"
+                :class="isConverting
+                  ? 'animate-pulse bg-amber-500 motion-reduce:animate-none'
+                  : errorMessage
+                    ? 'bg-rose-500'
+                    : conversion
+                      ? 'bg-emerald-500'
+                      : 'bg-slate-300 dark:bg-slate-600'"
                 aria-hidden="true"
               ></span>
               <div>
@@ -129,20 +147,22 @@
                 <h2
                   :id="`${targetFormat.toLowerCase()}-output-heading`"
                   class="mt-1 font-semibold"
-                  :class="errorMessage
-                    ? 'text-rose-700 dark:text-rose-400'
-                    : conversion
-                      ? 'text-emerald-700 dark:text-emerald-400'
-                      : 'text-slate-800 dark:text-slate-100'"
+                  :class="isConverting
+                    ? 'text-amber-700 dark:text-amber-400'
+                    : errorMessage
+                      ? 'text-rose-700 dark:text-rose-400'
+                      : conversion
+                        ? 'text-emerald-700 dark:text-emerald-400'
+                        : 'text-slate-800 dark:text-slate-100'"
                 >
-                  {{ errorMessage ? `${sourceFormat} needs attention` : `${targetFormat} output` }}
+                  {{ isConverting ? `Converting ${sourceFormat}…` : errorMessage ? `${sourceFormat} needs attention` : `${targetFormat} output` }}
                 </h2>
               </div>
             </div>
 
             <div class="flex items-center gap-2">
               <button
-                v-if="conversion"
+                v-if="conversion && !isConverting"
                 type="button"
                 class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:border-primary-300 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary-700 dark:hover:text-primary-300"
                 aria-label="Swap output into input and reverse conversion direction"
@@ -154,7 +174,7 @@
                 Swap
               </button>
               <button
-                v-if="conversion"
+                v-if="conversion && !isConverting"
                 type="button"
                 class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:border-primary-300 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary-700 dark:hover:text-primary-300"
                 @click="copyOutput"
@@ -170,7 +190,18 @@
         </div>
 
         <div class="relative flex-1 overflow-hidden bg-slate-50/30 dark:bg-slate-950/10">
-          <div v-if="errorMessage" class="h-full overflow-y-auto p-6">
+          <div v-if="isConverting" class="flex h-full min-h-[320px] items-center justify-center p-8 text-center" role="status">
+            <div class="max-w-xs">
+              <svg class="mx-auto h-8 w-8 animate-spin text-primary-500 motion-reduce:animate-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" />
+                <path class="opacity-75" fill="currentColor" d="M21 12a9 9 0 0 0-9-9v3a6 6 0 0 1 6 6h3Z" />
+              </svg>
+              <p class="mt-4 text-sm font-semibold text-slate-700 dark:text-slate-200">Checking structure and converting…</p>
+              <p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Conversion begins after a short pause in typing.</p>
+            </div>
+          </div>
+
+          <div v-else-if="errorMessage" class="h-full overflow-y-auto p-6">
             <div id="conversion-error" role="alert" class="rounded-2xl border border-rose-200 bg-rose-50 p-5 dark:border-rose-900/60 dark:bg-rose-950/30">
               <div class="flex items-start gap-3">
                 <svg class="mt-0.5 h-5 w-5 shrink-0 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -226,15 +257,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
   convertJSONYAML,
+  DEFAULT_MAX_DEPTH,
+  DEFAULT_MAX_INPUT_CHARACTERS,
+  DEFAULT_MAX_NODES,
   type JSONYAMLConversionResult,
   type JSONYAMLDirection,
 } from '@/utilities/JSONYAMLConverter'
+
+const CONVERSION_DEBOUNCE_MS = 250
 
 const JSON_SAMPLE = `{
   "service": "utils-ninja",
@@ -261,6 +297,8 @@ const indent = ref(2)
 const arrayAsDocuments = ref(false)
 const conversion = ref<JSONYAMLConversionResult | null>(null)
 const errorMessage = ref('')
+const isConverting = ref(false)
+let conversionTimer: ReturnType<typeof setTimeout> | undefined
 
 const sourceFormat = computed(() => direction.value === 'json-to-yaml' ? 'JSON' : 'YAML')
 const targetFormat = computed(() => direction.value === 'json-to-yaml' ? 'YAML' : 'JSON')
@@ -277,12 +315,34 @@ const documentSummary = computed(() => {
   return `${inputLabel} → ${outputLabel}`
 })
 
-watch([input, direction, indent, arrayAsDocuments], convert, { immediate: true })
+watch([input, direction, indent, arrayAsDocuments], scheduleConversion, { immediate: true })
+
+onBeforeUnmount(() => {
+  if (conversionTimer !== undefined) clearTimeout(conversionTimer)
+})
+
+function scheduleConversion() {
+  if (conversionTimer !== undefined) clearTimeout(conversionTimer)
+  conversionTimer = undefined
+  conversion.value = null
+  errorMessage.value = ''
+
+  if (!input.value.trim()) {
+    isConverting.value = false
+    return
+  }
+
+  isConverting.value = true
+  conversionTimer = setTimeout(convert, CONVERSION_DEBOUNCE_MS)
+}
 
 function convert() {
+  conversionTimer = undefined
+
   if (!input.value.trim()) {
     conversion.value = null
     errorMessage.value = ''
+    isConverting.value = false
     return
   }
 
@@ -291,11 +351,16 @@ function convert() {
       indent: indent.value,
       arrayAsDocuments: arrayAsDocuments.value,
       maxAliasCount: 50,
+      maxInputCharacters: DEFAULT_MAX_INPUT_CHARACTERS,
+      maxNodes: DEFAULT_MAX_NODES,
+      maxDepth: DEFAULT_MAX_DEPTH,
     })
     errorMessage.value = ''
   } catch (error) {
     conversion.value = null
     errorMessage.value = error instanceof Error ? error.message : `${sourceFormat.value} could not be converted safely.`
+  } finally {
+    isConverting.value = false
   }
 }
 

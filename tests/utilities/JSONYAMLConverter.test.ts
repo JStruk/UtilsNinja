@@ -108,6 +108,33 @@ replicas: 4`)
         )
     })
 
+    it('rejects integers that would be rounded in either conversion direction', () => {
+        expect(() => convertJSONToYAML('{"id":9007199254740993}')).toThrowError(
+            /integer outside JavaScript's safe range/,
+        )
+        expect(() => convertYAMLToJSON('id: 9007199254740993')).toThrowError(
+            /integer outside JavaScript's safe range/,
+        )
+
+        const safeJSON = `{"id":${Number.MAX_SAFE_INTEGER}}`
+        expect(convertJSONToYAML(safeJSON).output).toContain(`id: ${Number.MAX_SAFE_INTEGER}`)
+        expect(JSON.parse(convertYAMLToJSON(`id: ${Number.MAX_SAFE_INTEGER}`).output)).toEqual({
+            id: Number.MAX_SAFE_INTEGER,
+        })
+    })
+
+    it('rejects non-string YAML mapping keys and keys that collide after coercion', () => {
+        expect(() => convertYAMLToJSON('1: numeric key')).toThrowError(
+            'YAML mapping keys must be strings to convert safely to JSON.',
+        )
+        expect(() => convertYAMLToJSON('1: numeric\n"1": string')).toThrowError(
+            'YAML contains mapping keys that become duplicates when converted to JSON strings.',
+        )
+        expect(() => convertYAMLToJSON('null: empty\n"": string')).toThrowError(
+            'YAML contains mapping keys that become duplicates when converted to JSON strings.',
+        )
+    })
+
     it('limits aliases and rejects circular aliases', () => {
         const aliased = `
 defaults: &defaults
@@ -131,6 +158,41 @@ second: *defaults`
         )
         expect(() => convertYAMLToJSON('enabled: true', { maxAliasCount: 1_001 })).toThrowError(
             'The YAML alias limit must be between 0 and 1,000.',
+        )
+    })
+
+    it('enforces configurable character, node, and nesting-depth limits', () => {
+        expect(() => convertJSONToYAML('{"enabled":true}', { maxInputCharacters: 8 })).toThrowError(
+            'JSON input exceeds the 8-character safety limit.',
+        )
+        expect(() => convertYAMLToJSON('enabled: true', { maxInputCharacters: 8 })).toThrowError(
+            'YAML input exceeds the 8-character safety limit.',
+        )
+
+        expect(() => convertJSONToYAML('[1,2,3]', { maxNodes: 3 })).toThrowError(
+            'JSON input exceeds the 3-node safety limit.',
+        )
+        expect(() => convertYAMLToJSON('items: [one, two]', { maxNodes: 3 })).toThrowError(
+            'YAML input exceeds the 3-node safety limit.',
+        )
+
+        expect(() => convertJSONToYAML('{"one":{"two":{"value":true}}}', { maxDepth: 2 })).toThrowError(
+            'JSON input exceeds the nesting-depth safety limit of 2.',
+        )
+        expect(() => convertYAMLToJSON('one:\n  two:\n    value: true', { maxDepth: 2 })).toThrowError(
+            'YAML input exceeds the nesting-depth safety limit of 2.',
+        )
+    })
+
+    it('validates configurable resource limits', () => {
+        expect(() => convertJSONToYAML('{}', { maxInputCharacters: 0 })).toThrowError(
+            /Maximum input characters must be a whole number/,
+        )
+        expect(() => convertYAMLToJSON('{}', { maxNodes: 0 })).toThrowError(
+            /Maximum value nodes must be a whole number/,
+        )
+        expect(() => convertYAMLToJSON('{}', { maxDepth: 257 })).toThrowError(
+            /Maximum nesting depth must be a whole number/,
         )
     })
 })
