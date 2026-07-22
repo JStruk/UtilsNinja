@@ -48,6 +48,26 @@ describe('generateCodeFromJSON', () => {
         expect(result.code).toMatch(/value: (?:number \| null \| string|number \| string \| null);/)
     })
 
+    it('preserves nullable array elements in C# and Go models', () => {
+        const input = '{"values":["one",null]}'
+
+        expect(generateCodeFromJSON(input, { language: 'csharp' }).code)
+            .toContain('public List<string?> Values')
+        expect(generateCodeFromJSON(input, { language: 'go' }).code)
+            .toContain('Values []*string `json:"values"`')
+    })
+
+    it('uses floating-point types for numbers outside the safe integral range', () => {
+        const input = '{"safe":9007199254740991,"huge":1e100}'
+        const csharp = generateCodeFromJSON(input, { language: 'csharp' }).code
+        const go = generateCodeFromJSON(input, { language: 'go' }).code
+
+        expect(csharp).toContain('public long Safe')
+        expect(csharp).toContain('public double Huge')
+        expect(go).toContain('Safe int64 `json:"safe"`')
+        expect(go).toContain('Huge float64 `json:"huge"`')
+    })
+
     it('quotes property names that are not TypeScript identifiers', () => {
         const result = generateCodeFromJSON('{"content-type":"json","123":"value"}')
 

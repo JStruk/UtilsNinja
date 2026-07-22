@@ -96,7 +96,10 @@ function inferSchema(value: unknown, context: InferenceContext, depth = 0): Sche
     if (value === null) return { kind: 'null' }
     if (typeof value === 'string') return { kind: 'string' }
     if (typeof value === 'boolean') return { kind: 'boolean' }
-    if (typeof value === 'number') return { kind: Number.isInteger(value) ? 'integer' : 'number' }
+    // JSON.parse exposes every JSON number as a JavaScript number. Restrict
+    // integral model types to the exactly representable range so generated
+    // long/int64 properties cannot overflow or encode an already-rounded value.
+    if (typeof value === 'number') return { kind: Number.isSafeInteger(value) ? 'integer' : 'number' }
 
     if (Array.isArray(value)) {
         if (value.length === 0) return { kind: 'array', item: { kind: 'unknown' } }
@@ -302,10 +305,6 @@ function renderTypeScript(schema: Schema, rootName: string): { code: string; cou
     }
 }
 
-function withoutNullUnion(schema: Schema): Schema {
-    return nullableParts(schema).schema
-}
-
 function csharpType(schema: Schema, hint: string, context: DefinitionContext): string {
     const { schema: concrete, nullable } = nullableParts(schema)
     let type: string
@@ -315,7 +314,7 @@ function csharpType(schema: Schema, hint: string, context: DefinitionContext): s
         case 'integer': type = 'long'; break
         case 'number': type = 'double'; break
         case 'boolean': type = 'bool'; break
-        case 'array': type = `List<${csharpType(withoutNullUnion(concrete.item), singularize(hint), context).replace(/\?$/, '')}>`; break
+        case 'array': type = `List<${csharpType(concrete.item, singularize(hint), context)}>`; break
         case 'object': type = csharpObject(concrete, hint, context); break
         case 'union': type = 'object'; break
         default: type = 'object'; break
@@ -388,7 +387,7 @@ function goType(schema: Schema, hint: string, context: DefinitionContext, option
         case 'integer': type = 'int64'; break
         case 'number': type = 'float64'; break
         case 'boolean': type = 'bool'; break
-        case 'array': type = `[]${goType(withoutNullUnion(concrete.item), singularize(hint), context)}`; break
+        case 'array': type = `[]${goType(concrete.item, singularize(hint), context)}`; break
         case 'object': type = goObject(concrete, hint, context); break
         default: type = 'any'; break
     }
