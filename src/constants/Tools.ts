@@ -220,6 +220,18 @@ export const tools: ToolDefinition[] = [
         analyticsCategory: 'Developer Tools',
     },
     {
+        id: 'diff-viewer',
+        routeName: 'DiffViewer',
+        path: 'diff-viewer',
+        label: 'Text & JSON Diff',
+        description: 'Compare text or normalized JSON in unified and side-by-side views.',
+        category: 'Text & Diff',
+        tags: ['diff', 'compare', 'text', 'json', 'unified', 'side by side'],
+        icon: 'diff',
+        component: () => import('@/views/DiffViewer.vue'),
+        analyticsCategory: 'Developer Tools',
+    },
+    {
         id: 'curl-to-fetch',
         routeName: 'CurlToFetch',
         path: 'curl-to-fetch',
