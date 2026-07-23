@@ -235,6 +235,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, shallowRef, watch } from 'vue'
 import { toast } from 'vue3-toastify'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
   COMMON_TIME_ZONES,
   CRON_EXPRESSION_MAX_LENGTH,
@@ -355,16 +356,15 @@ async function copySchedule() {
     ...result.value.nextExecutions.map(execution => `${execution.position}. ${execution.iso}`),
   ].join('\n')
 
-  try {
-    if (!navigator.clipboard) throw new Error('Clipboard access is unavailable in this browser.')
-    await navigator.clipboard.writeText(text)
+  const copyResult = await copyToClipboard(text)
+  if (copyResult.success) {
+    errorMessage.value = ''
     statusMessage.value = 'Cron schedule copied to the clipboard.'
     toast.success('Schedule copied to clipboard', { autoClose: 2000 })
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Unable to copy the schedule.'
-    errorMessage.value = message
+  } else {
+    errorMessage.value = copyResult.error
     statusMessage.value = 'Copy failed.'
-    toast.error(message, { autoClose: 3000 })
+    toast.error(copyResult.error, { autoClose: 3000 })
   }
 }
 </script>

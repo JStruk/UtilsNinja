@@ -68,9 +68,10 @@ function encode() {
   }
 }
 
-function copyResult() {
-  copyToClipboard(encodedString.value)
-  toast.success('Encoded string copied to clipboard', { autoClose: 2500 })
+async function copyResult() {
+  const result = await copyToClipboard(encodedString.value)
+  if (result.success) toast.success('Encoded string copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial encode

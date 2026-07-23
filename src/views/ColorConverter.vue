@@ -103,9 +103,10 @@ function convert() {
   }
 }
 
-function copyVal(val: string) {
+async function copyVal(val: string) {
   if (!val) return
-  copyToClipboard(val)
-  toast.success('Color copied to clipboard')
+  const result = await copyToClipboard(val)
+  if (result.success) toast.success('Color copied to clipboard')
+  else toast.error(result.error, { autoClose: 3000 })
 }
 </script>

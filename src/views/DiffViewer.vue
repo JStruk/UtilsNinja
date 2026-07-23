@@ -299,6 +299,7 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, shallowRef, watch } from 'vue'
 import { toast } from 'vue3-toastify'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
   DIFF_LIMITS,
   compareInputs,
@@ -415,16 +416,15 @@ function clearInputs() {
 async function copyUnifiedDiff() {
   if (!result.value) return
 
-  try {
-    if (!navigator.clipboard) throw new Error('Clipboard access is unavailable in this browser.')
-    await navigator.clipboard.writeText(formatUnifiedDiff(result.value))
+  const copyResult = await copyToClipboard(formatUnifiedDiff(result.value))
+  if (copyResult.success) {
+    errorMessage.value = ''
     statusMessage.value = 'Unified diff copied to the clipboard.'
     toast.success('Unified diff copied to clipboard', { autoClose: 2000 })
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Unable to copy the diff.'
-    errorMessage.value = message
+  } else {
+    errorMessage.value = copyResult.error
     statusMessage.value = 'Copy failed.'
-    toast.error(message, { autoClose: 3000 })
+    toast.error(copyResult.error, { autoClose: 3000 })
   }
 }
 

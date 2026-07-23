@@ -79,9 +79,10 @@ function decode() {
   }
 }
 
-function copyButtonClicked() {
-  copyToClipboard(decodedString.value)
-  toast.success('Decoded string copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(decodedString.value)
+  if (result.success) toast.success('Decoded string copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial decode

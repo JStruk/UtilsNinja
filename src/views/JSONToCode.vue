@@ -160,6 +160,7 @@
 import { computed, ref, shallowRef, watch } from 'vue'
 import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
   generateCodeFromJSON,
   JSON_TO_CODE_LIMITS,
@@ -234,15 +235,13 @@ function loadSample() {
 async function copyCode() {
   if (!result.value) return
 
-  try {
-    if (!navigator.clipboard) throw new Error('Clipboard access is unavailable in this browser.')
-    await navigator.clipboard.writeText(result.value.code)
+  const copyResult = await copyToClipboard(result.value.code)
+  if (copyResult.success) {
     statusMessage.value = 'Generated code copied to the clipboard.'
     toast.success('Generated code copied to clipboard', { autoClose: 2000 })
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unable to copy the generated code.'
+  } else {
     statusMessage.value = 'Copy failed.'
-    toast.error(message, { autoClose: 3000 })
+    toast.error(copyResult.error, { autoClose: 3000 })
   }
 }
 </script>

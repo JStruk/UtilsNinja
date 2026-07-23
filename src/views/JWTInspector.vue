@@ -352,9 +352,10 @@ function clearToken() {
   token.value = ''
 }
 
-function copySection(label: string, value: Record<string, unknown>) {
-  copyToClipboard(JSON.stringify(value, null, 2))
-  toast.success(`${label} copied to clipboard`, { autoClose: 2000 })
+async function copySection(label: string, value: Record<string, unknown>) {
+  const result = await copyToClipboard(JSON.stringify(value, null, 2))
+  if (result.success) toast.success(`${label} copied to clipboard`, { autoClose: 2000 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 function displayClaim(value: unknown): string {

@@ -84,9 +84,10 @@ function convert() {
   }
 }
 
-function copyButtonClicked() {
-  copyToClipboard(JSON.stringify(jsonOutput.value, null, '\t'))
-  toast.success('JSON copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(JSON.stringify(jsonOutput.value, null, '\t'))
+  if (result.success) toast.success('JSON copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial conversion

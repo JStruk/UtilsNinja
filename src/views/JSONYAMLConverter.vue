@@ -375,9 +375,10 @@ function swapDirection() {
   input.value = nextInput
 }
 
-function copyOutput() {
+async function copyOutput() {
   if (!conversion.value) return
-  copyToClipboard(conversion.value.output)
-  toast.success(`${targetFormat.value} copied to clipboard`, { autoClose: 2000 })
+  const result = await copyToClipboard(conversion.value.output)
+  if (result.success) toast.success(`${targetFormat.value} copied to clipboard`, { autoClose: 2000 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 </script>

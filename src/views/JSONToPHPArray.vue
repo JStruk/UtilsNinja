@@ -80,9 +80,10 @@ function convert() {
   }
 }
 
-function copyButtonClicked() {
-  copyToClipboard(phpArray.value)
-  toast.success('PHP Array copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(phpArray.value)
+  if (result.success) toast.success('PHP Array copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial conversion

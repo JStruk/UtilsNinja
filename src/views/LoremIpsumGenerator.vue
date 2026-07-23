@@ -37,7 +37,7 @@
             </button>
             <button 
               v-if="lorem"
-              @click="copyToClipboard(lorem)"
+              @click="copyLorem"
               class="p-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm active:scale-95"
               title="Copy"
             >
@@ -62,6 +62,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { toast } from 'vue3-toastify'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import { generate } from '@/utilities/LoremIpsumGenerator'
 import type { LoremUnit } from 'lorem-ipsum/types/src/constants/units'
@@ -72,6 +73,12 @@ const selectedLoremUnits = ref<string>('words')
 
 function getLoremIpsum() {
   lorem.value = generate(selectedLoremUnits.value as LoremUnit, numUnits.value)
+}
+
+async function copyLorem() {
+  const result = await copyToClipboard(lorem.value)
+  if (result.success) toast.success('Lorem ipsum copied to clipboard', { autoClose: 2000 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 </script>

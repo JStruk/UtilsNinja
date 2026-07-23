@@ -250,6 +250,7 @@
 import { computed, ref, shallowRef, watch } from 'vue'
 import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
+import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
   HASH_ALGORITHMS,
   generateFileHash,
@@ -394,16 +395,15 @@ async function generate() {
 }
 
 async function copyResult() {
-  try {
-    if (!navigator.clipboard) throw new Error('Clipboard access is unavailable in this browser.')
-    await navigator.clipboard.writeText(result.value)
+  const copyResult = await copyToClipboard(result.value)
+  if (copyResult.success) {
+    errorMessage.value = ''
     statusMessage.value = `${resultTitle.value} copied to the clipboard.`
     toast.success('Output copied to clipboard', { autoClose: 2000 })
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Unable to copy the output.'
-    errorMessage.value = message
+  } else {
+    errorMessage.value = copyResult.error
     statusMessage.value = 'Copy failed.'
-    toast.error(message, { autoClose: 3000 })
+    toast.error(copyResult.error, { autoClose: 3000 })
   }
 }
 

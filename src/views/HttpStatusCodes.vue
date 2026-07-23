@@ -118,8 +118,9 @@ function getTypeStyles(code: number) {
   return 'bg-slate-50 text-slate-600 dark:bg-slate-800 dark:text-slate-400'
 }
 
-function copyStatus(code: string) {
-  copyToClipboard(code)
-  toast.success(`Copied status ${code}`, { autoClose: 1500 })
+async function copyStatus(code: string) {
+  const result = await copyToClipboard(code)
+  if (result.success) toast.success(`Copied status ${code}`, { autoClose: 1500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 </script>

@@ -437,12 +437,13 @@ function applyPrefix(prefix: number) {
   maskInput.value = String(prefix)
 }
 
-function copyValue(label: string, value: string) {
-  copyToClipboard(value)
-  toast.success(`${label} copied to clipboard`, { autoClose: 1800 })
+async function copyValue(label: string, value: string) {
+  const result = await copyToClipboard(value)
+  if (result.success) toast.success(`${label} copied to clipboard`, { autoClose: 1800 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
-function copySummary() {
+async function copySummary() {
   if (!calculation.value) return
 
   const summary = [
@@ -456,8 +457,9 @@ function copySummary() {
     `Usable hosts: ${calculation.value.usableHostCount}`,
   ].join('\n')
 
-  copyToClipboard(summary)
-  toast.success('Subnet summary copied to clipboard', { autoClose: 1800 })
+  const result = await copyToClipboard(summary)
+  if (result.success) toast.success('Subnet summary copied to clipboard', { autoClose: 1800 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 function formatCount(value: number): string {

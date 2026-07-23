@@ -304,6 +304,7 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
+import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import {
@@ -448,9 +449,15 @@ function swapCodecValues(): void {
   liveMessage.value = 'Codec input and output swapped.'
 }
 
-function copyValue(value: string, label: string): void {
+async function copyValue(value: string, label: string): Promise<void> {
   if (!value) return
-  copyToClipboard(value)
-  liveMessage.value = `${label} copied to the clipboard.`
+  const result = await copyToClipboard(value)
+  if (result.success) {
+    liveMessage.value = `${label} copied to the clipboard.`
+    toast.success(`${label} copied to clipboard`, { autoClose: 2000 })
+  } else {
+    liveMessage.value = `Copy failed: ${result.error}`
+    toast.error(result.error, { autoClose: 3000 })
+  }
 }
 </script>

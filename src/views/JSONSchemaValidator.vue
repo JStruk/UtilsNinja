@@ -260,6 +260,7 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '@/Layouts/TwoPaneLayout.vue'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import type {
@@ -505,10 +506,16 @@ function formatEditor(source: EditorSource): void {
   }
 }
 
-function copyReport(): void {
+async function copyReport(): Promise<void> {
   if (!result.value) return
-  copyToClipboard(JSON.stringify(result.value, null, 2))
-  liveMessage.value = 'Validation report copied to the clipboard.'
+  const copyResult = await copyToClipboard(JSON.stringify(result.value, null, 2))
+  if (copyResult.success) {
+    liveMessage.value = 'Validation report copied to the clipboard.'
+    toast.success('Validation report copied to clipboard', { autoClose: 2000 })
+  } else {
+    liveMessage.value = `Copy failed: ${copyResult.error}`
+    toast.error(copyResult.error, { autoClose: 3000 })
+  }
 }
 
 watch([schemaText, dataText, allErrors, strictDiagnostics], scheduleValidation)

@@ -69,10 +69,10 @@ function formatJSON() {
   }
 }
 
-function copyButtonClicked() {
-  copyToClipboard(JSON.stringify(formattedJSON.value, null, '\t'))
-  console.log('toasting')
-  toast.success('Formatted JSON copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(JSON.stringify(formattedJSON.value, null, '\t'))
+  if (result.success) toast.success('Formatted JSON copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 </script>

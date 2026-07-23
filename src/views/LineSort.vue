@@ -81,9 +81,10 @@ function toggleDeDupe() {
   convert()
 }
 
-function copyButtonClicked() {
-  copyToClipboard(sortedInput.value)
-  toast.success('Sorted lines copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(sortedInput.value)
+  if (result.success) toast.success('Sorted lines copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial convert

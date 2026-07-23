@@ -122,15 +122,17 @@ function generate() {
   toast.success(`Generated ${count.value} ${selectedType.value}s`, { autoClose: 1500 })
 }
 
-function copyAll() {
+async function copyAll() {
   const text = results.value.join('\n')
-  copyToClipboard(text)
-  toast.success('All results copied to clipboard', { autoClose: 2000 })
+  const result = await copyToClipboard(text)
+  if (result.success) toast.success('All results copied to clipboard', { autoClose: 2000 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
-function copyItem(text: string) {
-  copyToClipboard(text)
-  toast.success('Copied to clipboard', { autoClose: 1000 })
+async function copyItem(text: string) {
+  const result = await copyToClipboard(text)
+  if (result.success) toast.success('Copied to clipboard', { autoClose: 1000 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial generate

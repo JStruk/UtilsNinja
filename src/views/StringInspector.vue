@@ -58,9 +58,10 @@ function inspectText() {
   output.value = inspect(inputText.value)
 }
 
-function copyButtonClicked() {
-  copyToClipboard(JSON.stringify(output.value, null, '\t'))
-  toast.success('Inspection results copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(JSON.stringify(output.value, null, '\t'))
+  if (result.success) toast.success('Inspection results copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial inspection

@@ -79,9 +79,10 @@ function convert() {
   }
 }
 
-function copyButtonClicked() {
-  copyToClipboard(CSVString.value)
-  toast.success('CSV copied to clipboard', { autoClose: 2500 })
+async function copyButtonClicked() {
+  const result = await copyToClipboard(CSVString.value)
+  if (result.success) toast.success('CSV copied to clipboard', { autoClose: 2500 })
+  else toast.error(result.error, { autoClose: 3000 })
 }
 
 // Initial conversion
