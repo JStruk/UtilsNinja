@@ -98,8 +98,8 @@ function convert() {
     hex.value = convertedColorCodes.hex
     hsl.value = convertedColorCodes.hsl
     cmyk.value = convertedColorCodes.cmyk
-  } catch (e: any) {
-    errorMessage.value = e.message
+  } catch (caught: unknown) {
+    errorMessage.value = caught instanceof Error ? caught.message : 'Unable to convert this color.'
   }
 }
 

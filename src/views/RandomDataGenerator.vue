@@ -98,13 +98,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { generateRandomData } from '@/utilities/RandomDataGenerator'
-import type { DataType } from '@/utilities/RandomDataGenerator'
+import type { DataType, RandomDataValue } from '@/utilities/RandomDataGenerator'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import { toast } from 'vue3-toastify'
 
 const selectedType = ref<DataType>('name')
 const count = ref(10)
-const results = ref<any[]>([])
+const results = ref<RandomDataValue[]>([])
 
 const dataTypes = [
   { label: 'Full Names', value: 'name' },

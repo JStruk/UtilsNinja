@@ -73,8 +73,8 @@ function decode() {
   try {
     decodedString.value = Base64Decode(stringToDecode.value)
     error.value = ''
-  } catch (e: any) {
-    error.value = e.message || 'Invalid Base64 sequence'
+  } catch (caught: unknown) {
+    error.value = caught instanceof Error ? caught.message : 'Invalid Base64 sequence'
     decodedString.value = ''
   }
 }

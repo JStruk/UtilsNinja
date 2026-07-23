@@ -50,7 +50,6 @@ import { VAceEditor } from 'vue3-ace-editor'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import '../../ace-config.js'
 import 'vue-json-pretty/lib/styles.css'
-import copyIcon from '../assets/copy-icon.png'
 import { toast } from 'vue3-toastify'
 import TwoPaneLayout from '../Layouts/TwoPaneLayout.vue'
 import type { JSONDataType } from 'vue-json-pretty/types/utils'
@@ -60,11 +59,10 @@ const isJSONValid = ref<boolean>(true)
 const formattedJSON = ref<JSONDataType>({})
 
 function formatJSON() {
-  JSONInput.value.replace(/'/g, '"')
   try {
     formattedJSON.value = JSON.parse(JSONInput.value)
     isJSONValid.value = true
-  } catch (e) {
+  } catch {
     isJSONValid.value = false
   }
 }

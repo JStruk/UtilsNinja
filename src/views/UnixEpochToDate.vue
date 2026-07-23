@@ -55,7 +55,7 @@ function formatDate() {
   try {
     formattedDate.value = unixEpochToDate(parseInt(inputText.value))
     isTimestampValid.value = true
-  } catch (e) {
+  } catch {
     isTimestampValid.value = false
   }
 }

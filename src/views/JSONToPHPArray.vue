@@ -74,7 +74,7 @@ function convert() {
     JSON.parse(JSONInput.value)
     phpArray.value = JSONToPHPArray(JSONInput.value)
     isJSONValid.value = true
-  } catch (e) {
+  } catch {
     isJSONValid.value = false
     phpArray.value = ''
   }

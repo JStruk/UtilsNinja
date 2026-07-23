@@ -73,7 +73,7 @@ function convert() {
     JSON.parse(JSONInput.value)
     CSVString.value = JSONtoCSV(JSONInput.value)
     isJSONValid.value = true
-  } catch (e) {
+  } catch {
     isJSONValid.value = false
     CSVString.value = ''
   }

@@ -63,8 +63,8 @@ function encode() {
   }
   try {
     encodedString.value = Base64Encode(stringToEncode.value)
-  } catch (e: any) {
-    toast.error(e.message)
+  } catch (caught: unknown) {
+    toast.error(caught instanceof Error ? caught.message : 'Unable to encode this value.')
   }
 }
 

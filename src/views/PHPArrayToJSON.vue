@@ -63,9 +63,10 @@ import { VAceEditor } from 'vue3-ace-editor'
 import '../../ace-config.js'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import { toast } from 'vue3-toastify'
+import type { JSONDataType } from 'vue-json-pretty/types/utils'
 
 const PHPInput = ref<string>("[\n  'status' => 'success',\n  'data' => [\n    'id' => 1,\n    'name' => 'Ninja'\n  ]\n]")
-const jsonOutput = ref<any>(null)
+const jsonOutput = ref<JSONDataType>(null)
 const error = ref<string>('')
 
 function convert() {
@@ -77,7 +78,7 @@ function convert() {
   
   try {
     error.value = ''
-    jsonOutput.value = PHPArrayToJSON(PHPInput.value)
+    jsonOutput.value = PHPArrayToJSON(PHPInput.value) as JSONDataType
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Failed to convert PHP array to JSON'
     jsonOutput.value = null

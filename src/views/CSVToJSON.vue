@@ -55,9 +55,10 @@ import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
 import { copyToClipboard } from '@/helpers/CopyToClipboard'
 import { toast } from 'vue3-toastify'
+import type { JSONDataType } from 'vue-json-pretty/types/utils'
 
 const CSVData = ref<string>('id,name,email\n1,Ninja,ninja@example.com\n2,Shinobi,shinobi@example.com')
-const jsonOutput = ref<any>(null)
+const jsonOutput = ref<JSONDataType>(null)
 const isJSONValid = ref<boolean>(true)
 
 function convert() {
@@ -70,9 +71,9 @@ function convert() {
   try {
     const result = CSVToJSON(CSVData.value)
     // The utility returns a stringified JSON, let's parse it for vue-json-pretty
-    jsonOutput.value = typeof result === 'string' ? JSON.parse(result) : result
+    jsonOutput.value = (typeof result === 'string' ? JSON.parse(result) : result) as JSONDataType
     isJSONValid.value = true
-  } catch (e) {
+  } catch {
     isJSONValid.value = false
     jsonOutput.value = null
   }
