@@ -78,22 +78,22 @@ export function curlToFetch(curlCommand: string): string {
 
     if (!url) return '// Could not find URL in curl command';
 
-    let code = `fetch("${url}", {\n`;
-    code += `  method: "${options.method}",\n`;
+    let code = `fetch(${JSON.stringify(url)}, {\n`;
+    code += `  method: ${JSON.stringify(options.method)},\n`;
 
     if (Object.keys(options.headers).length > 0) {
-        code += `  headers: {\n`;
+        code += '  headers: {\n';
         for (const [key, value] of Object.entries(options.headers)) {
-            code += `    "${key}": "${value}",\n`;
+            code += `    ${JSON.stringify(key)}: ${JSON.stringify(value)},\n`;
         }
-        code += `  },\n`;
+        code += '  },\n';
     }
 
     if (options.body) {
         code += `  body: JSON.stringify(${options.body}),\n`;
     }
 
-    code += `})\n.then(response => response.json())\n.then(data => console.log(data))\n.catch(error => console.error('Error:', error));`;
+    code += "})\n.then(response => response.json())\n.then(data => console.log(data))\n.catch(error => console.error('Error:', error));";
 
     return code;
 }

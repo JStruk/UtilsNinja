@@ -1,5 +1,4 @@
 import pluginVue from 'eslint-plugin-vue'
-import vueTsConfig from '@vue/eslint-config-typescript'
 import pluginCypress from 'eslint-plugin-cypress/flat'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 

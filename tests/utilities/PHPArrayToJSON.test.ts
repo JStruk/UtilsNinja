@@ -5,7 +5,7 @@ import { PHPArrayToJSON } from '@/utilities/PHPArrayToJSON'
 describe('PHPArrayToJson', () => {
     it('returns an empty json object from empty associative array', () => {
         const array = '[]'
-        const result: any[] = []
+        const result: unknown[] = []
 
         expect(PHPArrayToJSON(array)).toEqual(result)
     })

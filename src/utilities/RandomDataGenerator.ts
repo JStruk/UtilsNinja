@@ -16,9 +16,11 @@ export interface GeneratorOptions {
     max?: number
 }
 
-export function generateRandomData(type: DataType, options: GeneratorOptions = {}): any[] {
+export type RandomDataValue = string | number
+
+export function generateRandomData(type: DataType, options: GeneratorOptions = {}): RandomDataValue[] {
     const count = options.count || 1
-    const results: any[] = []
+    const results: RandomDataValue[] = []
 
     for (let i = 0; i < count; i++) {
         switch (type) {

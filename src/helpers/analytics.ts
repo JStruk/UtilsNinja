@@ -9,7 +9,7 @@
 
 declare global {
     interface Window {
-        gtag?: (...args: any[]) => void
+        gtag?: (command: 'event', eventName: string, params?: Record<string, unknown>) => void
     }
 }
 
@@ -18,7 +18,7 @@ declare global {
  * @param eventName - The name of the event (e.g., 'tool_used', 'copy_result', 'download')
  * @param params - Optional parameters to send with the event
  */
-export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && window.gtag) {
         window.gtag('event', eventName, params)
     }

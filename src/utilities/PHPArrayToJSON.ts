@@ -1,10 +1,10 @@
-export function PHPArrayToJSON(php: string): {} {
+export function PHPArrayToJSON(php: string): unknown {
     // First, identify and protect regular arrays
     const protectedArrays = new Map<string, string>();
     let arrayCounter = 0;
     
     // Replace regular arrays with placeholders
-    const withProtectedArrays = php.replace(/\[([^=>\]]*)\]/g, (match, content) => {
+    const withProtectedArrays = php.replace(/\[([^=>\]]*)\]/g, (match) => {
         const placeholder = `__ARRAY_${arrayCounter}__`;
         protectedArrays.set(placeholder, match);
         arrayCounter++;
