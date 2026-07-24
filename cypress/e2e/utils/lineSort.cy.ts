@@ -3,53 +3,47 @@ import { lineSort } from '../../../src/utilities/LineSort'
 describe('LineSort', () => {
     beforeEach(() => {
         cy.visit('/tools/line-sort')
+        cy.location('pathname').should('equal', '/tools/line-sort')
     })
 
-    const text: string = 'c\nb\na'
-    const duplicateText: string = 'c\nc\nc\nb\na'
+    const text = 'c\nb\na'
+    const duplicateText = 'c\nc\nc\nb\na'
 
-    it('should allow the user to enter text to sort', () => {
-        cy.get('textarea[aria-label="input-to-sort"]')
-            .filter(':visible')
-            .type(text)
-    })
-
-    it('should display the sorted text', () => {
-        cy.get('textarea[aria-label="input-to-sort"]')
-            .filter(':visible')
+    it('sorts replaced input and retries until the debounced output is ready', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
             .type(text)
 
-        const sortedText: string = lineSort(text, false)
-        cy.wait(310)
-        cy.get('textarea[aria-label="sorted-text"]')
-            .filter(':visible')
-            .should('have.value', sortedText)
+        cy.get('textarea[readonly]')
+            .should('have.value', lineSort(text))
     })
 
-    it('should remove duplicate lines and sort', () => {
-        cy.get('textarea[aria-label="input-to-sort"]')
-            .filter(':visible')
+    it('removes duplicate lines by default', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
             .type(duplicateText)
 
-        const sortedText: string = lineSort(duplicateText)
-        cy.wait(310)
-        cy.get('textarea[aria-label="sorted-text"]')
-            .filter(':visible')
-            .should('have.value', sortedText)
+        cy.get('textarea[readonly]')
+            .should('have.value', lineSort(duplicateText))
     })
 
-    it('should not remove duplicate lines if not selected', () => {
-        cy.get('textarea[aria-label="input-to-sort"]')
-            .filter(':visible')
+    it('keeps duplicate lines when the option is turned off', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
             .type(duplicateText)
-        cy.get('input[aria-label="remove-duplicates-checkbox"]')
-            .filter(':visible')
+
+        cy.contains('span', 'Remove Duplicates')
+            .parent()
+            .find('button')
             .click()
 
-        cy.wait(310)
-        const sortedText: string = lineSort(duplicateText, false)
-        cy.get('textarea[aria-label="sorted-text"]')
-            .filter(':visible')
-            .should('have.value', sortedText)
+        cy.get('textarea[readonly]')
+            .should('have.value', lineSort(duplicateText, false))
     })
 })

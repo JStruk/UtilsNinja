@@ -3,25 +3,20 @@ import { Base64Encode } from '../../../src/utilities/Base64Encode'
 describe('Base64 Encoder', () => {
     beforeEach(() => {
         cy.visit('/tools/base-64-encode')
+        cy.location('pathname').should('equal', '/tools/base-64-encode')
     })
 
-    const text: string = 'idk this is definitely some text'
+    const text = 'idk this is definitely some text'
 
-    it('should allow the user to enter text to encode', () => {
-        cy.get('textarea[aria-label="input-to-encode"]')
-            .filter(':visible')
-            .type(text)
-    })
-
-    it('should display the encoded text', () => {
-        cy.get('textarea[aria-label="input-to-encode"]')
-            .filter(':visible')
+    it('encodes replaced input without relying on a fixed debounce wait', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
             .type(text)
 
-        const encodedText: string = Base64Encode(text)
-        cy.wait(310)
-        cy.get('textarea[aria-label="encoded-text"]')
-            .filter(':visible')
-            .should('have.value', encodedText)
+        cy.get('textarea[readonly]')
+            .should('be.visible')
+            .and('have.value', Base64Encode(text))
     })
 })

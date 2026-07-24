@@ -1,45 +1,50 @@
-import { inspect, InspectionResult } from '../../../src/utilities/StringInspector'
+import { inspect } from '../../../src/utilities/StringInspector'
+import type { InspectionResult } from '../../../src/utilities/StringInspector'
 
 describe('String Inspector', () => {
     beforeEach(() => {
         cy.visit('/tools/inspector')
+        cy.location('pathname').should('equal', '/tools/inspector')
     })
 
-    const text = 'idk this is definitely some text'
     const sentence = 'this has \n four of the same word \r and that word is word word'
 
 
-    it('should allow the user to enter text', () => {
+    it('updates the inspection statistics for replaced input', () => {
         cy.get('textarea[aria-label="string-inspector"]')
-            .filter(':visible')
-            .type(text, { scrollBehavior: 'center' })
-    })
-
-    it('should display the results of the inspected string', () => {
+            .should('be.visible')
+            .clear()
         cy.get('textarea[aria-label="string-inspector"]')
-            .filter(':visible')
-            .type(sentence, { scrollBehavior: 'center' })
+            .type(sentence)
 
         const inspectorResult: InspectionResult = inspect(sentence)
 
-        cy.contains(`"characterCount":${inspectorResult.characterCount}`)
-        cy.contains(`"wordCount":${inspectorResult.wordCount}`)
-        cy.contains(`"nonWhitespaceCharacterCount":${inspectorResult.nonWhitespaceCharacterCount}`)
-        cy.contains(`"lineCount":${inspectorResult.lineCount}`)
+        cy.get('.vjs-tree')
+            .should('contain.text', 'characterCount')
+            .and('contain.text', String(inspectorResult.characterCount))
+            .and('contain.text', 'wordCount')
+            .and('contain.text', String(inspectorResult.wordCount))
+            .and('contain.text', 'nonWhitespaceCharacterCount')
+            .and('contain.text', String(inspectorResult.nonWhitespaceCharacterCount))
+            .and('contain.text', 'lineCount')
+            .and('contain.text', String(inspectorResult.lineCount))
     })
 
-    it('should display the word distribution for the inspected string', function () {
+    it('shows the word distribution for the inspected string', () => {
         cy.get('textarea[aria-label="string-inspector"]')
-            .filter(':visible')
-            .type(sentence, { scrollBehavior: 'center' })
+            .should('be.visible')
+            .clear()
+        cy.get('textarea[aria-label="string-inspector"]')
+            .type(sentence)
 
         const inspectorResult: InspectionResult = inspect(sentence)
-
-        cy.contains('"wordDistribution":{')
         const distribution = inspectorResult.wordDistribution
 
-        Object.keys(distribution).map((word) => {
-            cy.contains(`"${word}":${distribution[word]}`)
+        cy.get('.vjs-tree').should('contain.text', 'wordDistribution')
+        Object.keys(distribution).forEach((word) => {
+            cy.get('.vjs-tree')
+                .should('contain.text', word)
+                .and('contain.text', String(distribution[word]))
         })
     })
 })

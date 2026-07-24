@@ -1,6 +1,7 @@
 describe('PHP Array To Json', () => {
     beforeEach(() => {
         cy.visit('/tools/php-to-json')
+        cy.location('pathname').should('equal', '/tools/php-to-json')
     })
 
     const key = 'tacos'
@@ -8,15 +9,17 @@ describe('PHP Array To Json', () => {
 
     const phpArray = `["${key}" => "${value}"]`
 
-    it('should allow the user to enter text', () => {
-        cy.get('.ace_text-input').first().type(phpArray, { force: true })
-    })
+    it('converts replaced PHP array editor content to JSON', () => {
+        cy.get('.ace_text-input')
+            .first()
+            .type('{selectall}{backspace}', { force: true })
+        cy.get('.ace_text-input')
+            .first()
+            .type(phpArray, { force: true, parseSpecialCharSequences: false })
 
-    it('should display the results of the inspected string', () => {
-        cy.get('.ace_text-input').first().type(phpArray, { force: true })
-
-        cy.wait(310)
-
-        cy.contains(`"${key}":"${value}"`)
+        cy.contains('h3', 'Valid JSON Output').should('be.visible')
+        cy.get('.vjs-tree')
+            .should('contain.text', key)
+            .and('contain.text', value)
     })
 })

@@ -3,27 +3,20 @@ import { Base64Decode } from '../../../src/utilities/Base64Decode'
 describe('Base64 Decoder', () => {
     beforeEach(() => {
         cy.visit('/tools/base-64-decode')
+        cy.location('pathname').should('equal', '/tools/base-64-decode')
     })
 
-    const text: string = 'Rm9vYmFy'
+    const text = 'Rm9vYmFy'
 
-    it('should allow the user to enter text to decode', () => {
-        cy.get('textarea[aria-label="input-to-decode"]')
-            .filter(':visible')
-            .type(text)
-    })
-
-    it('should display the decoded text', () => {
-        cy.get('textarea[aria-label="input-to-decode"]')
-            .filter(':visible')
+    it('decodes replaced input without relying on a fixed debounce wait', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
             .type(text)
 
-        const decodedText: string = Base64Decode(text)
-        cy.wait(310)
-
-        cy.get('textarea[aria-label="decoded-text"]')
-            .filter(':visible')
-            .should('have.value', decodedText)
+        cy.get('textarea[readonly]')
+            .should('be.visible')
+            .and('have.value', Base64Decode(text))
     })
-
 })

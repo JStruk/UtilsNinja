@@ -1,44 +1,34 @@
-import { CSVToJSON } from '../../../src/utilities/CSVToJSON'
-
 describe('CSV to JSON', () => {
     beforeEach(() => {
         cy.visit('/tools/csv-to-json')
+        cy.location('pathname').should('equal', '/tools/csv-to-json')
     })
 
-    it('should allow the user to type text into textarea', () => {
-        cy.get('textarea[placeholder="CSV Data"]')
-            .filter(':visible')
-            .type('I am the walrus', { scrollBehavior: 'center' })
-    })
+    it('converts replaced CSV input and renders the JSON fields', () => {
+        const CSVData = 'Name,Age\nJoe,25\nMike,30'
 
-    it.skip('should accept user CSV and output converted JSON', () => {
-        const CSVData = "Name,Age,Height\nJoe,25,5'10\nMike,30,6'0"
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
+            .type(CSVData)
 
-        cy.get('textarea[placeholder="CSV Data"]')
-            .filter(':visible')
-            .type(CSVData, { scrollBehavior: 'center' })
-
-        const expectedJSON = CSVToJSON(CSVData)
-        cy.wait(310)
-
-        // not sure how to assert the code editor's value
+        cy.contains('h3', 'Valid JSON Output').should('be.visible')
         cy.get('.vjs-tree')
-            // .filter(':visible')
-            // .invoke('val')
-            .contains(JSON.stringify('"Name:"'))
+            .should('contain.text', 'Name')
+            .and('contain.text', 'Joe')
+            .and('contain.text', 'Age')
+            .and('contain.text', '30')
     })
 
-    it.skip('should return an empty array if the CSV data cannot be parsed', () => {
-        cy.get('textarea[placeholder="CSV Data"]')
-            .filter(':visible')
-            .type('I am the walrus', { scrollBehavior: 'center' })
+    it('renders an empty JSON array for a header-only CSV document', () => {
+        cy.get('textarea:not([readonly])')
+            .should('be.visible')
+            .clear()
+        cy.get('textarea:not([readonly])')
+            .type('Name,Age')
 
-        cy.wait(310)
-
-        // not sure how to assert the code editor's value
-        cy.get('textarea[placeholder="JSON format"]')
-            .filter(':visible')
-            .invoke('val')
-            .should('equal', '[]')
+        cy.contains('h3', 'Valid JSON Output').should('be.visible')
+        cy.get('.vjs-tree').should('contain.text', '[]')
     })
 })
